@@ -40,7 +40,20 @@ public class Point3D extends Point2D {
         return new Vector(x,y,z);
     }
 
-    public double distance(){
+    /**
+     *
+     * @param other The secont point value
+     * @return Return the distance between the two points
+     */
 
+    public double distance(Point3D other){
+        double x= this.get_x() - other.get_x();
+        double y= this.get_y() - other.get_y();
+        double z= this.get_z() - other.get_z();
+        return Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
+    }
+
+    public Point3D addVectorToPiont(Vector vector){
+        return new Point3D(get_x()+vector.point.get_x())
     }
 }
