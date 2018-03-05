@@ -1,6 +1,6 @@
 package primitives;
 
-import java.util.Vector;
+
 
 public class Point3D extends Point2D {
 
@@ -9,7 +9,7 @@ public class Point3D extends Point2D {
     // ***************** Constructors ********************** //
     public Point3D(double x, double y, double z){
         super(x,y);
-        _z = new Coordinate(z);
+        this._z = new Coordinate(z);
     }
 
     /**
@@ -32,9 +32,15 @@ public class Point3D extends Point2D {
 
 
     // ***************** Administration  ******************** //
+
     public Vector vectorSubstract(Point3D other){
-        return new Vector(get_x()-other.get_x(),get_y()-other.get_y(),get_z()-other.get_z());
+        double x = get_x()- other.get_x();
+        double y =get_y()- other.get_y();
+        double z = get_z()-other.get_z();
+        return new Vector(x,y,z);
     }
 
-    public double distance
+    public double distance(){
+
+    }
 }
