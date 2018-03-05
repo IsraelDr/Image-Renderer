@@ -1,4 +1,5 @@
 package primitives;
+
 public class Coordinate {
     protected double _cord;
     private final double EPSILON = 0.000001;
@@ -10,7 +11,7 @@ public class Coordinate {
     }
 
     /**
-     *
+     *Copy constructor
      * @param source The Coordinate that will be copied
      */
     Coordinate(Coordinate source){
@@ -30,6 +31,11 @@ public class Coordinate {
         return "" + get_cord();
     }
 
+    /**
+     *
+     * @param obj The coordinate to compare with
+     * @return Returns TRUE when the distance between the two point is lower than EPSILON
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Coordinate))

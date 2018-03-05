@@ -19,7 +19,7 @@ public class Point3D extends Point2D {
      */
     public Point3D(Point3D other){
         super(other);
-        _z = new Coordinate(other._z);
+        this._z = new Coordinate(other._z);
 
     }
 
@@ -32,19 +32,24 @@ public class Point3D extends Point2D {
 
 
     // ***************** Administration  ******************** //
-
     /**
      *
-     * @param other The Coordinates that will be substracted from the current Coordinates
-     * @return Returns a new vector
+     * @return Returns a string in this format: (x,y,z)
      */
-    public Vector vectorSubstract(Point3D other){
-        double x = get_x()- other.get_x();
-        double y =get_y()- other.get_y();
-        double z = get_z()-other.get_z();
-        return new Vector(x,y,z);
+    @Override
+    public String toString() {
+        return "("+this._x.toString()+","+this._y.toString()+","+_z.toString()+")" ;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return  obj instanceof Point3D &&
+                super.equals(obj)&&
+                this._z.equals(((Point3D) obj).get_z());
+    }
+
+
+    // ***************** Operations ********************
     /**
      *Calculate the distance between two points in R3
      * @param other The secont point value
@@ -67,4 +72,19 @@ public class Point3D extends Point2D {
     public Point3D addVectorToPiont(Vector vector){
         return new Point3D(get_x()+vector.point.get_x(),get_y()+vector.point.get_y(),+get_z()+vector.point.get_z());
     }
+
+    /**
+     *
+     * @param other The Coordinates that will be substracted from the current Coordinates
+     * @return Returns a new vector
+     */
+    public Vector vectorSubstract(Point3D other){
+        double x = get_x()- other.get_x();
+        double y =get_y()- other.get_y();
+        double z = get_z()-other.get_z();
+        return new Vector(x,y,z);
+    }
+
 }
+
+
