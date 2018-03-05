@@ -1,5 +1,4 @@
 package primitives;
-
 public class Coordinate {
     protected double _cord;
     private final double EPSILON = 0.000001;
