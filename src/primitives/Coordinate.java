@@ -11,6 +11,11 @@ public class Coordinate {
     }
 
 
+    Coordinate(Coordinate source){
+        _cord = source.get_cord();
+    }
+
+
     // ***************** Getters/Setters ********************** //
     public double get_cord() {
         return _cord;
@@ -35,12 +40,20 @@ public class Coordinate {
 
     /**
      *
-     * @param other
-     * @return
+     * @param other The Coordinate that will be added to the current Coordinate
+     * @return Returns a new Coordinate with the value of the two Coordinate
      */
     public Coordinate add(Coordinate other){
         return new Coordinate(other.get_cord()+get_cord()) ;
     }
 
+    /**
+     *
+     * @param other The Coordinate that will be substracted from the current Coordinate
+     * @return The current Coordinate - the secont Coordinate
+     */
+    public Coordinate substract(Coordinate other){
+        return new Coordinate(get_cord()-other.get_cord());
+    }
 
 }
