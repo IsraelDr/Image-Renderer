@@ -43,7 +43,7 @@ public class Point2D{
     public boolean equals(Object obj) {
         if(!(obj instanceof Point2D))
             return false;
-        return (this.get_x()==((Point2D)obj).get_x())&&(this.get_y()==((Point2D)obj).get_y());
+        return (this._x.equals(((Point2D)obj)._x)&&(this._y.equals(((Point2D)obj)._y)));
     }
 
     @Override

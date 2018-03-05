@@ -2,7 +2,7 @@ package primitives;
 
 
 public class Vector {
-    protected Point3D point;
+    protected Point3D _point;
 
     // ***************** Constructors ********************** //
 
@@ -13,7 +13,7 @@ public class Vector {
      * @param z
      */
     public Vector(double x, double y, double z){
-        this.point = new Point3D(x,y,z);
+        this._point = new Point3D(x,y,z);
     }
 
     /**
@@ -21,13 +21,13 @@ public class Vector {
      * @param temp - object to copy
      */
     public Vector(Point3D temp){
-        this.point=new Point3D(temp);
+        this._point=new Point3D(temp);
     }
 
     // ***************** Getters/Setters ********************** //
 
     public Point3D getPoint() {
-        return point;
+        return _point;
     }
 
     // ***************** Administration  ******************** //
@@ -36,12 +36,12 @@ public class Vector {
     public boolean equals(Object obj) {
         if(!(obj instanceof Point3D))
             return false;
-        return this.point.equals((Point3D)obj);
+        return this._point.equals((Point3D)obj);
     }
 
     @Override
     public String toString() {
-        return this.point.toString();
+        return this._point.toString();
     }
     // ***************** Operations ******************** //
 
@@ -51,7 +51,7 @@ public class Vector {
      * @return
      */
     public Vector add(Vector temp){
-        return (this.point.vectorSubstract(temp.multipliedbyScalar(-1).point));
+        return (this._point.vectorSubstract(temp.multipliedbyScalar(-1)._point));
     }
 
     /**
@@ -60,7 +60,7 @@ public class Vector {
      * @return
      */
     public Vector multipliedbyScalar(double scalar){
-        return new Vector(point.get_x()*scalar,point.get_y()*scalar,point.get_z()*scalar);
+        return new Vector(_point.get_x()*scalar,_point.get_y()*scalar,_point.get_z()*scalar);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Vector {
      * @return
      */
     public double ScalarProduct(Vector temp){
-        return point.get_x()*temp.point.get_x()+point.get_y()*temp.point.get_y()+point.get_z()*temp.point.get_z();
+        return _point.get_x()*temp._point.get_x()+_point.get_y()*temp._point.get_y()+_point.get_z()*temp._point.get_z();
     }
 
     /**
@@ -78,9 +78,9 @@ public class Vector {
      * @return
      */
     public Vector VectorProduct(Vector temp){
-        double i = this.point.get_y()*temp.point.get_z()-temp.point.get_y()*this.point.get_z();
-        double j = temp.point.get_x()*this.point.get_z()-this.point.get_x()*temp.point.get_z();
-        double k = this.point.get_x()*temp.point.get_y()-temp.point.get_x()*this.point.get_y();
+        double i = this._point.get_y()*temp._point.get_z()-temp._point.get_y()*this._point.get_z();
+        double j = temp._point.get_x()*this._point.get_z()-this._point.get_x()*temp._point.get_z();
+        double k = this._point.get_x()*temp._point.get_y()-temp._point.get_x()*this._point.get_y();
         return new Vector(i,j,k);
     }
 
@@ -90,7 +90,7 @@ public class Vector {
      * @return
      */
     public double size(){
-        return this.point.distance(new Point3D(0,0,0));
+        return this._point.distance(new Point3D(0,0,0));
     }
 
     /**
