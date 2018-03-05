@@ -35,4 +35,6 @@ public class Point3D extends Point2D {
     public Vector vectorSubstract(Point3D other){
         return new Vector(get_x()-other.get_x(),get_y()-other.get_y(),get_z()-other.get_z());
     }
+
+    public double distance
 }
