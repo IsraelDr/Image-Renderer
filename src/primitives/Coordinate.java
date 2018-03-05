@@ -1,8 +1,10 @@
 package primitives;
 
 public class Coordinate {
-    private double _cord;
+    protected double _cord;
     private final double EPSILON = 0.000001;
+
+
     // ***************** Constructors ********************** //
     public Coordinate(double cord){
         _cord = cord;
@@ -30,4 +32,15 @@ public class Coordinate {
         else
             return false;
     }
+
+    /**
+     *
+     * @param other
+     * @return
+     */
+    public Coordinate add(Coordinate other){
+        return new Coordinate(other.get_cord()+get_cord()) ;
+    }
+
+
 }
