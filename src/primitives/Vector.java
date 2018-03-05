@@ -20,8 +20,8 @@ public class Vector {
      * Copy ctor
      * @param temp - object to copy
      */
-    public Vector(Point3D temp){
-        this._point=new Point3D(temp);
+    public Vector(Vector temp){
+        this._point=new Point3D(temp._point);
     }
 
     // ***************** Getters/Setters ********************** //

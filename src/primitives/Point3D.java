@@ -70,7 +70,7 @@ public class Point3D extends Point2D {
      * @return Returns the sum of the current point with the end point of the vector
      */
     public Point3D addVectorToPiont(Vector vector){
-        return new Point3D(get_x()+vector.point.get_x(),get_y()+vector.point.get_y(),+get_z()+vector.point.get_z());
+        return new Point3D(get_x()+vector._point.get_x(),get_y()+vector._point.get_y(),+get_z()+vector._point.get_z());
     }
 
     /**

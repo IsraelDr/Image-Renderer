@@ -46,6 +46,7 @@ public class Coordinate {
             return false;
     }
 
+    // ***************** Operations ******************** //
     /**
      *
      * @param other The Coordinate that will be added to the current Coordinate
