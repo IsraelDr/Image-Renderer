@@ -9,7 +9,10 @@ public class Coordinate {
         _cord = cord;
     }
 
-
+    /**
+     *
+     * @param source The Coordinate that will be copied
+     */
     Coordinate(Coordinate source){
         _cord = source.get_cord();
     }
