@@ -33,6 +33,11 @@ public class Point3D extends Point2D {
 
     // ***************** Administration  ******************** //
 
+    /**
+     *
+     * @param other The Coordinates that will be substracted from the current Coordinates
+     * @return Returns a new vector
+     */
     public Vector vectorSubstract(Point3D other){
         double x = get_x()- other.get_x();
         double y =get_y()- other.get_y();
@@ -41,9 +46,9 @@ public class Point3D extends Point2D {
     }
 
     /**
-     *
+     *Calculate the distance between two points in R3
      * @param other The secont point value
-     * @return Return the distance between the two points
+     * @return Returns the distance between the two points
      */
 
     public double distance(Point3D other){
@@ -53,7 +58,13 @@ public class Point3D extends Point2D {
         return Math.sqrt(Math.pow(x,2)+Math.pow(y,2)+Math.pow(z,2));
     }
 
+
+    /**
+     *
+     * @param vector The end point from the vector will be calculate
+     * @return Returns the sum of the current point with the end point of the vector
+     */
     public Point3D addVectorToPiont(Vector vector){
-        return new Point3D(get_x()+vector.point.get_x())
+        return new Point3D(get_x()+vector.point.get_x(),get_y()+vector.point.get_y(),+get_z()+vector.point.get_z())
     }
 }
