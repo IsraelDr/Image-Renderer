@@ -45,7 +45,7 @@ public class Point3D extends Point2D {
     public boolean equals(Object obj) {
         return  obj instanceof Point3D &&
                 super.equals(obj)&&
-                this._z.equals(((Point3D) obj).get_z());
+                this._z.equals(((Point3D) obj)._z);
     }
 
 
