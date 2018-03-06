@@ -23,10 +23,6 @@ public class Sphere extends RadialGeometry {
     public Point3D get_point() {
         return _point;
     }
-    @Override
-    public double get_radius() {
-        return super.get_radius();
-    }
     // ***************** Operations ******************** //
     @Override
     public Vector getNormal(Point3D temp) {

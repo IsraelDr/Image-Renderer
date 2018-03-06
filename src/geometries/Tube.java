@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 
 /**
  * represents Tube with Ray and radius
@@ -31,11 +29,6 @@ public class Tube extends RadialGeometry {
         this._ray=new Ray(temp.get_ray());
     }
     // ***************** Getters/Setters ********************** //
-
-    @Override
-    public double get_radius() {
-        return super.get_radius();
-    }
 
     public Ray get_ray() {
         return _ray;
