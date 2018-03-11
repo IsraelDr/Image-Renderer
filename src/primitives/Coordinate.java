@@ -10,6 +10,7 @@ public class Coordinate {
         _cord = cord;
     }
 
+
     /**
      *Copy constructor
      * @param source The Coordinate that will be copied
@@ -20,6 +21,7 @@ public class Coordinate {
 
 
     // ***************** Getters/Setters ********************** //
+
     public double get_cord() {
         return _cord;
     }
@@ -28,7 +30,7 @@ public class Coordinate {
 
     @Override
     public String toString() {
-        if(get_cord()==(int)get_cord())
+        if(get_cord()==(int)get_cord()) //checked if the double is an int
             return  "" + (int)get_cord();
         return ""+get_cord();
     }

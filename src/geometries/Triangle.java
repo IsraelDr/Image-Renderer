@@ -3,11 +3,10 @@ package geometries;
 import primitives.Point3D;
 import primitives.Vector;
 
-public class Triangle extends Geometry {
+public class Triangle extends Plane {
+    protected Point3D _second;
+    protected Point3D _third;
 
-    Point3D _first;
-    Point3D _second;
-    Point3D _third;
 
     // ***************** Constructors ********************** //
 
@@ -18,11 +17,11 @@ public class Triangle extends Geometry {
      * @param third The third coordinate
      */
     public Triangle(Point3D first, Point3D second, Point3D third){
-        super();
-        _first = new Point3D(first);
+        super(first,new Vector(third.get_y()*second.get_z()-second.get_y()*third.get_z(),
+                second.get_x()*third.get_z()-third.get_x()*second.get_z(),
+                third.get_x()*second.get_y()-second.get_x()*third.get_y()));
         _second = new Point3D(second);
         _third = new Point3D(third);
-
     }
 
     /**
@@ -31,16 +30,11 @@ public class Triangle extends Geometry {
      */
     public Triangle(Triangle other){
         super(other);
-        _first = new Point3D(other._first);
         _second = new Point3D(other._second);
         _third = new Point3D(other._third);
     }
 
 // ***************** Getters/Setters ********************** //
-
-    public Point3D get_first() {
-        return _first;
-    }
 
     public Point3D get_second() {
         return _second;
@@ -61,4 +55,6 @@ public class Triangle extends Geometry {
     public Vector getNormal(Point3D temp) {
         return null;
     }
+
+
 }
