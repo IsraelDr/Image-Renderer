@@ -1,8 +1,18 @@
+import jdk.internal.util.xml.impl.Input;
 import primitives.*;
 import geometries.*;
+import primitives.Vector;
 
 import java.util.prefs.Preferences;
+import java.io.*;
+import java.util.*;
 
+
+/**
+ * Authors:
+ * Israel Dreyfuss 4301288, sruli97@gmail.com
+ * Eli Cahn, 13333573, eli.cahn@gmail.com
+ */
 public class Targil1 {
 
     public static void main(String[] args) {
@@ -16,9 +26,10 @@ public class Targil1 {
         System.out.println(vector1.equals(vector7));
         System.out.println(vector1.toString());
         System.out.println(vector2.toString());
-        System.out.println("ScalarProduct" + vector1.ScalarProduct(vector2));
-        System.out.println("VectorProduct" + vector1.VectorProduct(vector2));
-        System.out.println("vector5.multipliedbyScalar" +vector5.multipliedbyScalar(8.5));
+        System.out.println("ScalarProduct: " + vector1.ScalarProduct(vector2));
+        System.out.println("VectorProduct: " + vector1.VectorProduct(vector2));
+        System.out.println("vector5.multipliedbyScalar: " +vector5.multipliedbyScalar(8.5));
+
 
 
     }

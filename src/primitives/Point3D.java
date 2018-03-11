@@ -38,7 +38,7 @@ public class Point3D extends Point2D {
      */
     @Override
     public String toString() {
-        return "("+this._x.toString()+","+this._y.toString()+","+_z.toString()+")" ;
+        return "{"+this._x.toString()+", "+this._y.toString()+", "+_z.toString()+"}" ;
     }
 
     @Override

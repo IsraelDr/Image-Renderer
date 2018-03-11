@@ -28,7 +28,9 @@ public class Coordinate {
 
     @Override
     public String toString() {
-        return "" + get_cord();
+        if(get_cord()==(int)get_cord())
+            return  "" + (int)get_cord();
+        return ""+get_cord();
     }
 
     /**
