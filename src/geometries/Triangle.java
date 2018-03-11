@@ -50,6 +50,17 @@ public class Triangle extends Geometry {
         return _third;
     }
 
+    // ***************** Administration  ******************** //
+
+    @Override
+    public String toString() {
+        return super.toString()+" "+_second.toString()+" "+_third.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj)&&_second.equals(obj)&&_third.equals(obj);
+    }
     // ***************** Operations ******************** //
 
     /**

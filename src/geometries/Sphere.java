@@ -23,6 +23,18 @@ public class Sphere extends RadialGeometry {
     public Point3D get_point() {
         return _point;
     }
+    // ***************** Administration  ******************** //
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj)&&_point.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+" "+ _point.toString();
+    }
+
     // ***************** Operations ******************** //
     @Override
     public Vector getNormal(Point3D temp) {

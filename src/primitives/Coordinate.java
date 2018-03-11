@@ -2,7 +2,7 @@ package primitives;
 
 public class Coordinate {
     protected double _cord;
-    private final double EPSILON = 0.000001;
+    private final double ACCURACY = 20;
 
 
     // ***************** Constructors ********************** //
@@ -40,9 +40,11 @@ public class Coordinate {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Coordinate))
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Coordinate)||obj==null)
             return false;
-        if (Math.abs(get_cord()-((Coordinate)((Coordinate) obj)).get_cord())<EPSILON)
+        if (Math.abs(getExp(get_cord())-getExp(((Coordinate) obj).get_cord()))>ACCURACY)
             return true;
         else
             return false;
@@ -65,6 +67,9 @@ public class Coordinate {
      */
     public Coordinate substract(Coordinate other){
         return new Coordinate(get_cord()-other.get_cord());
+    }
+    private int getExp(double num){
+        return (int)((Double.doubleToRawLongBits(num)>>52)&0x7FFL)-1023;
     }
 
 }

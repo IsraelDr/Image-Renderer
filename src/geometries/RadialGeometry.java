@@ -22,4 +22,15 @@ public abstract class RadialGeometry extends Geometry {
     public double get_radius() {
         return _radius;
     }
+    // ***************** Administration  ******************** //
+
+    @Override
+    public String toString() {
+        return "Rad: "+_radius;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return _radius==obj;
+    }
 }

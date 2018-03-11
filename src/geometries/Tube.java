@@ -33,6 +33,17 @@ public class Tube extends RadialGeometry {
     public Ray get_ray() {
         return _ray;
     }
+    // ***************** Administration  ******************** //
+
+    @Override
+    public boolean equals(Object obj) {
+        return this._ray.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return this._ray.toString();
+    }
     // ***************** Operations ******************** //
 
     /**

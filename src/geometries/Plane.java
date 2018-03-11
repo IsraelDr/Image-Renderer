@@ -40,10 +40,22 @@ public class Plane extends Geometry {
     public Vector get_vector() {
         return _vector;
     }
+    // ***************** Administration  ******************** //
+
+    @Override
+    public boolean equals(Object obj) {
+        return _point.equals(obj)&&_vector.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return _point.toString()+" "+_vector.toString();
+    }
     // ***************** Operations ******************** //
 
     @Override
     public Vector getNormal(Point3D temp) {
         return null;
     }
+
 }
