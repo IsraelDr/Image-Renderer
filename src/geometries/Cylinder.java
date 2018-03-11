@@ -41,7 +41,9 @@ public class Cylinder extends Tube {
      */
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj)&&this._height==obj;
+        if (obj instanceof Cylinder && obj != null)
+          return super.equals(obj)&&this._height==((Cylinder) obj)._height;
+        return false;
     }
 
     /**

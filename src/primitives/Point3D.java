@@ -2,6 +2,7 @@ package primitives;
 
 
 
+
 public class Point3D extends Point2D {
 
     protected Coordinate _z;

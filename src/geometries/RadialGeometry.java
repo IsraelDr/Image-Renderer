@@ -31,6 +31,8 @@ public abstract class RadialGeometry extends Geometry {
 
     @Override
     public boolean equals(Object obj) {
-        return _radius==obj;
+        if(obj instanceof RadialGeometry && obj != null)
+             return _radius==((RadialGeometry) obj).get_radius();
+        return false;
     }
 }

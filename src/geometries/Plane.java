@@ -58,8 +58,9 @@ public class Plane extends Geometry {
     // ***************** Operations ******************** //
 
     @Override
+
     public Vector getNormal(Point3D temp) {
-        return null;
+        return get_vector();
     }
 
 }

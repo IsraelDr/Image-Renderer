@@ -66,10 +66,5 @@ public class Triangle extends Plane {
      * @param temp
      * @return NULL
      */
-    @Override
-    public Vector getNormal(Point3D temp) {
-        return null;
-    }
-
 
 }

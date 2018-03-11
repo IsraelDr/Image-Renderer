@@ -29,6 +29,9 @@ public class Targil1 {
         System.out.println("ScalarProduct: " + vector1.ScalarProduct(vector2));
         System.out.println("VectorProduct: " + vector1.VectorProduct(vector2));
         System.out.println("vector5.multipliedbyScalar: " +vector5.multipliedbyScalar(8.5));
+        Point3D e = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
+        Point3D f = new Point3D(6.0093625,0.5789,-2.90908);
+        System.out.println(e.distance(f));
 
 
 
