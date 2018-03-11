@@ -41,7 +41,9 @@ public class Ray {
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Ray))
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Ray)||obj==null)
             return false;
         return _point.equals(((Ray) obj)._point)&&_vector.equals(((Ray) obj)._vector);
     }

@@ -44,6 +44,10 @@ public class Plane extends Geometry {
 
     @Override
     public boolean equals(Object obj) {
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Plane)||obj==null)
+            return false;
         return _point.equals(obj)&&_vector.equals(obj);
     }
 

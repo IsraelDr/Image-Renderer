@@ -37,6 +37,10 @@ public class Tube extends RadialGeometry {
 
     @Override
     public boolean equals(Object obj) {
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Tube)||obj==null)
+            return false;
         return this._ray.equals(obj);
     }
 

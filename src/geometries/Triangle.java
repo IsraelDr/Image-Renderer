@@ -53,6 +53,10 @@ public class Triangle extends Plane {
 
     @Override
     public boolean equals(Object obj) {
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Triangle)||obj==null)
+            return false;
         return super.equals(obj)&&_second.equals(obj)&&_third.equals(obj);
     }
     // ***************** Operations ******************** //

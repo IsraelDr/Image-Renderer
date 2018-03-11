@@ -27,6 +27,10 @@ public class Sphere extends RadialGeometry {
 
     @Override
     public boolean equals(Object obj) {
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Sphere)||obj==null)
+            return false;
         return super.equals(obj)&&_point.equals(obj);
     }
 

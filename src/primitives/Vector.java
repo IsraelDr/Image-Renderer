@@ -34,7 +34,9 @@ public class Vector {
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Vector))
+        if(this==obj)
+            return true;
+        if (!(obj instanceof Vector)||obj==null)
             return false;
         return this._point.equals(((Vector) obj)._point);
     }
