@@ -1,6 +1,7 @@
 package unittests;
 
 import org.junit.Test;
+import primitives.Coordinate;
 
 import static org.junit.Assert.*;
 

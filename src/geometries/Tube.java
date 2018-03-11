@@ -57,6 +57,13 @@ public class Tube extends RadialGeometry {
      */
     @Override
     public Vector getNormal(Point3D temp) {
-        return null;
+        Point3D pointBase =this._ray.get_point();
+        double c=pointBase.distance(temp);
+        double a=Math.sqrt(Math.pow(c,2)-Math.pow(_radius,2));
+        Vector ab=this._ray.get_vector().NormalVector().multipliedbyScalar(a);
+        Vector ac=pointBase.vectorSubstract(temp);
+        Vector fin =ac.add(ab);
+        return fin;
+
     }
 }
