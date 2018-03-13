@@ -32,6 +32,10 @@ public class Targil1 {
         Point3D e = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
         Point3D f = new Point3D(6.0093625,0.5789,-2.90908);
         System.out.println(e.distance(f));
+        Vector vector11 = new Vector(1.9,-0.6,9.8);
+        Point3D e1 = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
+        Vector vector1_2 = new Vector(0.899013,2.38765,12.4458);
+        System.out.println("addVectorToPiont: " + e1.addVectorToPiont(vector11).toString());
 
 
 

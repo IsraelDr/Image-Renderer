@@ -2,6 +2,7 @@ package unittests;
 
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Vector;
 
 import static org.junit.Assert.*;
 
@@ -36,6 +37,22 @@ public class Point3DTest {
 
     @Test
     public void addVectorToPiont() {
+        Point3D e = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
+        Point3D f = new Point3D(6.0093625,0.5789,-2.90908);
+        Vector vector1 = new Vector(1.9,-0.6,9.8);
+        Vector vector2 = new Vector(11.09,-0.654,2.00008);
+        Vector vector1_2 = new Vector(0.8990129999999998, 2.387645, 12.44575131106459);//The result from adding Vector1 to point e
+        assertTrue(e.addVectorToPiont(vector1).get_x()== vector1_2.getPoint().get_x());
+        assertTrue(e.addVectorToPiont(vector1).get_y()== vector1_2.getPoint().get_y());
+        assertTrue(e.addVectorToPiont(vector1).get_z()== vector1_2.getPoint().get_z());
+        assertFalse(f.addVectorToPiont(vector2).get_x()== vector1_2.getPoint().get_x());
+        assertFalse(f.addVectorToPiont(vector2).get_y()== vector1_2.getPoint().get_y());
+        assertFalse(f.addVectorToPiont(vector2).get_z()== vector1_2.getPoint().get_z());
+
+
+
+
+
     }
 
     @Test
