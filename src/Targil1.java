@@ -36,7 +36,9 @@ public class Targil1 {
         Point3D e1 = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
         Vector vector1_2 = new Vector(0.899013,2.38765,12.4458);
         System.out.println("addVectorToPiont: " + e1.addVectorToPiont(vector11).toString());
-
+        Coordinate ex11 = new Coordinate(1000000000.00001);
+        Coordinate ex12 = new Coordinate(0.00001);
+        System.out.println(ex12.subtract(ex11).toString());
 
 
     }

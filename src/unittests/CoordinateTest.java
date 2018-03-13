@@ -20,6 +20,9 @@ public class CoordinateTest {
         Coordinate ex2 = new Coordinate(1.1999991);
         Coordinate ex3 = new Coordinate(1000000000);
         Coordinate ex4 = new Coordinate(1000000000.00001);
+        Coordinate ex11 = new Coordinate(1000000000.00001);
+        Coordinate ex12 = new Coordinate(0.00001);
+        //assertFalse(ex12.subtract(ex11));
         assertFalse(ex3.equals(ex4));
         assertFalse(ex4.equals(ex3));
         assertTrue(ex1.equals(ex2));
@@ -39,6 +42,6 @@ public class CoordinateTest {
     }
 
     @Test
-    public void substract() {
+    public void subsract() {
     }
 }
