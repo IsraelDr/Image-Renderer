@@ -27,7 +27,7 @@ public class Targil1 {
         System.out.println(vector1.toString());
         System.out.println(vector2.toString());
         System.out.println("ScalarProduct: " + vector1.ScalarProduct(vector2));
-        System.out.println("VectorProduct: " + vector1.vectorProduct(vector2));
+        System.out.println("VectorProduct: " + vector1.VectorProduct(vector2));
         System.out.println("vector5.multipliedbyScalar: " +vector5.multipliedbyScalar(8.5));
         Point3D e = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
         Point3D f = new Point3D(6.0093625,0.5789,-2.90908);
@@ -38,15 +38,12 @@ public class Targil1 {
         System.out.println("addVectorToPiont: " + e1.addVectorToPiont(vector11).toString());
         Coordinate ex11 = new Coordinate(1000000000.00001);
         Coordinate ex12 = new Coordinate(0.00001);
-        System.out.println(ex12.subtract(ex11).toString());
-        Vector a = new Vector(1,2,3);
-        //Vector b = new Vector(2,3,4);
-        //System.out.println( a.add(b).toString());
-        Vector b = new Vector(2,3,4);
-        Vector d = new Vector(-1,-2,-3);
-        Vector c = new Vector(0,0,0);
-        Vector g = new Vector(1,2.45,3.098);
-        System.out.println(g.NormalVector().size());
+        Vector EX11 = new Vector(1.00000004,2.00000001,4);
+        Vector EX12 = new Vector(1,2,4.0000001);
+        Vector EX0 = new Vector(0,0,0);
+
+        System.out.println((int)0.999999);
+
 
     }
 }
