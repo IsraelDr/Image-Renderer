@@ -7,7 +7,7 @@ public class Coordinate {
 
     // ***************** Constructors ********************** //
     public Coordinate(double cord){
-        _cord = cord;
+        _cord = (getExp(cord)<ACCURACY)?0.0: cord;
     }
 
 

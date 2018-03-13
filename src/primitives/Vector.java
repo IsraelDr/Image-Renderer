@@ -1,6 +1,8 @@
 package primitives;
 
-
+/**
+ * Class of Vector contains Point3D
+ */
 public class Vector {
     protected Point3D _point;
 
@@ -79,7 +81,7 @@ public class Vector {
      * @param temp
      * @return
      */
-    public Vector VectorProduct(Vector temp){
+    public Vector vectorProduct(Vector temp){
         double i = this._point.get_y()*temp._point.get_z()-temp._point.get_y()*this._point.get_z();
         double j = temp._point.get_x()*this._point.get_z()-this._point.get_x()*temp._point.get_z();
         double k = this._point.get_x()*temp._point.get_y()-temp._point.get_x()*this._point.get_y();
