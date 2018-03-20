@@ -10,7 +10,7 @@ public class CameraTest {
 
     @Test
     public void constructRayThroughPixel() {
-        int pixelX = 1081;
+        int pixelX = 1081;//
         int pixelY = 1921;
         double screenDistance = 1.5;
         double screenWidth = 2.5;
