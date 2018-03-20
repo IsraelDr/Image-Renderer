@@ -18,17 +18,17 @@ public class Camera {
      * @param right vector to right
      */
     public Camera(Point3D place, Vector front, Vector right){
-            try {
-                if(front.ScalarProduct(right)!=0||front.size()==0||right.size()==0)
-                    throw new Exception("The two vectors are not orthonormal");
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
+        try {
+            if(front.ScalarProduct(right)!=0||front.size()==0||right.size()==0)
+                throw new Exception("The two vectors are not orthonormal");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         _p0=place;
-        _toward=front;
-        _right=right;
-        _up=_toward.vectorProduct(_right);
+        _toward=front.NormalVector();
+        _right=right.NormalVector();
+        _up=(_toward.vectorProduct(_right)).NormalVector();
     }
 
     //***************Operations*************************
@@ -48,7 +48,7 @@ public class Camera {
         Point3D Pc=new Point3D(_p0.addVectorToPiont(_toward.multipliedbyScalar(screenDistance)));
         double Rx=screenWidth/Nx;
         double Ry=screenHeight/Ny;
-        Point3D Pij=Pc.addVectorToPiont((_right.multipliedbyScalar(Rx*(i-((Nx+1)/2)))).add(_up.multipliedbyScalar(Ry*((Ny+1)/2)-j)));
+        Point3D Pij=Pc.addVectorToPiont((_right.multipliedbyScalar(Rx*(i-((Nx+1)/2)))).add(_up.multipliedbyScalar(Ry*(((Ny+1)/2)-j))));
         return new Ray(new Vector(Pij.get_x()-_p0.get_x(),Pij.get_y()-_p0.get_y(),Pij.get_z()-_p0.get_z()),_p0);
     }
 }

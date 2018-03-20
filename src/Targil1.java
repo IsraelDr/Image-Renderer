@@ -1,3 +1,4 @@
+import elements.Camera;
 import jdk.internal.util.xml.impl.Input;
 import primitives.*;
 import geometries.*;
@@ -8,6 +9,7 @@ import java.io.*;
 import java.util.*;
 
 
+
 /**
  * Authors:
  * Israel Dreyfuss 4301288, sruli97@gmail.com
@@ -16,33 +18,19 @@ import java.util.*;
 public class Targil1 {
 
     public static void main(String[] args) {
-        Vector vector1 = new Vector(1,2,3);
-        Vector vector2 = new Vector(6.987,2.98,10);
-        Vector vector3 = new Vector(123,0,-3);
-        Vector vector4 = new Vector(-0.5,-2,-7);
-        Vector vector5 = new Vector(-1.1,2,6);
-        Vector vector6 = new Vector(0,0,0);
-        Vector vector7 = new Vector(1,2,3);
-        System.out.println(vector1.equals(vector7));
-        System.out.println(vector1.toString());
-        System.out.println(vector2.toString());
-        System.out.println("ScalarProduct: " + vector1.ScalarProduct(vector2));
-        System.out.println("VectorProduct: " + vector1.vectorProduct(vector2));
-        System.out.println("vector5.multipliedbyScalar: " +vector5.multipliedbyScalar(8.5));
-        Point3D e = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
-        Point3D f = new Point3D(6.0093625,0.5789,-2.90908);
-        System.out.println(e.distance(f));
-        Vector vector11 = new Vector(1.9,-0.6,9.8);
-        Point3D e1 = new Point3D(-1.000987,2.9876450,Math.sqrt(7));
-        Vector vector1_2 = new Vector(0.899013,2.38765,12.4458);
-        System.out.println("addVectorToPiont: " + e1.addVectorToPiont(vector11).toString());
-        Coordinate ex11 = new Coordinate(1000000000.00001);
-        Coordinate ex12 = new Coordinate(0.00001);
-        Vector EX11 = new Vector(1.00000004,2.00000001,4);
-        Vector EX12 = new Vector(1,2,4.0000001);
-        Vector EX0 = new Vector(0,0,0);
-
-        System.out.println((int)0.999999);
+        int pixelX2 = 3077;
+        int pixelY2 = 5469;
+        double screenDistance2= 10.788;
+        double screenWidth2 = 157.86;
+        double screenHeight2 = 426.11;
+        int i2 = 145;
+        int j2 = 277;
+        Point3D center2 = new Point3D(2,7,-3);
+        Vector unit12 = new Vector(2,-2,1);
+        Vector unit22 = new Vector(1,2,2);
+        Camera camera2 = new Camera(center2,unit12, unit22);
+        Ray rayTest2 = camera2.constructRayThroughPixel(pixelX2,pixelY2,i2,j2,screenDistance2,screenWidth2,screenHeight2);
+        System.out.println(rayTest2.toString());//.equals(new Vector(-3.5,-5.09482,-4.34227)));
 
 
     }
