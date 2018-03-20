@@ -2,7 +2,6 @@ package elements;
 
 import primitives.Point3D;
 import primitives.Vector;
-
 /**
  * Class of Camera
  */
