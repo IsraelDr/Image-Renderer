@@ -126,6 +126,16 @@ public class Coordinate {
         int resultExp = getExp(result);
         return resultExp < ACCURACY ? 0.0 : result;
     }
+    public Coordinate scale(double num){
+        return new Coordinate(_scale(num));
+    }
+    public Coordinate multiply(Coordinate other){
+        return new Coordinate(_scale(other._cord));
+    }
+    private double _scale(double num){
+        int deltaExp=getExp(num-1);
+        return deltaExp <ACCURACY?_cord:_cord*num;
+    }
 
 
 }
