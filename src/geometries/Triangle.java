@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.ArrayList;
 
 public class Triangle extends Plane {
     protected Point3D _second;
@@ -66,9 +69,23 @@ public class Triangle extends Plane {
     // ***************** Operations ******************** //
 
     /**
-     * returns NULL
-     * @param temp
-     * @return NULL
+     *
+     * @param ray
+     * @return arraylist of intersections
      */
-
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray ray) {
+        ArrayList<Point3D> points= super.findIntersections(ray);
+        Vector v1=_point.vectorSubstract(ray.get_point());
+        Vector v2=_second.vectorSubstract(ray.get_point());
+        Vector v3=_third.vectorSubstract(ray.get_point());
+        Vector N1=v1.vectorProduct(v2).NormalVector();
+        Vector N2=v2.vectorProduct(v3).NormalVector();
+        Vector N3=v3.vectorProduct(v1).NormalVector();
+        if((v1.ScalarProduct(N1)>0&&v2.ScalarProduct(N2)>0&&v3.ScalarProduct(N3)>0)||
+                (v1.ScalarProduct(N1)<0&&v2.ScalarProduct(N2)<0&&v3.ScalarProduct(N3)<0))
+            return points;
+        else
+            return null;
+    }
 }
