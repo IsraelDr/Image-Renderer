@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
+
 /**
  * represents Tube with Ray and radius
  */
@@ -65,5 +67,10 @@ public class Tube extends RadialGeometry {
         Vector fin =ac.add(ab);
         return fin;
 
+    }
+
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }
