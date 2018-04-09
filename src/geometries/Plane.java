@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.ArrayList;
 
 /**
  * Class that defines a Plane. It contains a Point3D and a Vector
@@ -80,4 +83,17 @@ public class Plane extends Geometry {
         return get_vector();
     }
 
+    @Override
+    /**
+     * finds all intersections of ray with plane
+     */
+    public ArrayList<Point3D> findIntersections(Ray ray) {
+        if(ray.get_vector().ScalarProduct(this._vector)==0)
+            return null;
+        double t=(this._vector.ScalarProduct(new Vector(this._point.vectorSubstract(ray.get_point()))))/
+                this._vector.ScalarProduct(ray.get_vector());
+        ArrayList<Point3D> points=new ArrayList<Point3D>();
+        points.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t)));
+        return points;
+    }
 }
