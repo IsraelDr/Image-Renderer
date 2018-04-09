@@ -17,10 +17,7 @@ public class Triangle extends Plane {
      * @param third The third coordinate
      */
     public Triangle(Point3D first, Point3D second, Point3D third){
-        super(first,(second.vectorSubstract(first)).vectorProduct(third.vectorSubstract(first)));
-        //,new Vector(third.get_y()*second.get_z()-second.get_y()*third.get_z(),
-         //       second.get_x()*third.get_z()-third.get_x()*second.get_z(),
-         //       third.get_x()*second.get_y()-second.get_x()*third.get_y()));
+        super(first,second,third);
         _second = new Point3D(second);
         _third = new Point3D(third);
     }

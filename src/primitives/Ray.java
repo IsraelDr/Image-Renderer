@@ -15,7 +15,7 @@ public class Ray {
      */
     public Ray(Vector vector,Point3D point){
         this._point=new Point3D(point);
-        this._vector=new Vector(vector);
+        this._vector=new Vector(vector.NormalVector());
 
     }
     public Ray(Ray temp){

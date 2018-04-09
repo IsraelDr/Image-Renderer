@@ -48,14 +48,6 @@ public class Point3DTest {
         assertFalse(f.addVectorToPiont(vector2).get_x()== vector1_2.getPoint().get_x());
         assertFalse(f.addVectorToPiont(vector2).get_y()== vector1_2.getPoint().get_y());
         assertFalse(f.addVectorToPiont(vector2).get_z()== vector1_2.getPoint().get_z());
-
-
-
-
-
     }
 
-    @Test
-    public void vectorSubstract() {
-    }
 }

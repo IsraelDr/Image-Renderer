@@ -10,6 +10,7 @@ public class Plane extends Geometry {
     protected Point3D _point;
     protected Vector _vector;
 
+
     // ***************** Constructors ********************** //
 
     /**
@@ -20,7 +21,23 @@ public class Plane extends Geometry {
     public Plane(Point3D point, Vector vector){
         super();
         this._point=new Point3D(point);
-        this._vector=new Vector(_vector);
+        this._vector=new Vector(vector.NormalVector());
+    }
+
+
+    public Plane(Point3D p1, Point3D p2,Point3D p3){
+        super();
+        try {
+            if(p1.equals(p2)||p1.equals(p3)||p2.equals(p3))
+                throw new Exception("Two of the choosen points are equal!");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
+        this._point=new Point3D(p1);
+        Vector norm=new Vector(((p2.vectorSubstract(p1)).vectorProduct((p3.vectorSubstract(p1))).NormalVector()));
+        this._vector=new Vector(norm);
     }
 
     /**
@@ -48,7 +65,7 @@ public class Plane extends Geometry {
             return true;
         if (!(obj instanceof Plane)||obj==null)
             return false;
-        return _point.equals(obj)&&_vector.equals(obj);
+        return _point.equals(((Plane) obj)._point)&&_vector.equals(((Plane) obj)._vector);
     }
 
     @Override
