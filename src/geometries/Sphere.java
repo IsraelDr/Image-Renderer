@@ -31,7 +31,7 @@ public class Sphere extends RadialGeometry {
             return true;
         if (!(obj instanceof Sphere)||obj==null)
             return false;
-        return super.equals(obj)&&_point.equals(obj);
+        return super.equals(obj)&&_point.equals(((Sphere) obj)._point);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class Sphere extends RadialGeometry {
     // ***************** Operations ******************** //
     @Override
     public Vector getNormal(Point3D temp) {
-        return new Vector(_point.vectorSubstract(temp));
+        return new Vector(temp.vectorSubstract(_point).NormalVector());
     }
 }

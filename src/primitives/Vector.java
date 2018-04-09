@@ -103,7 +103,7 @@ public class Vector {
      */
     public Vector NormalVector(){
         double size=this.size();
-        if(size==0){
+        if(size==0 || (size > 0.999999 && size < 1.000001)){
             return this;
         }
         return this.multipliedbyScalar(1/size);

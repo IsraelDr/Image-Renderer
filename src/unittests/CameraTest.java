@@ -2,9 +2,11 @@ package unittests;
 
 import elements.Camera;
 import org.junit.Test;
-import primitives.*;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class CameraTest {
 

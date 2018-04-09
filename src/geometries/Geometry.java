@@ -22,6 +22,12 @@ public abstract class Geometry {
 
     }
     // ***************** Operations ******************** //
+
+    /**
+     *
+     * @param temp
+     * @return Returns The orthogonal Vector
+     */
     public abstract Vector getNormal(Point3D temp);
     public abstract ArrayList<Point3D> findIntersections(Ray ray);
 }
