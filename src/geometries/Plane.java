@@ -65,7 +65,7 @@ public class Plane extends Geometry {
             return true;
         if (!(obj instanceof Plane)||obj==null)
             return false;
-        return _point.equals(((Plane) obj)._point)&&_vector.equals(((Plane) obj)._vector);
+        return _point.vectorSubstract(((Plane) obj)._point).ScalarProduct(_vector)==0&&_vector.equals(((Plane) obj)._vector);
     }
 
     @Override

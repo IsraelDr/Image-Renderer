@@ -55,9 +55,13 @@ public class Triangle extends Plane {
             return true;
         if (!(obj instanceof Triangle)||obj==null)
             return false;
-        return super.equals(obj)&&
-                (_second.equals(((Triangle) obj)._second)&&_third.equals(((Triangle) obj)._third))||
-                (_second.equals(((Triangle) obj)._third)&&_third.equals(((Triangle) obj)._second));
+        return (_point.equals(((Triangle) obj)._point)&&_second.equals(((Triangle) obj)._second)&&_third.equals(((Triangle) obj)._third))||
+                (_point.equals(((Triangle) obj)._point)&&_second.equals(((Triangle) obj)._third)&&_third.equals(((Triangle) obj)._second))||
+                (_point.equals(((Triangle) obj)._second)&&_second.equals(((Triangle) obj)._third)&&_third.equals(((Triangle) obj)._point))||
+                (_point.equals(((Triangle) obj)._second)&&_second.equals(((Triangle) obj)._point)&&_third.equals(((Triangle) obj)._third))||
+                (_point.equals(((Triangle) obj)._third)&&_second.equals(((Triangle) obj)._second)&&_third.equals(((Triangle) obj)._point))||
+                (_point.equals(((Triangle) obj)._third)&&_second.equals(((Triangle) obj)._point)&&_third.equals(((Triangle) obj)._second));
+
     }
     // ***************** Operations ******************** //
 
