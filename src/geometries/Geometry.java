@@ -23,5 +23,5 @@ public abstract class Geometry {
     }
     // ***************** Operations ******************** //
     public abstract Vector getNormal(Point3D temp);
-    //public abstract ArrayList<Point3D> findIntersections(Ray ray);
+    public abstract ArrayList<Point3D> findIntersections(Ray ray);
 }
