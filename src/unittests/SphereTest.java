@@ -98,7 +98,7 @@ public class SphereTest {
                 }
             }
         }
-        assertTrue(a2.size() == 10);
+        assertTrue(a2.size() == 10);//
     }
 }
 
