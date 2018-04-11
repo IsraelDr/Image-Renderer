@@ -71,6 +71,6 @@ public class Tube extends RadialGeometry {
 
     @Override
     public ArrayList<Point3D> findIntersections(Ray ray) {
-        return null;
+        return null;//
     }
 }
