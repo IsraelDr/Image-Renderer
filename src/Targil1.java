@@ -8,6 +8,7 @@ import java.util.prefs.Preferences;
 import java.io.*;
 import java.util.*;
 
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -18,10 +19,18 @@ import java.util.*;
 public class Targil1 {
 
     public static void main(String[] args) {
-        Plane a =new Plane(new Point3D(1,2,3),new Vector(2,3,4));
-        Plane b = new Plane(new Point3D(1,2,3),new Vector(4,6,8));
-        System.out.println(a);
-        System.out.println(b);
+        ArrayList<Point3D> a=new ArrayList<Point3D>();
+        Camera cam =new Camera(new Point3D(0,0,0),new Vector(0,0,-1),new Vector(1,0,0));
+        int length=0;
+        Triangle _triangle1=new Triangle(new Point3D(1,1,-2),new Point3D(-1,1,-2),new Point3D(0,-1,-2));
+        for (int i=1;i<=3;i++)
+        {
+            for (int j = 1; j <= 3; j++) {
+                Ray _ray=cam.constructRayThroughPixel(3,3,i,j,1,3,3);
+                a.addAll(_triangle1.findIntersections(_ray));
+            }
+        }
 
+        System.out.println(a);
     }
 }

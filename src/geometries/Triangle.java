@@ -67,7 +67,6 @@ public class Triangle extends Plane {
 
     }
     // ***************** Operations ******************** //
-
     /**
      *
      * @param ray
@@ -82,10 +81,10 @@ public class Triangle extends Plane {
         Vector N1=v1.vectorProduct(v2).NormalVector();
         Vector N2=v2.vectorProduct(v3).NormalVector();
         Vector N3=v3.vectorProduct(v1).NormalVector();
-        if((v1.ScalarProduct(N1)>0&&v2.ScalarProduct(N2)>0&&v3.ScalarProduct(N3)>0)||
-                (v1.ScalarProduct(N1)<0&&v2.ScalarProduct(N2)<0&&v3.ScalarProduct(N3)<0))
+        if((ray.get_vector().ScalarProduct(N1)>0&&ray.get_vector().ScalarProduct(N2)>0&&ray.get_vector().ScalarProduct(N3)>0)||
+                (ray.get_vector().ScalarProduct(N1)<0&&ray.get_vector().ScalarProduct(N2)<0&&ray.get_vector().ScalarProduct(N3)<0))
             return points;
         else
-            return null;
+            return new ArrayList<Point3D>();
     }
 }
