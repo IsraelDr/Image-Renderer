@@ -31,14 +31,26 @@ public class Camera {
         _up=(_toward.vectorProduct(_right)).NormalVector();
     }
 
+    /**
+     *
+     * copy ctor
+     * @param camera
+     */
+    public Camera(Camera camera){
+        this._p0=new Point3D(camera._p0);
+        this._toward=new Vector(camera._toward);
+        this._right=new Vector(camera._right);
+        this._up=new Vector(camera._up);
+    }
+
     //***************Operations*************************
 
     /**
      *
      * @param Nx - number of pixels in view plane in line X
      * @param Ny - number of pixels in view plane in line Y
-     * @param i - describes the pixel we want in line x
-     * @param j - describes the pixel we want in line y
+     * @param i - describes the pixel we want in line x starts from 1
+     * @param j - describes the pixel we want in line y starts from 1
      * @param screenDistance distance of the screen
      * @param screenWidth - width of screen
      * @param screenHeight - height of screen
