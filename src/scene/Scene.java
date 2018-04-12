@@ -37,8 +37,8 @@ public class Scene {
     //*************************Setter/Getter**********//
 
     /**
-     * get
-     * @return camera
+     * getter
+     * @return Returns the camera that takes the scene
      */
     public Camera get_camera() {
         return _camera;
@@ -46,7 +46,7 @@ public class Scene {
 
     /**
      * getter
-     * @return color
+     * @return Returns the color of the scene
      */
     public Color get_color() {
         return _color;
@@ -54,31 +54,31 @@ public class Scene {
 
     /**
      * getter
-     * @return distance viewplane
+     * @return Returns the distance between the Camera and the view plane
      */
     public double get_distance() {
         return _distance;
     }
 
     /**
-     * setter
-     * @param camera
+     * Setter
+     * @param camera Sets the camera that takes the scene
      */
     public void set_camera(Camera camera) {
         this._camera=new Camera(camera);
     }
 
     /**
-     * setter
-     * @param color
+     * Setter
+     * @param color Sets the color of the scene
      */
     public void set_color(Color color) {
         this._color = new Color(color.getRed(),color.getGreen(),color.getBlue());
     }
 
     /**
-     * setter
-     * @param _distance
+     * Seeter
+     * @param _distance Sets the distance between the Camera and the view plane
      */
     public void set_distance(double _distance) {
         this._distance = _distance;
