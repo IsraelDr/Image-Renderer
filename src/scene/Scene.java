@@ -77,10 +77,10 @@ public class Scene {
     }
 
     /**
-     * Seeter
-     * @param _distance Sets the distance between the Camera and the view plane
+     * Setter
+     * @param distance Sets the distance between the Camera and the view plane
      */
-    public void set_distance(double _distance) {
-        this._distance = _distance;
+    public void set_distance(double distance) {
+        this._distance = distance;
     }
 }
