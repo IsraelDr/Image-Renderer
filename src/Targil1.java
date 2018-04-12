@@ -3,7 +3,6 @@ import geometries.Triangle;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import scene.Scene;
 
 import java.util.ArrayList;
 
@@ -29,10 +28,5 @@ public class Targil1 {
         }
 
         System.out.println(a);
-        Scene s = new Scene("eli");
-        s.get_camera();
-        s.set_camera(cam);
-
-
     }
 }
