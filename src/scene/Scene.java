@@ -83,4 +83,14 @@ public class Scene {
     public void set_distance(double distance) {
         this._distance = distance;
     }
+
+    //********************Operations*************************//
+
+    /**
+     * adding geometry to scene
+     * @param geometry, one of the geometries
+     */
+    public void addGeometry(Geometry geometry) {
+        this._geometries.add(geometry);
+    }
 }
