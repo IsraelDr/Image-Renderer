@@ -33,6 +33,8 @@ public class Plane extends Geometry {
         try {
             if(p1.equals(p2)||p1.equals(p3)||p2.equals(p3))
                 throw new Exception("Two of the choosen points are equal!");
+            if(p1.vectorSubstract(p2).NormalVector().equals(p1.vectorSubstract(p3).NormalVector()))
+                throw new Exception("The points are on one line!");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
