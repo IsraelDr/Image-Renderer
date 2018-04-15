@@ -28,16 +28,6 @@ public class Sphere extends RadialGeometry {
         return _point;
     }
     // ***************** Administration  ******************** //
-
-    @Override
-    public boolean equals(Object obj) {
-        if(this==obj)
-            return true;
-        if (!(obj instanceof Sphere)||obj==null)
-            return false;
-        return super.equals(obj)&&_point.equals(((Sphere) obj)._point);
-    }
-
     @Override
     public String toString() {
         return super.toString()+" "+ _point.toString();

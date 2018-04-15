@@ -34,17 +34,6 @@ public class Cylinder extends Tube {
 
     // ***************** Administration  ******************** //
 
-    /**
-     * equals for Cylinder
-     * @param obj
-     * @return
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Cylinder && obj != null)
-          return super.equals(obj)&&this._height==((Cylinder) obj)._height;
-        return false;
-    }
 
     /**
      * To string for Cylinder

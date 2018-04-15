@@ -54,21 +54,6 @@ public class Triangle extends Plane {
     public String toString() {
         return super.toString() + " " + _second.toString() + " " + _third.toString();
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Triangle) || obj == null)
-            return false;
-        return (_point.equals(((Triangle) obj)._point) && _second.equals(((Triangle) obj)._second) && _third.equals(((Triangle) obj)._third)) ||
-                (_point.equals(((Triangle) obj)._point) && _second.equals(((Triangle) obj)._third) && _third.equals(((Triangle) obj)._second)) ||
-                (_point.equals(((Triangle) obj)._second) && _second.equals(((Triangle) obj)._third) && _third.equals(((Triangle) obj)._point)) ||
-                (_point.equals(((Triangle) obj)._second) && _second.equals(((Triangle) obj)._point) && _third.equals(((Triangle) obj)._third)) ||
-                (_point.equals(((Triangle) obj)._third) && _second.equals(((Triangle) obj)._second) && _third.equals(((Triangle) obj)._point)) ||
-                (_point.equals(((Triangle) obj)._third) && _second.equals(((Triangle) obj)._point) && _third.equals(((Triangle) obj)._second));
-
-    }
     // ***************** Operations ******************** //
 
     /**

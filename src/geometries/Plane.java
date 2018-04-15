@@ -69,16 +69,6 @@ public class Plane extends Geometry {
         return _vector;
     }
     // ***************** Administration  ******************** //
-
-    @Override
-    public boolean equals(Object obj) {
-        if(this==obj)
-            return true;
-        if (!(obj instanceof Plane)||obj==null)
-            return false;
-        return _point.vectorSubstract(((Plane) obj)._point).ScalarProduct(_vector)==0&&_vector.equals(((Plane) obj)._vector);
-    }
-
     @Override
     public String toString() {
         return _point.toString()+" "+_vector.toString();
