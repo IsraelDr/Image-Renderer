@@ -48,4 +48,14 @@ public class Color {
     public java.awt.Color getColor(){
         return _color;
     }
+
+    /**
+     * multiply colors by scalar
+     * @param mult number between 0 and 1
+     */
+    public void scale(double mult){
+        if(mult<1&&mult >=0)
+            this._color = new java.awt.Color((int)(_color.getRed()*mult),(int)(_color.getGreen()*mult),(int)(_color.getBlue()*mult));
+
+    }
 }
