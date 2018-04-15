@@ -63,10 +63,10 @@ public class VectorTest {
         Vector d = new Vector(-1,-2,-3);
         Vector c = new Vector(0,0,0);
         Vector g = new Vector(1,2.45,3.098);
-        assertTrue("Is not equal ",a.vectorProduct(b).equals(new Vector(-1,2,-1)));
+        assertTrue("Is not equal ",a.vectorProduct(b).equals((new Vector(-1,2,-1)).NormalVector()));
         assertTrue("Is not equal ",c.vectorProduct(d).equals(c));
         assertTrue("Is not equal ",d.vectorProduct(a).equals(c));
-        assertTrue("Is not equal ",b.vectorProduct(g).equals(new Vector(-0.506, -2.196, 1.9)));
+        assertTrue("Is not equal ",b.vectorProduct(g).equals(new Vector(-0.506, -2.196, 1.9).NormalVector()));
     }
 
     @Test

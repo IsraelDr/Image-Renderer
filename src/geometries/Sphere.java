@@ -5,6 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class defines sphere with center and radius
@@ -49,8 +50,8 @@ public class Sphere extends RadialGeometry {
     }
 
     @Override
-    public ArrayList<Point3D> findIntersections(Ray ray) {
-        ArrayList<Point3D> list = new ArrayList<Point3D>();
+    public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> list = new ArrayList<Point3D>();
         Vector u = this._point.vectorSubstract(ray.get_point());
         double tm = ray.get_vector().ScalarProduct(u);
         double d = Math.sqrt(Math.pow(u.size(),2)-Math.pow(tm,2));

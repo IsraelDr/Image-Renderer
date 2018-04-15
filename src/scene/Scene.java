@@ -2,23 +2,18 @@ package scene;
 
 
 import elements.Camera;
-import geometries.Geometry;
-import primitives.Point3D;
-import primitives.Vector;
-
-import java.awt.*;
-import java.util.ArrayList;
+import geometries.*;
+import primitives.*;
 
 /**
  * Class that defines the Scene
  */
 public class Scene {
     protected String _name;
-    protected Color _color;
-    protected ArrayList<Geometry> _geometries;
+    protected Color _background;
+    protected Geometries _geometries;
     protected Camera _camera;
     protected double _distance;
-
 
     //****************Constructor****************//
 
@@ -28,8 +23,8 @@ public class Scene {
      */
     public Scene(String name){
         _name=name;
-        _color=new Color(1,1,1);
-        _geometries=new ArrayList<Geometry>();
+        _background=new Color(1,1,1);
+        _geometries=new Geometries();
         _camera=new Camera(new Point3D(0,0,0),new Vector(1,0,0),new Vector(0,1,0));
         _distance=1;
     }
@@ -49,7 +44,7 @@ public class Scene {
      * @return Returns the color of the scene
      */
     public Color get_color() {
-        return _color;
+        return _background;
     }
 
     /**
@@ -64,7 +59,7 @@ public class Scene {
      * Setter
      * @param camera Sets the camera that takes the scene
      */
-    public void set_camera(Camera camera) {
+    public void setCamera(Camera camera) {
         this._camera=new Camera(camera);
     }
 
@@ -73,7 +68,7 @@ public class Scene {
      * @param color Sets the color of the scene
      */
     public void set_color(Color color) {
-        this._color = new Color(color.getRed(),color.getGreen(),color.getBlue());
+        this._background = new Color(color);
     }
 
     /**
@@ -91,6 +86,6 @@ public class Scene {
      * @param geometry, one of the geometries
      */
     public void addGeometry(Geometry geometry) {
-        this._geometries.add(geometry);
+        this._geometries.addGeometry(geometry);
     }
 }

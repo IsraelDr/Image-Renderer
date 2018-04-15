@@ -3,7 +3,7 @@ package geometries;
 import primitives.Point3D;
 import primitives.Vector;
 import primitives.Ray;
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Geometry {
 
@@ -28,6 +28,6 @@ public abstract class Geometry {
      * @param temp
      * @return Returns The orthogonal Vector
      */
-    public abstract Vector getNormal(Point3D temp);
-    public abstract ArrayList<Point3D> findIntersections(Ray ray);
+    public Vector getNormal(Point3D temp) {return null; };
+    public abstract List<Point3D> findIntersections(Ray ray);
 }

@@ -25,7 +25,7 @@ public class CameraTest {
         Camera camera = new Camera(center,unit1, unit2);
         Ray rayTest = camera.constructRayThroughPixel(pixelX,pixelY,i,j,screenDistance,screenWidth,screenHeight);
         assertTrue(rayTest.get_point().equals(center));
-        //assertTrue(rayTest.get_vector().equals(new Vector(1.5,-0.09481961147085993,0.6577303487766786)));
+        assertTrue(rayTest.get_vector().equals(new Vector(1.5,-0.09481961147085993,0.6577303487766786).NormalVector()));
         int pixelX2 = 1081;
         int pixelY2 = 1921;
         double screenDistance2= 1.5;
@@ -39,7 +39,7 @@ public class CameraTest {
         Camera camera2 = new Camera(center2,unit12, unit22);
         Ray rayTest2 = camera2.constructRayThroughPixel(pixelX2,pixelY2,i2,j2,screenDistance2,screenWidth2,screenHeight2);
         assertTrue(rayTest2.get_point().equals(center2));
-        //assertTrue(rayTest2.get_vector().equals(new Vector(0.529906563658594,-1.282456523906133,0.8752738248705452)));
+        assertTrue(rayTest2.get_vector().equals(new Vector(0.529906563658594,-1.282456523906133,0.8752738248705452).NormalVector()));
         int pixelX3 = 3077;
         int pixelY3 = 5469;
         double screenDistance3= 10.788;
@@ -53,6 +53,6 @@ public class CameraTest {
         Camera camera3 = new Camera(center3,unit13, unit23);
         Ray rayTest3 = camera3.constructRayThroughPixel(pixelX3,pixelY3,i3,j3,screenDistance3,screenWidth3,screenHeight3);
         assertTrue(rayTest3.get_point().equals(center3));
-        //assertTrue(rayTest3.get_vector().equals(new Vector(-144.32147051369734,-118.70707779828513,83.59278543082442)));
+        assertTrue(rayTest3.get_vector().equals(new Vector(-144.32147051369734,-118.70707779828513,83.59278543082442).NormalVector()));
     }
 }

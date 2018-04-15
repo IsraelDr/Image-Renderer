@@ -5,13 +5,22 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Geometries extends Geometry {
-    public Vector getNormal(Point3D temp) {
-        return null;
+    private List<Geometry> _geometries = new ArrayList<Geometry>();
+
+    public void addGeometry(Geometry g) {
+        _geometries.add(g);
     }
 
-    public ArrayList<Point3D> findIntersections(Ray ray) {
-        return null;
+    public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> points = new ArrayList<Point3D>();
+
+        for (Geometry g : _geometries) {
+            for (Point3D p : g.findIntersections(ray))
+                points.add(p);
+        }
+        return points;
     }
 }

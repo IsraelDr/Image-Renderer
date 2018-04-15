@@ -5,6 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that defines a Plane. It contains a Point3D and a Vector
@@ -27,7 +28,12 @@ public class Plane extends Geometry {
         this._vector=new Vector(vector.NormalVector());
     }
 
-
+    /**
+     * ctor Plane three points
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public Plane(Point3D p1, Point3D p2,Point3D p3){
         super();
         try {
@@ -89,8 +95,8 @@ public class Plane extends Geometry {
     /**
      * finds all intersections of ray with plane
      */
-    public ArrayList<Point3D> findIntersections(Ray ray) {
-        ArrayList<Point3D> points=new ArrayList<Point3D>();
+    public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> points=new ArrayList<Point3D>();
         if(ray.get_vector().ScalarProduct(this._vector)==0)
             return points;
         double t=(this._vector.ScalarProduct(new Vector(this._point.vectorSubstract(ray.get_point()))))/
