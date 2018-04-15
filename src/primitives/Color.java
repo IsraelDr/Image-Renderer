@@ -30,8 +30,22 @@ public class Color {
      * @param params
      */
     public void add(Color... params){
+        int _r=this._color.getRed();
+        int _g=this._color.getGreen();
+        int _b=this._color.getBlue();
         for (Color _c:params){
-
+            _r+=_c._color.getRed();
+            _g+=_c._color.getGreen();
+            _b+=_c._color.getBlue();
         }
+        this._color=new java.awt.Color(_r,_g,_b);
+    }
+
+    /**
+     * getter color
+     * @return
+     */
+    public java.awt.Color getColor(){
+        return _color;
     }
 }
