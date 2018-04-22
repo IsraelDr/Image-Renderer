@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class TriangleTest {
 
-    @Test
+    /*@Test
     public void equals() {
         Triangle a = new Triangle(new Point3D(1,2,-3),new Point3D(5,9,0),new Point3D(23,-5,4));
         Triangle b = new Triangle(new Point3D(1,2,-3),new Point3D(23,-5,4),new Point3D(5,9,0));
@@ -25,7 +25,7 @@ public class TriangleTest {
         assertTrue(a.equals(d));
         assertTrue(a.equals(f));
         assertTrue(a.equals(e));
-    }
+    }*/
 
     @Test
     public void findIntersections() {

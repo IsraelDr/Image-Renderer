@@ -42,6 +42,15 @@ public class Camera {
         this._right=new Vector(camera._right);
         this._up=new Vector(camera._up);
     }
+    //****************getter/setter*************//
+
+    /**
+     * getter
+     * @return p0
+     */
+    public Point3D getP0() {
+        return _p0;
+    }
 
     //***************Operations*************************
 

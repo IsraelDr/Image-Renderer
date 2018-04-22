@@ -58,4 +58,13 @@ public class Color {
             this._color = new java.awt.Color((int)(_color.getRed()*mult),(int)(_color.getGreen()*mult),(int)(_color.getBlue()*mult));
 
     }
+
+    /**
+     * reduce from color
+     * @param num
+     */
+    public void reduce(double num){
+            this._color = new java.awt.Color((int)(Math.max(_color.getRed()-num,0)),(int)((Math.max(_color.getGreen()-num,0))),(int)((Math.max(_color.getBlue()-num,0))));
+
+    }
 }

@@ -1,6 +1,7 @@
 package scene;
 
 
+import elements.AmbientLight;
 import elements.Camera;
 import geometries.*;
 import primitives.*;
@@ -14,6 +15,7 @@ public class Scene {
     protected Geometries _geometries;
     protected Camera _camera;
     protected double _distance;
+    protected AmbientLight _ambientlight;
 
     //****************Constructor****************//
 
@@ -23,10 +25,11 @@ public class Scene {
      */
     public Scene(String name){
         _name=name;
-        _background=new Color(1,1,1);
+        _background=new Color(0,0,0);
         _geometries=new Geometries();
         _camera=new Camera(new Point3D(0,0,0),new Vector(1,0,0),new Vector(0,1,0));
         _distance=1;
+        _ambientlight=new AmbientLight(new Color(255,255,255),1);
     }
 
     //*************************Setter/Getter**********//
@@ -35,24 +38,40 @@ public class Scene {
      * getter
      * @return Returns the camera that takes the scene
      */
-    public Camera get_camera() {
+    public Camera getCamera() {
         return _camera;
+    }
+
+    /**
+     * getter
+     * @return geometries
+     */
+    public Geometries getGeometries() {
+        return _geometries;
     }
 
     /**
      * getter
      * @return Returns the color of the scene
      */
-    public Color get_color() {
-        return _background;
+    public java.awt.Color getBackgroundColor() {
+        return _background.getColor();
     }
 
     /**
      * getter
      * @return Returns the distance between the Camera and the view plane
      */
-    public double get_distance() {
+    public double getDistance() {
         return _distance;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public AmbientLight getAmbientlight() {
+        return _ambientlight;
     }
 
     /**
@@ -67,7 +86,7 @@ public class Scene {
      * Setter
      * @param color Sets the color of the scene
      */
-    public void set_color(Color color) {
+    public void setColor(Color color) {
         this._background = new Color(color);
     }
 
@@ -75,7 +94,7 @@ public class Scene {
      * Setter
      * @param distance Sets the distance between the Camera and the view plane
      */
-    public void set_distance(double distance) {
+    public void setDistance(double distance) {
         this._distance = distance;
     }
 

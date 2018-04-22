@@ -7,7 +7,7 @@ import primitives.Color;
  */
 public class AmbientLight {
     protected Color _color;
-    protected double Ka;
+    protected double _Ka;
 
     /**
      * ctor
@@ -15,6 +15,15 @@ public class AmbientLight {
      * @param Ka
      */
     public AmbientLight(Color color,double Ka){
+        this._color=new Color(color);
+        this._Ka=Ka;
+    }
 
+    /**
+     *  Intensity
+     * @return
+     */
+    public Color getIntensity(){
+        return new Color(Math.min((int)(_color.getColor().getRed()),255),Math.min((int)(_color.getColor().getGreen()*_Ka),255),Math.min((int)(_color.getColor().getBlue()*_Ka),255));
     }
 }
