@@ -16,7 +16,7 @@ public class renderTest {
 
     @Test
     public void renderImage() {
-        Scene scene=new Scene("testpic");
+        /*Scene scene=new Scene("testpic");
         scene.addGeometry(new Triangle(new Point3D(1,-100,100),new Point3D(1,-100,0),new Point3D(1,0,100)));
         scene.addGeometry(new Triangle(new Point3D(1,-100,-100),new Point3D(1,-100,0),new Point3D(1,0,-100)));
         scene.addGeometry(new Triangle(new Point3D(1,100,-100),new Point3D(1,100,0),new Point3D(1,0,-100)));
@@ -25,11 +25,11 @@ public class renderTest {
         ImageWriter imageWriter=new ImageWriter("testpic",500,500,500,500);
         Render render=new Render(scene,imageWriter);
 
-        render.renderImage();
+        render.renderImage();*/
 
         Scene scene2 = new Scene("Testscene");
         scene2.setCamera(new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(0, 1, 0)));
-        scene2.setDistance(100);
+        scene2.setDistance(150);
         scene2.setBackgroundColor(new Color(0, 0, 0));
         Geometries geometries2 = new Geometries();
 
@@ -57,5 +57,32 @@ public class renderTest {
         render2.renderImage();
         render2.printGrid(50);
         render2.getImageWriter().writeToimage();
+
+        Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49));
+        Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49));
+        Triangle downLeft   = new Triangle(new Point3D(100,0,-49),new Point3D(0,-100,-49),new Point3D(100,-100,-49));
+        Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49));
+
+        Sphere middle = new Sphere(new Point3D(0,0,-50),35);
+
+        Camera camera3 = new Camera(new Point3D(0,0,0),new Vector(0,0,-1),new Vector(-1,0,0));
+
+        Scene myScene = new Scene("Triangles and Sphere, Asher and Zvei, Targil 4");
+        myScene.setDistance(50);
+        myScene.setCamera(camera3);
+        myScene.setBackgroundColor(new Color(75,127,190));
+
+        myScene.addGeometry(upLeft);
+        myScene.addGeometry(upRight);
+        myScene.addGeometry(downLeft);
+        myScene.addGeometry(downRight);
+        myScene.addGeometry(middle);
+
+        ImageWriter sceneWriter = new ImageWriter("Triangles and Sphere, Israel Eli",500,500,500,500);
+        Render myRender = new Render(myScene,sceneWriter);
+
+        myRender.renderImage();
+        myRender.printGrid(50);
+        myRender.getImageWriter().writeToimage();
     }
 }

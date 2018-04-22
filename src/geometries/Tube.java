@@ -28,11 +28,11 @@ public class Tube extends RadialGeometry {
      */
     public Tube(Tube temp){
         super(temp);
-        this._ray=new Ray(temp.get_ray());
+        this._ray=new Ray(temp.getRay());
     }
     // ***************** Getters/Setters ********************** //
 
-    public Ray get_ray() {
+    public Ray getRay() {
         return _ray;
     }
     // ***************** Administration  ******************** //
@@ -43,7 +43,7 @@ public class Tube extends RadialGeometry {
     // ***************** Operations ******************** //
 
     /**
-     * get normal to tube at point on geometry
+     * get normal to tube at point on geometrys
      * @param temp
      * @return
      */
