@@ -36,8 +36,8 @@ public class Render {
                 }
             }
         }
-        this.printGrid(50);
-        _imageWriter.writeToimage();
+        //this.printGrid(50);
+        //_imageWriter.writeToimage();
     }
 
     public void printGrid(int interval){
