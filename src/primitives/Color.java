@@ -14,7 +14,7 @@ public class Color {
      * @param b blue
      */
     public Color(int r,int g,int b){
-        this._color=new java.awt.Color(Math.min(r,255),Math.min(g,255),Math.min(b,255));
+        this._color=new java.awt.Color(Math.max(Math.min(r,255),0),Math.max(Math.min(g,255),0),Math.max(Math.min(b,255),0));
     }
 
     /**
@@ -56,7 +56,6 @@ public class Color {
     public void scale(double mult){
         if(mult<1&&mult >=0)
             this._color = new java.awt.Color((int)(_color.getRed()*mult),(int)(_color.getGreen()*mult),(int)(_color.getBlue()*mult));
-
     }
 
     /**
