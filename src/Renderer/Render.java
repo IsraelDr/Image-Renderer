@@ -22,8 +22,8 @@ public class Render {
     }
     public void renderImage(){
         int k;
-        for (int i = 0; i <= 500; i++) {
-            for (int j = 0; j <= 500; j++) {
+        for (int i = 1; i < 500; i++) {
+            for (int j = 1; j < 500; j++) {
                 if(i==250&&j==250)
                     k=0;
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
@@ -36,18 +36,28 @@ public class Render {
                 }
             }
         }
-        printGrid(50);
+        this.printGrid(50);
         _imageWriter.writeToimage();
     }
 
-    private void printGrid(int interval){
-        for (int i = 0; i <= 500; i+=interval) {
-            for (int j = 0; j <= 500; j++) {
+    public void printGrid(int interval){
+        for (int i = 0; i < 500; i+=interval) {
+            for (int j = 0; j < 500; j++) {
                 _imageWriter.writePixel(i,j,new java.awt.Color(255,255,255));
                 _imageWriter.writePixel(j,i,new java.awt.Color(255,255,255));
             }
         }
     }
+    //******************************GETTERS********************************//
+
+    /**
+     * getter
+     * @return imagewriter
+     */
+    public ImageWriter getImageWriter() {
+        return _imageWriter;
+    }
+
     private Color calcColor(Point3D point){
         return _scene.getAmbientlight().getIntensity();
 

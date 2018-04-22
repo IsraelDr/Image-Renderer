@@ -50,6 +50,12 @@ public class Scene {
         return _geometries;
     }
 
+    public void setGeometries(Geometries geometries) {
+        for (Geometry g:geometries.getGeometries()) {
+            this._geometries.addGeometry(g);
+        }
+    }
+
     /**
      * getter
      * @return Returns the color of the scene
@@ -86,7 +92,7 @@ public class Scene {
      * Setter
      * @param color Sets the color of the scene
      */
-    public void setColor(Color color) {
+    public void setBackgroundColor(Color color) {
         this._background = new Color(color);
     }
 

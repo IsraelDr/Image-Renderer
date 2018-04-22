@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Geometries extends Geometry {
-    private List<Geometry> _geometries = new ArrayList<Geometry>();
+    protected List<Geometry> _geometries = new ArrayList<Geometry>();
 
     public void addGeometry(Geometry g) {
         _geometries.add(g);
@@ -22,5 +22,9 @@ public class Geometries extends Geometry {
                 points.add(p);
         }
         return points;
+    }
+
+    public List<Geometry> getGeometries() {
+        return _geometries;
     }
 }
