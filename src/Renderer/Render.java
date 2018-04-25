@@ -24,8 +24,6 @@ public class Render {
         int k;
         for (int i = 1; i < 500; i++) {
             for (int j = 1; j < 500; j++) {
-                if(i==250&&j==250)
-                    k=0;
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
                 List<Point3D> intersectionPoints=_scene.getGeometries().findIntersections(ray);
                 if(intersectionPoints.isEmpty())
@@ -36,10 +34,12 @@ public class Render {
                 }
             }
         }
-        //this.printGrid(50);
-        //_imageWriter.writeToimage();
     }
 
+    /**
+     * PrintGrid by interval
+     * @param interval
+     */
     public void printGrid(int interval){
         for (int i = 0; i < 500; i+=interval) {
             for (int j = 0; j < 500; j++) {
@@ -58,10 +58,21 @@ public class Render {
         return _imageWriter;
     }
 
+    /**
+     * Calculates the color
+     * @param point
+     * @return
+     */
     private Color calcColor(Point3D point){
         return _scene.getAmbientlight().getIntensity();
 
     }
+
+    /**
+     * getClosestPoint
+     * @param points
+     * @return
+     */
     private Point3D getClosestPoint(List<Point3D> points){
         double distance=0;
         Point3D temp=null;
