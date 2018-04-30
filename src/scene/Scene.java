@@ -6,6 +6,8 @@ import elements.Camera;
 import geometries.*;
 import primitives.*;
 
+import java.util.List;
+
 /**
  * Class that defines the Scene
  */
@@ -29,7 +31,7 @@ public class Scene {
         _geometries=new Geometries();
         _camera=new Camera(new Point3D(0,0,0),new Vector(1,0,0),new Vector(0,1,0));
         _distance=1;
-        _ambientlight=new AmbientLight(new Color(255,255,255),1);
+        _ambientlight=new AmbientLight(new Color(100,90,120),1);
     }
 
     //*************************Setter/Getter**********//
@@ -46,8 +48,8 @@ public class Scene {
      * getter
      * @return geometries
      */
-    public Geometries getGeometries() {
-        return _geometries;
+    public List<Geometry> getGeometries() {
+        return _geometries.getGeometries();
     }
 
     public void setGeometries(Geometries geometries) {

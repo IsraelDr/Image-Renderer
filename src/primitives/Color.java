@@ -38,7 +38,7 @@ public class Color {
             _g+=_c._color.getGreen();
             _b+=_c._color.getBlue();
         }
-        this._color=new java.awt.Color(_r,_g,_b);
+        this._color=new java.awt.Color(Math.max(Math.min(_r,255),0),Math.max(Math.min(_g,255),0),Math.max(Math.min(_b,255),0));
     }
 
     /**
@@ -46,7 +46,7 @@ public class Color {
      * @return
      */
     public java.awt.Color getColor(){
-        return _color;
+        return this._color;
     }
 
     /**

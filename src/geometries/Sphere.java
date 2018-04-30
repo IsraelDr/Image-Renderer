@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -14,12 +15,12 @@ public class Sphere extends RadialGeometry {
     protected Point3D _point;
 
     // ***************** Constructors ********************** //
-    public Sphere(Point3D point, double rad){
-        super(rad);
+    public Sphere(Point3D point, double rad,Color emission){
+        super(rad,emission);
         this._point=new Point3D(point);
     }
-    public Sphere(Sphere temp){
-        super(temp._radius);
+    public Sphere(Sphere temp, Color emission){
+        super(temp._radius,emission);
         this._point=new Point3D(temp._point);
     }
 

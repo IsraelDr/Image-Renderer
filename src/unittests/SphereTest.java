@@ -4,6 +4,7 @@ package unittests;
 import elements.Camera;
 import geometries.Sphere;
 import org.junit.Test;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -22,8 +23,8 @@ public class SphereTest {
         Point3D pnt = new Point3D(1, 2, 3);
         Point3D pnt1 = new Point3D(1, 2, 0);
         double rad = 1;
-        Sphere a = new Sphere(pnt, rad);
-        Sphere b = new Sphere(pnt1, rad);
+        Sphere a = new Sphere(pnt, rad,new Color(50,50,50));
+        Sphere b = new Sphere(pnt1, rad,new Color(50,50,50));
         assertFalse(a.equals(b));
 
 
@@ -35,7 +36,7 @@ public class SphereTest {
         Point3D pnt1 = new Point3D(9, 8, 3);
         Vector d = new Vector(0.8, 0.6, 0);
         double rad = 10;
-        Sphere a = new Sphere(pnt, rad);
+        Sphere a = new Sphere(pnt, rad,new Color(50,50,50));
         assertTrue(a.getNormal(pnt1).equals(d));
 
     }
@@ -46,7 +47,7 @@ public class SphereTest {
         Camera camera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(1, 0, 0));
         Point3D center = new Point3D(0, 0, -3);
         double rad = 1;
-        Sphere sphere = new Sphere(center, rad);
+        Sphere sphere = new Sphere(center, rad,new Color(50,50,50));
         Ray[] rays = new Ray[9];
         ArrayList<Point3D> a = new ArrayList<Point3D>();
         int g = 0;
@@ -66,7 +67,7 @@ public class SphereTest {
         Camera camera1 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(1, 0, 0));
         Point3D center1 = new Point3D(0, 0, -2.5);
         double rad1 = 2;
-        Sphere sphere1 = new Sphere(center1, rad1);
+        Sphere sphere1 = new Sphere(center1, rad1,new Color(50,50,50));
         Ray[] rays1 = new Ray[9];
         ArrayList<Point3D> a1 = new ArrayList<Point3D>();
         int g1 = 0;
@@ -86,7 +87,7 @@ public class SphereTest {
         Camera camera2 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(1, 0, 0));
         Point3D center2 = new Point3D(0, 0, -2);
         double rad2 = 1.5;
-        Sphere sphere2 = new Sphere(center2, rad2);
+        Sphere sphere2 = new Sphere(center2, rad2,new Color(50,50,50));
         Ray[] rays2 = new Ray[9];
         ArrayList<Point3D> a2 = new ArrayList<Point3D>();
         int g2 = 0;
@@ -106,7 +107,7 @@ public class SphereTest {
         Camera camera3 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(1, 0, 0));
         Point3D center3 = new Point3D(0, 0, -1);
         double rad3 = 4;
-        Sphere sphere3 = new Sphere(center3, rad3);
+        Sphere sphere3 = new Sphere(center3, rad3,new Color(50,50,50));
         Ray[] rays3 = new Ray[9];
         ArrayList<Point3D> a3 = new ArrayList<Point3D>();
         int g3 = 0;
@@ -126,7 +127,7 @@ public class SphereTest {
         Camera camera4 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, -1), new Vector(1, 0, 0));
         Point3D center4 = new Point3D(0, 0, 1);
         double rad4 = 1;
-        Sphere sphere4 = new Sphere(center4, rad4);
+        Sphere sphere4 = new Sphere(center4, rad4,new Color(50,50,50));
         Ray[] rays4 = new Ray[9];
         ArrayList<Point3D> a4 = new ArrayList<Point3D>();
         int g4 = 0;

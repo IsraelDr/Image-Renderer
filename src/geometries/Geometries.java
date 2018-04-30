@@ -5,9 +5,11 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Geometries extends Geometry {
+public class Geometries {
     protected List<Geometry> _geometries = new ArrayList<Geometry>();
 
     public void addGeometry(Geometry g) {

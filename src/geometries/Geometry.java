@@ -1,26 +1,41 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 import primitives.Ray;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Geometry {
 
-    // ***************** Constructors ********************** //
+    protected Color _emission;
 
+    // ***************** Constructors ********************** //
     /**
      * ctor
      */
-    public Geometry(){}
+    public Geometry(Color emission){
+        this._emission=new Color(emission);
+    }
 
     /**
      * Copy Ctor
      * @param temp
      */
     public Geometry(Geometry temp) {
-
+        this._emission=new Color(temp._emission);
     }
+    //***************** GETTER/SETTER*******************//
+
+    /**
+     * Getter
+     * @return emission color
+     */
+    public Color getEmission() {
+        return _emission;
+    }
+
     // ***************** Operations ******************** //
 
     /**

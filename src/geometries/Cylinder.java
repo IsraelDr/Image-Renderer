@@ -11,9 +11,9 @@ public class Cylinder extends Tube {
      * @param _radius The radius value
      * @param height The height of the cylinder
      */
-    public Cylinder(Ray _ray, double _radius, double height)
+    public Cylinder(Ray _ray, double _radius, double height,Color emission)
     {
-        super(_ray,_radius);
+        super(_ray,_radius,emission);
         _height = height;
     }
 

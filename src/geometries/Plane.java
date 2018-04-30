@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -22,8 +23,8 @@ public class Plane extends Geometry {
      * @param point
      * @param vector
      */
-    public Plane(Point3D point, Vector vector){
-        super();
+    public Plane(Point3D point, Vector vector, Color emission){
+        super(emission);
         this._point=new Point3D(point);
         this._vector=new Vector(vector.NormalVector());
     }
@@ -34,8 +35,8 @@ public class Plane extends Geometry {
      * @param p2
      * @param p3
      */
-    public Plane(Point3D p1, Point3D p2,Point3D p3){
-        super();
+    public Plane(Point3D p1, Point3D p2,Point3D p3,Color emission){
+        super(emission);
         try {
             if(p1.equals(p2)||p1.equals(p3)||p2.equals(p3))
                 throw new Exception("Two of the choosen points are equal!");
