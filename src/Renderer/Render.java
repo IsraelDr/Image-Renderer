@@ -18,7 +18,6 @@ import java.util.Map;
 public class Render {
     protected Scene _scene;
     protected ImageWriter _imageWriter;
-    private double distance;
     public Render(Scene scene,ImageWriter imageWriter) {
         this._scene=scene;
         this._imageWriter=new ImageWriter(imageWriter);
@@ -82,19 +81,18 @@ public class Render {
      * @return
      */
     private Map<Geometry,Point3D> getClosestPoint(Map<Geometry, List<Point3D>> intersectionpoints){
-        this.distance = Double.MAX_VALUE;
+        double distance = Double.MAX_VALUE;
         Point3D p0 = _scene.getCamera().getP0();
         Map<Geometry, Point3D> minDistancePoint = new HashMap<Geometry, Point3D>();
-        intersectionpoints.forEach((geometry,points) ->{
-             points.forEach(point->{
-                 if (p0.distance(point) < this.distance) {
-                        minDistancePoint.clear(); // make it empty
-                        minDistancePoint.put(geometry, new Point3D(point));
-                        this.distance = p0.distance(point);
+        for(Map.Entry<Geometry,List<Point3D>> a:intersectionpoints.entrySet()){
+            for (Point3D p:a.getValue()) {
+                if (p0.distance(p) < distance) {
+                    minDistancePoint.clear(); // make it empty
+                    minDistancePoint.put(a.getKey(), new Point3D(p));
+                    distance = p0.distance(p);
                 }
-            });
-
-        });
+            }
+        }
         return minDistancePoint;
     }
 
