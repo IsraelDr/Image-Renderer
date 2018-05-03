@@ -12,14 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Render
  */
 public class Render {
     protected Scene _scene;
     protected ImageWriter _imageWriter;
-
+    private double distance;
     public Render(Scene scene,ImageWriter imageWriter) {
         this._scene=scene;
         this._imageWriter=new ImageWriter(imageWriter);
@@ -83,16 +82,15 @@ public class Render {
      * @return
      */
     private Map<Geometry,Point3D> getClosestPoint(Map<Geometry, List<Point3D>> intersectionpoints){
-        final double distance = Double.MAX_VALUE;
+        this.distance = Double.MAX_VALUE;
         Point3D p0 = _scene.getCamera().getP0();
         Map<Geometry, Point3D> minDistancePoint = new HashMap<Geometry, Point3D>();
         intersectionpoints.forEach((geometry,points) ->{
              points.forEach(point->{
-                 double d = distance;
-                 if (p0.distance(point) < d) {
-                    minDistancePoint.clear(); // make it empty
-                    minDistancePoint.put(geometry, new Point3D(point));
-                    d = p0.distance(point);
+                 if (p0.distance(point) < this.distance) {
+                        minDistancePoint.clear(); // make it empty
+                        minDistancePoint.put(geometry, new Point3D(point));
+                        this.distance = p0.distance(point);
                 }
             });
 
