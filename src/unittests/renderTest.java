@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class renderTest {
 
     @Test
-    public void renderImage() {
+    public void renderImage() {//
 
         Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49),new Color(100,90,250));
         Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49),new Color(50,20,200));
