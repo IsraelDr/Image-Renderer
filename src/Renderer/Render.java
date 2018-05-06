@@ -24,10 +24,8 @@ public class Render {
     }
     public void renderImage(){
         int k;
-        for (int i = 1; i < 500; i++) {
-            for (int j = 1; j < 500; j++) {
-                if(i==250&&j==250)
-                    k=0;
+        for (int i = 1; i < _imageWriter.getNx(); i++) {
+            for (int j = 1; j < _imageWriter.getNy(); j++) {
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
                 Map<Geometry,List<Point3D>> intersectionPoints=getSceneRayIntersections(ray);
                 if(intersectionPoints.isEmpty())

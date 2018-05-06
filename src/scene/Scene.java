@@ -3,6 +3,7 @@ package scene;
 
 import elements.AmbientLight;
 import elements.Camera;
+import elements.LightSource;
 import geometries.*;
 import primitives.*;
 
@@ -18,6 +19,7 @@ public class Scene {
     protected Camera _camera;
     protected double _distance;
     protected AmbientLight _ambientlight;
+    protected List<LightSource> _lights;
 
     //****************Constructor****************//
 

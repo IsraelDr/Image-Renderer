@@ -1,15 +1,14 @@
 package geometries;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
-import primitives.Ray;
+import primitives.*;
+
 import java.util.List;
 import java.util.Map;
 
 public abstract class Geometry {
 
     protected Color _emission;
+    protected Material _material;
 
     // ***************** Constructors ********************** //
     /**
@@ -43,6 +42,6 @@ public abstract class Geometry {
      * @param temp
      * @return Returns The orthogonal Vector
      */
-    public Vector getNormal(Point3D temp) {return null; };
+    public abstract Vector getNormal(Point3D temp);
     public abstract List<Point3D> findIntersections(Ray ray);
 }

@@ -5,8 +5,8 @@ import primitives.Color;
 /**
  * Class represents the ambient light
  */
-public class AmbientLight {
-    protected Color _color;
+public class AmbientLight extends Light {
+
     protected double _Ka;
 
     /**
