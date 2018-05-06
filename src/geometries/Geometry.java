@@ -14,8 +14,9 @@ public abstract class Geometry {
     /**
      * ctor
      */
-    public Geometry(Color emission){
+    public Geometry(Color emission,Material material){
         this._emission=new Color(emission);
+        this._material=new Material(material);
     }
 
     /**
