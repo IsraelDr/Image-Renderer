@@ -27,10 +27,10 @@ public class SpotLight extends PointLight {
     /**
      * copy ctor
      *
-     * @param spotLight
+     * @param spotLight The object to be copied
      */
     SpotLight(SpotLight spotLight) {
-        super((PointLight) spotLight);
+        super(spotLight);
         _direction = new Vector((spotLight.getDirection()));
     }
 
@@ -42,13 +42,14 @@ public class SpotLight extends PointLight {
 
     //******************************OPERATIONS********************************//
 
-    @Override
+
     /**
      * GetIntensity of Point
      *
      * @param point
      * @return
      */
+    @Override
     public Color getIntensity(Point3D point) {
         double dMultL = getD(point).ScalarProduct(getL(point));
         if (dMultL < 0) //The point is not lit by the flashlight
