@@ -4,10 +4,7 @@ import elements.Camera;
 import geometries.Plane;
 import geometries.Triangle;
 import org.junit.Test;
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 
 import static org.junit.Assert.*;
 
@@ -32,7 +29,7 @@ public class TriangleTest {
     public void findIntersections() {
         Camera cam =new Camera(new Point3D(0,0,0),new Vector(0,0,-1),new Vector(1,0,0));
         int length=0;
-        Triangle _triangle1=new Triangle(new Point3D(1,1,-2),new Point3D(-1,1,-2),new Point3D(0,-1,-2), new Color(50,50,50));
+        Triangle _triangle1=new Triangle(new Point3D(1,1,-2),new Point3D(-1,1,-2),new Point3D(0,-1,-2), new Color(50,50,50),new Material(10,15,20));
         for (int i=1;i<=3;i++)
         {
             for (int j = 1; j <= 3; j++) {
@@ -43,7 +40,7 @@ public class TriangleTest {
         assertTrue(length==1);
 
         length=0;
-        Triangle _triangle2=new Triangle(new Point3D(1,1,-2),new Point3D(-1,1,-2),new Point3D(0,-20,-2),new Color(50,50,50));
+        Triangle _triangle2=new Triangle(new Point3D(1,1,-2),new Point3D(-1,1,-2),new Point3D(0,-20,-2),new Color(50,50,50),new Material(10,15,20));
         for (int i=1;i<=3;i++)
         {
             for (int j = 1; j <= 3; j++) {

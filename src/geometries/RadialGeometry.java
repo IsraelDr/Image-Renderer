@@ -1,13 +1,14 @@
 package geometries;
 
 import primitives.Color;
+import primitives.Material;
 
 public abstract class RadialGeometry extends Geometry {
     protected double _radius;
 
     // ***************** Constructors ********************** //
-    public RadialGeometry(double rad, Color emission){
-        super(emission);
+    public RadialGeometry(double rad, Color emission, Material _material){
+        super(emission,_material);
         this._radius=rad;
     }
     /**
