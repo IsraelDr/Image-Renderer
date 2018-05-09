@@ -16,8 +16,8 @@ import java.util.Map;
  * Render
  */
 public class Render {
-    protected Scene _scene;
-    protected ImageWriter _imageWriter;
+    private Scene _scene;
+    private ImageWriter _imageWriter;
     public Render(Scene scene,ImageWriter imageWriter) {
         this._scene=scene;
         this._imageWriter=new ImageWriter(imageWriter);
@@ -61,6 +61,7 @@ public class Render {
         return _imageWriter;
     }
 
+    // ************************** Operations ***************************** //
     /**
      * Calculates the color
      * @param point
@@ -75,8 +76,8 @@ public class Render {
 
     /**
      * getClosestPoint
-     * @param intersectionpoints
-     * @return
+     * @param intersectionpoints Intersection points
+     * @return Returns the closest point
      */
     private Map<Geometry,Point3D> getClosestPoint(Map<Geometry, List<Point3D>> intersectionpoints){
         double distance = Double.MAX_VALUE;

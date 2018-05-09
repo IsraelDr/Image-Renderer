@@ -10,6 +10,37 @@ import primitives.Vector;
 public class DirectionalLight extends Light implements LightSource {
 
     protected Vector _direction;
+
+    //******************************CONSTRUCTORS********************************//
+
+    /**
+     * ctor
+     * @param color Color
+     * @param direction A vector that indicates the direction of light
+     */
+    DirectionalLight(Color color, Vector direction){
+        _color = new Color(color);
+        _direction = new Vector(direction);
+    }
+
+    /**
+     * copy ctor
+     * @return
+     */
+    DirectionalLight(DirectionalLight directionalLight){
+        _color = new Color(directionalLight.getColor());
+        _direction = new Vector(directionalLight.getDirection());
+    }
+
+    //******************************GETTERS********************************//
+
+
+    public Vector getDirection() {
+        return new Vector(_direction);
+    }
+
+    // ************************** Operations ***************************** //
+
     @Override
     public Color getIntensity() {
         return null;
@@ -23,7 +54,7 @@ public class DirectionalLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity(Point3D point) {
-        return null;
+        return getColor();
     }
 
     /**

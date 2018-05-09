@@ -29,7 +29,7 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * copy ctor
-     * @param pointLight
+     * @param pointLight Point Light
      */
     PointLight(PointLight pointLight){
         _color = new Color(pointLight.getColor());
@@ -61,20 +61,20 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity() {
-        return new Color(Math.min((int)(_color.getColor().getRed()),255),Math.min((int)(_color.getColor().getGreen()),255),Math.min((int)(_color.getColor().getBlue()),255));
-
+        //return new Color(Math.min((int)(_color.getColor().getRed()),255),Math.min((int)(_color.getColor().getGreen()),255),Math.min((int)(_color.getColor().getBlue()),255));
+        return null;
     }
 
     /**
      * GetIntensity of Point
      *
-     * @param point
-     * @return
+     * @param point Point
+     * @return Returns Intensity of Point
      */
     @Override
     public Color getIntensity(Point3D point) {
         double d = point.distance(_position);//Distance between PointLight and Geomatry
-        java.awt.Color i0 = getIntensity().getColor();
+        java.awt.Color i0 = getColor().getColor();
         int kkk = (int) (_Kc +_Kl*d + _Kq * Math.pow(d,2));
         Color il = new Color(i0.getRed()/kkk,i0.getGreen()/kkk,i0.getBlue()/kkk);
         return il;
@@ -95,7 +95,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * Vector of strongest light from spotlight
      *
-     * @param point
+     * @param point Point
      * @return Returns always null
      */
     @Override
