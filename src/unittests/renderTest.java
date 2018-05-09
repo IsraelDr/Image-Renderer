@@ -1,16 +1,11 @@
 package unittests;
 
-import Renderer.ImageWriter;
-import Renderer.Render;
+import Renderer.*;
 import elements.*;
 import geometries.*;
-import geometries.Sphere;
-import geometries.Triangle;
 import org.junit.Test;
 import primitives.*;
-import scene.Scene;
-
-import static org.junit.Assert.*;
+import scene.*;
 
 public class renderTest {
 
