@@ -36,6 +36,15 @@ public abstract class Geometry {
         return _emission;
     }
 
+    /**
+     * Get mAterial
+     * @return
+     */
+    public Material getMaterial() {
+        return _material;
+    }
+
+
     // ***************** Operations ******************** //
 
     /**
@@ -45,4 +54,5 @@ public abstract class Geometry {
      */
     public abstract Vector getNormal(Point3D temp);
     public abstract List<Point3D> findIntersections(Ray ray);
+
 }

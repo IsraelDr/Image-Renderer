@@ -65,11 +65,11 @@ public class DirectionalLight extends Light implements LightSource {
      */
     @Override
     public Vector getL(Point3D point) {
-        return null;
+        return this.getD(point);
     }
 
     /**
-     * Vector of strongest light from spotlight
+     * Vector of strongest light from directionallight
      *
      * @param point
      * @return

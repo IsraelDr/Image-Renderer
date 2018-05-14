@@ -52,6 +52,13 @@ public class Camera {
         return _p0;
     }
 
+    /**
+     * GETTER
+     * @return
+     */
+    public Vector getToward() {
+        return _toward;
+    }
     //***************Operations*************************
 
     /**

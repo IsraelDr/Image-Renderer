@@ -19,7 +19,7 @@ public class SpotLight extends PointLight {
      * @param Kl        Kl
      * @param Kq        Kq
      */
-    SpotLight(Color color, Vector direction, Point3D position, double Kc, double Kl, double Kq) {
+    public SpotLight(Color color, Vector direction, Point3D position, double Kc, double Kl, double Kq) {
         super(color, position, Kc, Kl, Kq);
         _direction = new Vector(direction);
     }
@@ -29,7 +29,7 @@ public class SpotLight extends PointLight {
      *
      * @param spotLight The object to be copied
      */
-    SpotLight(SpotLight spotLight) {
+    public SpotLight(SpotLight spotLight) {
         super(spotLight);
         _direction = new Vector((spotLight.getDirection()));
     }
@@ -51,11 +51,24 @@ public class SpotLight extends PointLight {
      */
     @Override
     public Color getIntensity(Point3D point) {
-        double dMultL = getD(point).ScalarProduct(getL(point));
+        /*double dMultL = getD(point).ScalarProduct(getL(point));
         if (dMultL < 0) //The point is not lit by the flashlight
             return new Color(0, 0, 0);
         java.awt.Color Il = super.getIntensity(point).getColor();
         return new Color((int) (Il.getRed() * dMultL), (int) (Il.getGreen() * dMultL), (int) (Il.getBlue() * dMultL));
+        */
+        double distance = _position.distance(point);
+        double denominator = _Kc + distance * _Kl + distance * Math.pow(_Kq, 2);
+
+        //position
+        Vector l = point.vectorSubstract(_position);
+        double numerator = _direction.ScalarProduct(l);
+
+        //scale
+        Color result = new Color(_color);
+        result.scale(numerator / denominator);
+
+        return result;
     }
 
     @Override

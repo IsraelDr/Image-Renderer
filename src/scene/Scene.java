@@ -7,6 +7,7 @@ import elements.LightSource;
 import geometries.*;
 import primitives.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class Scene {
         _camera=new Camera(new Point3D(0,0,0),new Vector(1,0,0),new Vector(0,1,0));
         _distance=1;
         _ambientlight=new AmbientLight(new Color(100,90,120),1);
+        _lights=new LinkedList<>();
     }
 
     //*************************Setter/Getter**********//
@@ -85,6 +87,14 @@ public class Scene {
     }
 
     /**
+     * setter
+     * @param light
+     */
+    public void setAmbientlight(Color light,double ka) {
+        this._ambientlight = new AmbientLight(light,ka);
+    }
+
+    /**
      * Setter
      * @param camera Sets the camera that takes the scene
      */
@@ -108,6 +118,13 @@ public class Scene {
         this._distance = distance;
     }
 
+    /**
+     * getter lights
+     * @return
+     */
+    public List<LightSource> getLights() {
+        return _lights;
+    }
     //********************Operations*************************//
 
     /**
@@ -116,5 +133,9 @@ public class Scene {
      */
     public void addGeometry(Geometry geometry) {
         this._geometries.addGeometry(geometry);
+    }
+
+    public void addLight(LightSource light) {
+        this._lights.add(light);
     }
 }

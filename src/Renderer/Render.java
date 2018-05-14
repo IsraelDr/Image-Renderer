@@ -1,10 +1,12 @@
 package Renderer;
 
 
+import elements.LightSource;
 import geometries.Geometry;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
+import primitives.Vector;
 import scene.Scene;
 
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ public class Render {
             for (int j = 1; j < _imageWriter.getNy(); j++) {
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
                 Map<Geometry,List<Point3D>> intersectionPoints=getSceneRayIntersections(ray);
+                if(i==300&&j==500)
+                    k=5;
                 if(intersectionPoints.isEmpty())
                     _imageWriter.writePixel(i,j,_scene.getBackgroundColor());
                 else {
@@ -70,8 +74,81 @@ public class Render {
     private Color calcColor(Geometry geometry, Point3D point){
         Color color=_scene.getAmbientlight().getIntensity();
         color.add(geometry.getEmission());
+        Vector n =geometry.getNormal(point);
+        int nShininess=geometry.getMaterial().getShininess();
+        double kd=geometry.getMaterial().getKd();
+        double ks=geometry.getMaterial().getKs();
+        for (LightSource lightsource:_scene.getLights()) {
+            Color lightIntensity=lightsource.getIntensity(point);
+            Vector l=lightsource.getL(point);
+            Vector v=point.vectorSubstract(_scene.getCamera().getP0());
+            color.add(calcDiffusive(kd,l,n,lightIntensity),calcSpecular(ks,l,n,v,nShininess,lightIntensity));
+        }
+
         return color;
 
+    }
+
+    /**
+     * return Calc of Diffusion
+     * @param kd
+     * @param l
+     * @param n
+     * @param lightIntensity
+     * @return
+     */
+    private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
+        /*double temp = kd * l.ScalarProduct(n);
+        Color temp2 = new Color(lightIntensity);
+        temp2.scale(temp);
+        return temp2;*/
+        Color result = new Color(lightIntensity);
+        double scalingFactor = kd *l.ScalarProduct(n);
+
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        Vector v = _scene.getCamera().getToward();
+        if ((l.ScalarProduct(n) > 0 && v.ScalarProduct(n) > 0) || (l.ScalarProduct(n) < 0 && v.ScalarProduct(n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        }
+        else{
+            return new Color(0,0,0);
+        }
+    }
+
+    /**
+     * return Calc of Specular
+     * @param ks
+     * @param n
+     * @param v
+     * @param nShininess
+     * @param lightIntensity
+     * @return
+     */
+    private Color calcSpecular(double ks,Vector l,Vector n,Vector v,int nShininess,Color lightIntensity) {
+        Color result = new Color(lightIntensity);
+
+        // calculating "Ks* dotProduct(-v,r)^nShininess" and 'r' itself.
+        double temp = -2 * l.ScalarProduct(n);
+        Vector nComponent = n.multipliedbyScalar(temp);
+        Vector r = l.getPoint().vectorSubstract(nComponent.getPoint());
+        double scalingFactor = ks * Math.pow(v.multipliedbyScalar(-1).ScalarProduct(r),nShininess);
+
+
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        if ((l.ScalarProduct(n) > 0 &&v.ScalarProduct(n) > 0)|| (l.ScalarProduct(n) < 0 && v.ScalarProduct(n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        }
+        else{
+            return new Color(0,0,0);
+        }
     }
 
     /**

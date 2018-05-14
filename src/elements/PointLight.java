@@ -19,7 +19,7 @@ public class PointLight extends Light implements LightSource {
      * @param Kl Kl
      * @param Kq Kq
      */
-    PointLight(Color color, Point3D position,double Kc,double Kl,double Kq){
+    public PointLight(Color color, Point3D position,double Kc,double Kl,double Kq){
         _color = new Color(color);
         _position = new Point3D(position);
         _Kc = Kc;
@@ -31,7 +31,7 @@ public class PointLight extends Light implements LightSource {
      * copy ctor
      * @param pointLight Point Light
      */
-    PointLight(PointLight pointLight){
+    public PointLight(PointLight pointLight){
         _color = new Color(pointLight.getColor());
         _position = new Point3D(pointLight.getPosition());
         _Kc = pointLight.getKc();
@@ -73,11 +73,19 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity(Point3D point) {
-        double d = point.distance(_position);//Distance between PointLight and Geomatry
+       /* double d = point.distance(_position);//Distance between PointLight and Geomatry
         java.awt.Color i0 = getColor().getColor();
-        int kkk = (int) (_Kc +_Kl*d + _Kq * Math.pow(d,2));
-        Color il = new Color(i0.getRed()/kkk,i0.getGreen()/kkk,i0.getBlue()/kkk);
+        double kkk =(_Kc +_Kl*d + _Kq * Math.pow(d,2));
+
+        Color il = new Color((int)(i0.getRed()/kkk),(int)(i0.getGreen()/kkk),(int)(i0.getBlue()/kkk));
         return il;
+        */
+        double distance = _position.distance(point);
+        double denominator = _Kc + distance * _Kl + distance * Math.pow(_Kq, 2);
+
+        Color result = new Color(super._color);
+        result.scale(1 / denominator);
+        return result;
     }
 
     /**
@@ -88,8 +96,7 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Vector getL(Point3D point) {
-        Vector l = new Vector(point.vectorSubstract(_position).NormalVector());
-        return l;
+        return new Vector(_position.get_x(),_position.get_y(),_position.get_z());
     }
 
     /**
@@ -100,6 +107,6 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Vector getD(Point3D point) {
-        return null;
+        return this.getL(point);
     }
 }
