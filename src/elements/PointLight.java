@@ -81,7 +81,7 @@ public class PointLight extends Light implements LightSource {
         return il;
         */
         double distance = _position.distance(point);
-        double denominator = _Kc + distance * _Kl + distance * Math.pow(_Kq, 2);
+        double denominator = _Kc + distance * _Kl + _Kq * Math.pow(distance, 2);
 
         Color result = new Color(super._color);
         result.scale(1 / denominator);
@@ -96,7 +96,7 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Vector getL(Point3D point) {
-        return new Vector(_position.get_x(),_position.get_y(),_position.get_z());
+        return (point.vectorSubstract(_position)).NormalVector();
     }
 
     /**

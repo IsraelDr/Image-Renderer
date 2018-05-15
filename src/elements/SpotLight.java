@@ -21,7 +21,7 @@ public class SpotLight extends PointLight {
      */
     public SpotLight(Color color, Vector direction, Point3D position, double Kc, double Kl, double Kq) {
         super(color, position, Kc, Kl, Kq);
-        _direction = new Vector(direction);
+        _direction = new Vector(direction).NormalVector();
     }
 
     /**
@@ -58,12 +58,13 @@ public class SpotLight extends PointLight {
         return new Color((int) (Il.getRed() * dMultL), (int) (Il.getGreen() * dMultL), (int) (Il.getBlue() * dMultL));
         */
         double distance = _position.distance(point);
-        double denominator = _Kc + distance * _Kl + distance * Math.pow(_Kq, 2);
+        double denominator = _Kc + distance * _Kl + _Kq * Math.pow(distance, 2);
 
         //position
-        Vector l = point.vectorSubstract(_position);
+        Vector l = (point.vectorSubstract(_position)).NormalVector();
         double numerator = _direction.ScalarProduct(l);
-
+        if(numerator<0)
+            return new Color(0,0,0);
         //scale
         Color result = new Color(_color);
         result.scale(numerator / denominator);

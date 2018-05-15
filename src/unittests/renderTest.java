@@ -43,7 +43,7 @@ public class renderTest {
 
 
         Sphere middle2 = new Sphere(new Point3D(50, 0, 0),
-                49,new Color(0,0,60),new Material(1,1,1));
+                49,new Color(0,20,100),new Material(1,1,10));
 
         Camera camera2 = new Camera(new Point3D(0, 0, 0),
 
@@ -53,11 +53,11 @@ public class renderTest {
         myScene2.setCamera(camera2);
         myScene2.setBackgroundColor(new Color(0, 0, 0));
         myScene2.addGeometry(middle2);
-        myScene2.setAmbientlight(new Color(120, 120, 120), 0.1);
+        myScene2.setAmbientlight(new Color(20,20,20), 0.1);
 
-       SpotLight mySpotLight = new SpotLight(new Color (255,0,255),new Vector(50,-20,0),
-                new Point3D(0,1,0),
-                5,5,10
+       SpotLight mySpotLight = new SpotLight(new Color (255,255,255),new Vector(1,0.5,0.5),
+                new Point3D(-0.5,-2,-2),
+                1,0.01,0.1
                 );
         /*SpotLight mySpotLight = new SpotLight(
                 new Color (255,0,255),new Vector(2,-2,30),
@@ -105,5 +105,32 @@ public class renderTest {
 
         //myRender.printGrid(100);
         myRender3.getImageWriter().writeToimage();
+
+
+        Triangle triangle1     = new Triangle(new Point3D(130,-130,-50),new Point3D(-130,-130,-50),new Point3D(-130,130,-40),new Color(40,40,40),new Material(0.5,1,1));
+        Triangle triangle2    = new Triangle(new Point3D(-130,130,-40),new Point3D(130,130,-40),new Point3D(130,-130,-50),new Color(40,40,40),new Material(0.5,1,1));
+        Camera camera5 = new Camera(new Point3D(0, 0, 0),
+
+                new Vector(0, 0, -1), new Vector(1, 0, 0));
+        Scene myScene6 = new Scene("sphere in the spot ligddddhtfrfrr");
+        myScene6.setDistance(170);
+        myScene6.setCamera(camera5);
+        myScene6.setBackgroundColor(new Color(0, 0, 0));
+        myScene6.addGeometry(triangle1);
+        myScene6.addGeometry(triangle2);
+        myScene6.setAmbientlight(new Color(0,0,0), 0.1);
+
+        SpotLight mySpotLigh233t = new SpotLight(new Color (201,226,255),new Vector(0,1,-26),
+                new Point3D(0,0,500),
+                0.8,0.000001,0.0000001
+        );
+        myScene6.addLight(mySpotLigh233t);
+        ImageWriter sceneWriter4 = new ImageWriter("sphere in the spot ligsss222ht",1000,1000,1000,1000);
+        Render myRender5 = new Render(myScene6,sceneWriter4);
+
+        myRender5.renderImage();
+
+        //myRender.printGrid(100);
+        myRender5.getImageWriter().writeToimage();
     }
 }
