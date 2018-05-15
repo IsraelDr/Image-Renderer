@@ -43,7 +43,7 @@ public class renderTest {
 
 
         Sphere middle2 = new Sphere(new Point3D(50, 0, 0),
-                49,new Color(0,20,100),new Material(1,1,10));
+                49,new Color(0,20,100),new Material(1,1,20));
 
         Camera camera2 = new Camera(new Point3D(0, 0, 0),
 
@@ -55,7 +55,7 @@ public class renderTest {
         myScene2.addGeometry(middle2);
         myScene2.setAmbientlight(new Color(20,20,20), 0.1);
 
-       SpotLight mySpotLight = new SpotLight(new Color (255,255,255),new Vector(1,0.5,0.5),
+        PointLight mySpotLight = new PointLight(new Color (255,255,255),/*new Vector(1,0.5,0.5),*/
                 new Point3D(-0.5,-2,-2),
                 1,0.01,0.1
                 );
