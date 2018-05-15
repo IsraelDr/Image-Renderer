@@ -1,6 +1,7 @@
 package Renderer;
 
 
+import elements.DirectionalLight;
 import elements.LightSource;
 import geometries.Geometry;
 import primitives.Color;
@@ -79,10 +80,17 @@ public class Render {
         double kd=geometry.getMaterial().getKd();
         double ks=geometry.getMaterial().getKs();
         for (LightSource lightsource:_scene.getLights()) {
-            Color lightIntensity=lightsource.getIntensity(point);
-            Vector l=lightsource.getL(point);
-            Vector v=(_scene.getCamera().getP0().vectorSubstract(point)).NormalVector();
-            color.add(calcDiffusive(kd,l,n,lightIntensity),calcSpecular(ks,l,n,v,nShininess,lightIntensity));
+            if(lightsource instanceof DirectionalLight){
+                Vector normal=geometry.getNormal(point);
+                if(normal.ScalarProduct(lightsource.getD(point).multipliedbyScalar(-1))>0)
+                    color.add(lightsource.getIntensity(point));
+            }
+            else {
+                Color lightIntensity = lightsource.getIntensity(point);
+                Vector l = lightsource.getL(point);
+                Vector v = (_scene.getCamera().getP0().vectorSubstract(point)).NormalVector();
+                color.add(calcDiffusive(kd, l, n, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+            }
         }
 
         return color;

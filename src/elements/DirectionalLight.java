@@ -18,7 +18,7 @@ public class DirectionalLight extends Light implements LightSource {
      * @param color Color
      * @param direction A vector that indicates the direction of light
      */
-    DirectionalLight(Color color, Vector direction){
+    public DirectionalLight(Color color, Vector direction){
         _color = new Color(color);
         _direction = new Vector(direction);
     }
@@ -27,7 +27,7 @@ public class DirectionalLight extends Light implements LightSource {
      * copy ctor
      * @return
      */
-    DirectionalLight(DirectionalLight directionalLight){
+    public DirectionalLight(DirectionalLight directionalLight){
         _color = new Color(directionalLight.getColor());
         _direction = new Vector(directionalLight.getDirection());
     }
@@ -76,6 +76,6 @@ public class DirectionalLight extends Light implements LightSource {
      */
     @Override
     public Vector getD(Point3D point) {
-        return null;
+        return new Vector(this._direction);
     }
 }

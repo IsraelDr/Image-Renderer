@@ -64,6 +64,8 @@ public class renderTest {
                 new Point3D(-1,1,-3),
                 5,5,12.5
                 );*/
+        //DirectionalLight dire2=new DirectionalLight(new Color(250,255,250),new Vector(0,0,-1));
+        //myScene2.addLight(dire2);
         myScene2.addLight(mySpotLight);
 
         ImageWriter sceneWriter2 = new ImageWriter("sphere in the spot light",1000,1000,1000,1000);
@@ -121,10 +123,12 @@ public class renderTest {
         myScene6.setAmbientlight(new Color(0,0,0), 0.1);
 
         SpotLight mySpotLigh233t = new SpotLight(new Color (201,226,255),new Vector(0,1,-26),
-                new Point3D(0,0,500),
+                new Point3D(0,0,0),
                 0.8,0.000001,0.0000001
         );
+        DirectionalLight dire=new DirectionalLight(new Color(250,250,250),new Vector(0,1,0));
         myScene6.addLight(mySpotLigh233t);
+        myScene6.addLight(dire);
         ImageWriter sceneWriter4 = new ImageWriter("sphere in the spot ligsss222ht",1000,1000,1000,1000);
         Render myRender5 = new Render(myScene6,sceneWriter4);
 
