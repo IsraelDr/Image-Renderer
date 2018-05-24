@@ -51,12 +51,6 @@ public class SpotLight extends PointLight {
      */
     @Override
     public Color getIntensity(Point3D point) {
-        /*double dMultL = getD(point).ScalarProduct(getL(point));
-        if (dMultL < 0) //The point is not lit by the flashlight
-            return new Color(0, 0, 0);
-        java.awt.Color Il = super.getIntensity(point).getColor();
-        return new Color((int) (Il.getRed() * dMultL), (int) (Il.getGreen() * dMultL), (int) (Il.getBlue() * dMultL));
-        */
         double distance = _position.distance(point);
         double denominator = _Kc + distance * _Kl + _Kq * Math.pow(distance, 2);
 

@@ -61,7 +61,6 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity() {
-        //return new Color(Math.min((int)(_color.getColor().getRed()),255),Math.min((int)(_color.getColor().getGreen()),255),Math.min((int)(_color.getColor().getBlue()),255));
         return null;
     }
 
@@ -73,13 +72,6 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Color getIntensity(Point3D point) {
-       /* double d = point.distance(_position);//Distance between PointLight and Geomatry
-        java.awt.Color i0 = getColor().getColor();
-        double kkk =(_Kc +_Kl*d + _Kq * Math.pow(d,2));
-
-        Color il = new Color((int)(i0.getRed()/kkk),(int)(i0.getGreen()/kkk),(int)(i0.getBlue()/kkk));
-        return il;
-        */
         double distance = _position.distance(point);
         double denominator = _Kc + distance * _Kl + _Kq * Math.pow(distance, 2);
 

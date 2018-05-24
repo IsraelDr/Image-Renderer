@@ -31,8 +31,6 @@ public class Render {
             for (int j = 1; j < _imageWriter.getNy(); j++) {
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
                 Map<Geometry,List<Point3D>> intersectionPoints=getSceneRayIntersections(ray);
-                if(i==650&&j==500)
-                    k=5;
                 if(intersectionPoints.isEmpty())
                     _imageWriter.writePixel(i,j,_scene.getBackgroundColor());
                 else {
@@ -106,18 +104,8 @@ public class Render {
      * @return
      */
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
-        /*double temp = kd * l.ScalarProduct(n);
-        Color temp2 = new Color(lightIntensity);
-        temp2.scale(temp);
-        return temp2;*/
         Color result = new Color(lightIntensity);
         double scalingFactor = kd *((l.multipliedbyScalar(-1)).ScalarProduct(n));//needs to be checked with teacher todo
-
-        // check if the Diffusion and Specular components are in the
-        // same side of the tangent surface as the light source.
-        // if true - return the scaled color.
-        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
-        //Vector v = (_scene.getCamera().getP0().vectorSubstract(point)).NormalVector();
         if(scalingFactor > 0 ) {
             result.scale(scalingFactor);
             return result;
@@ -138,18 +126,10 @@ public class Render {
      */
     private Color calcSpecular(double ks,Vector l,Vector n,Vector v,int nShininess,Color lightIntensity) {
         Color result = new Color(lightIntensity);
-
-        // calculating "Ks* dotProduct(-v,r)^nShininess" and 'r' itself.
         double temp = -2 * l.ScalarProduct(n);
         Vector nComponent = n.multipliedbyScalar(temp);
         Vector r = l.add(nComponent);
         double scalingFactor = ks * Math.pow(v.ScalarProduct(r),nShininess);
-
-
-        // check if the Diffusion and Specular components are in the
-        // same side of the tangent surface as the light source.
-        // if true - return the scaled color.
-        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
         if ((l.multipliedbyScalar(-1).ScalarProduct(n) > 0 &&v.ScalarProduct(n) > 0)|| (l.multipliedbyScalar(-1).ScalarProduct(n) < 0 && v.ScalarProduct(n) < 0)) {
             result.scale(scalingFactor);
             return result;
