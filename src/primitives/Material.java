@@ -19,6 +19,8 @@ public class Material {
     public Material(double Kd,double Ks,int Shininess) {
         this._Kd=Kd;
         this._Ks=Ks;
+        if(Shininess%2==0)
+            Shininess++;
         this._nShininess=Shininess;
     }
 

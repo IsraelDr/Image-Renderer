@@ -29,6 +29,11 @@ public class Render {
         int k;
         for (int i = 1; i < _imageWriter.getNx(); i++) {
             for (int j = 1; j < _imageWriter.getNy(); j++) {
+                if(i==740&&j>=500) {
+                    k = 5;
+                    //this._imageWriter.writePixel(i, j, new java.awt.Color(0,0,0));
+                    //continue;
+                }
                 Ray ray=_scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j,_scene.getDistance(),_imageWriter.getWidth(),_imageWriter.getHeight());
                 Map<Geometry,List<Point3D>> intersectionPoints=getSceneRayIntersections(ray);
                 if(intersectionPoints.isEmpty())
@@ -86,8 +91,9 @@ public class Render {
             else {
                 Color lightIntensity = lightsource.getIntensity(point);
                 Vector l = lightsource.getL(point);
-                Vector v = (_scene.getCamera().getP0().vectorSubstract(point)).NormalVector();
-                color.add(calcDiffusive(kd, l, n, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                Vector v = (point.vectorSubstract(_scene.getCamera().getP0())).NormalVector();
+                if (l.ScalarProduct(n)*v.ScalarProduct(n) > 0)
+                    color.add(calcDiffusive(kd, l, n, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
 
@@ -105,14 +111,14 @@ public class Render {
      */
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         Color result = new Color(lightIntensity);
-        double scalingFactor = kd *((l.multipliedbyScalar(-1)).ScalarProduct(n));//needs to be checked with teacher todo
-        if(scalingFactor > 0 ) {
+        double scalingFactor = kd *(Math.abs(l.ScalarProduct(n)));//needs to be checked with teacher todo
+        //if(scalingFactor > 0 ) {
             result.scale(scalingFactor);
             return result;
-        }
-        else{
-            return new Color(0,0,0);
-        }
+        //}
+        //else{
+        //    return new Color(0,0,0);
+        //}
     }
 
     /**
@@ -126,17 +132,17 @@ public class Render {
      */
     private Color calcSpecular(double ks,Vector l,Vector n,Vector v,int nShininess,Color lightIntensity) {
         Color result = new Color(lightIntensity);
-        double temp = -2 * l.ScalarProduct(n);
-        Vector nComponent = n.multipliedbyScalar(temp);
-        Vector r = l.add(nComponent);
-        double scalingFactor = ks * Math.pow(v.ScalarProduct(r),nShininess);
-        if ((l.multipliedbyScalar(-1).ScalarProduct(n) > 0 &&v.ScalarProduct(n) > 0)|| (l.multipliedbyScalar(-1).ScalarProduct(n) < 0 && v.ScalarProduct(n) < 0)) {
+        //double temp = -2 * l.ScalarProduct(n);
+        //Vector nComponent = n.multipliedbyScalar(temp);
+        Vector r = l.add(n.multipliedbyScalar(-2 * l.ScalarProduct(n)));
+        double scalingFactor = ks * Math.pow(v.multipliedbyScalar(-1).ScalarProduct(r),nShininess);
+        //if ((l.multipliedbyScalar(-1).ScalarProduct(n) > 0 &&v.ScalarProduct(n) > 0)|| (l.multipliedbyScalar(-1).ScalarProduct(n) < 0 && v.ScalarProduct(n) < 0)) {
             result.scale(scalingFactor);
             return result;
-        }
-        else{
-            return new Color(0,0,0);
-        }
+        //}
+        //else{
+        //    return new Color(0,0,0);
+        //}
     }
 
     /**
