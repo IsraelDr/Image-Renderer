@@ -45,7 +45,7 @@ public class renderTest {
         Sphere middle2 = new Sphere(new Point3D(50, 0, 0),
                 49,new Color(0,20,100),new Material(1,1,20));
 
-        Camera camera2 = new Camera(new Point3D(0, 0, 0),
+        Camera camera2 = new Camera(new Point3D(-10, -10, 0),
 
                 new Vector(1, 0, 0), new Vector(0, 1, 0));
         Scene myScene2 = new Scene("sphere in the spot light");
