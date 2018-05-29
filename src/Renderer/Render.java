@@ -3,6 +3,7 @@ package Renderer;
 
 import elements.DirectionalLight;
 import elements.LightSource;
+import elements.PointLight;
 import geometries.Geometry;
 import primitives.Color;
 import primitives.Point3D;
@@ -85,15 +86,21 @@ public class Render {
         for (LightSource lightsource:_scene.getLights()) {
             if(lightsource instanceof DirectionalLight){
                 Vector normal=geometry.getNormal(point);
-                if(normal.ScalarProduct(lightsource.getD(point).multipliedbyScalar(-1))>0)
-                    color.add(lightsource.getIntensity(point));
+                if(normal.ScalarProduct(lightsource.getD(point).multipliedbyScalar(-1))>0) {
+                    double scalingFactor=normal.ScalarProduct(lightsource.getD(point).multipliedbyScalar(-1));
+                    Color c=lightsource.getIntensity(point);
+                    c.scale(scalingFactor);
+                    color.add(c);
+                }
             }
             else {
-                Color lightIntensity = lightsource.getIntensity(point);
                 Vector l = lightsource.getL(point);
                 Vector v = (point.vectorSubstract(_scene.getCamera().getP0())).NormalVector();
                 if (l.ScalarProduct(n)*v.ScalarProduct(n) > 0)
-                    color.add(calcDiffusive(kd, l, n, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                    if(!occluded(l,((PointLight)lightsource).getPosition(),geometry,point)) {
+                        Color lightIntensity = lightsource.getIntensity(point);
+                        color.add(calcDiffusive(kd, l, n, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                    }
             }
         }
 
@@ -179,5 +186,24 @@ public class Render {
                 intersectionPoints.put(geometry,geometryIntersectionPoints);
         }
         return intersectionPoints;
+    }
+
+    /**
+     * occluded checks if has to be shdow rays
+     * @param l
+     * @param geometry
+     * @param point
+     * @return
+     */
+    private boolean occluded(Vector l,Point3D lightpoint, Geometry geometry,Point3D point) {
+        Vector lightDirection = l.multipliedbyScalar(-1); // from point to light source
+        Ray lightRay = new Ray(lightDirection,point);
+        Map<Geometry, List<Point3D>> intersectionPoints =getSceneRayIntersections(lightRay);
+        intersectionPoints.remove(geometry);
+        if(intersectionPoints.isEmpty())
+            return false;
+        Map<Geometry,Point3D> closestPoint = getClosestPoint(intersectionPoints);
+        Map.Entry<Geometry,Point3D>entry=closestPoint.entrySet().iterator().next();
+        return (entry.getValue().distance(point)<lightpoint.distance(point));
     }
 }

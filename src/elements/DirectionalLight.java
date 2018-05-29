@@ -20,7 +20,7 @@ public class DirectionalLight extends Light implements LightSource {
      */
     public DirectionalLight(Color color, Vector direction){
         _color = new Color(color);
-        _direction = new Vector(direction);
+        _direction = new Vector(direction).NormalVector();
     }
 
     /**
