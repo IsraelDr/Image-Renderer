@@ -7,6 +7,8 @@ package primitives;
 public class Material {
     protected double _Kd;
     protected double _Ks;
+    protected double _Kr;
+    protected double _Kt;
     protected int _nShininess;
 
     //******************************CONSTRUCTORS********************************//
@@ -16,9 +18,11 @@ public class Material {
      * @param Ks Ks
      * @param Shininess Shininess
      */
-    public Material(double Kd,double Ks,int Shininess) {
+    public Material(double Kd,double Ks,double Kr,double Kt,int Shininess) {
         this._Kd=Kd;
         this._Ks=Ks;
+        this._Kr=Kr;
+        this._Kt=Kt;
         if(Shininess%2==0)
             Shininess++;
         this._nShininess=Shininess;
@@ -31,6 +35,8 @@ public class Material {
     public Material(Material material) {
         this._Kd=material._Kd;
         this._Ks=material._Ks;
+        this._Kr=material._Kr;
+        this._Kt=material._Kt;
         this._nShininess=material._nShininess;
     }
 
@@ -43,6 +49,10 @@ public class Material {
     public double getKs() {
         return _Ks;
     }
+
+    public double getKr() { return _Kr; }
+
+    public double getKt() { return _Kt; }
 
     public int getShininess() {
         return _nShininess;

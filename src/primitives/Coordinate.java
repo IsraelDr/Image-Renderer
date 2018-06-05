@@ -2,7 +2,7 @@ package primitives;
 
 public class Coordinate {
     protected double _cord;
-    private final double ACCURACY = -20;
+    private final static double ACCURACY = -20;
 
 
     // ***************** Constructors ********************** //
@@ -83,13 +83,15 @@ public class Coordinate {
         return new Coordinate(add(other._cord));
     }
 
-    private int getExp(double num){
+    private static int getExp(double num){
         return (int)((Double.doubleToRawLongBits(num)>>52)&0x7FFL)-1023;
     }
 
     private double subtract(double other) {
-        int otherExp = getExp(other);
-        int thisExp = getExp(_cord);
+        int otherExp = other == 0.0 ? 0 : getExp(other);
+        int thisExp = _cord == 0.0 ? 0 : getExp(_cord);
+        //int otherExp = getExp(other);
+        //int thisExp = getExp(_cord);
 
         // if other is too small relatively to our coordinate
         // return the original coordinate
@@ -135,6 +137,15 @@ public class Coordinate {
     private double _scale(double num){
         int deltaExp=getExp(num-1);
         return deltaExp <ACCURACY?_cord:_cord*num;
+    }
+
+    /**
+     * RETURNS ZERO
+     * @param number
+     * @return
+     */
+    public static boolean isZero(double number) {
+        return getExp(number) < ACCURACY;
     }
 
 
