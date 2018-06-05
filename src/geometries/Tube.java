@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * represents Tube with Ray and radius
@@ -56,9 +57,29 @@ public class Tube extends RadialGeometry {
         return b.NormalVector();
 
     }
-
     @Override
-    public ArrayList<Point3D> findIntersections(Ray ray) {
-        return null;//
+    public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> list = new ArrayList<Point3D>();
+        Vector n=ray.get_vector().add(this._ray.get_vector().multipliedbyScalar(this._ray.get_vector().ScalarProduct(ray.get_vector())).multipliedbyScalar(-1));
+        double A=n.ScalarProduct(n);
+        Vector m=this._ray.get_point().vectorSubstract(ray.get_point());
+        Vector k=m.add(this._ray.get_vector().multipliedbyScalar(this._ray.get_vector().ScalarProduct(m))).multipliedbyScalar(-1);
+        double B=2*(n.ScalarProduct(k));
+        double C=k.ScalarProduct(k)-Math.pow(this._radius,2);
+        double delta=Math.pow(B,2)-4*A*C;
+        if(delta<0||A==0)
+            return list;
+        if(delta==0) {
+            double t=-B/(2*A);
+            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t)));
+        }
+        else {
+            double deltasquare=Math.sqrt(delta);
+            double t1=(-B+deltasquare)/(2*A);
+            double t2=(-B-deltasquare)/(2*A);
+            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t1)));
+            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t2)));
+        }
+        return list;
     }
 }

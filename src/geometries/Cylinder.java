@@ -1,7 +1,11 @@
 package geometries;
 import primitives.*;
+
+import java.util.List;
+
 public class Cylinder extends Tube {
     double _height;
+    static double k=0;
 
     // ***************** Constructors ********************** //
 
@@ -42,6 +46,21 @@ public class Cylinder extends Tube {
     @Override
     public String toString() {
         return this.toString()+", Height: "+this._height;
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        /*k++;
+        int l;
+        List<Point3D> list= super.findIntersections(ray);
+        if(k==575000)
+            l=5;
+        for (Point3D p:list) {
+            if(Math.pow(p.distance(ray.get_point()),2)>Math.pow(get_height(),2)+Math.pow(get_radius(),2)&&p.vectorSubstract(ray.get_point()).ScalarProduct(getRay().get_vector())>0)
+                list.remove(p);
+        }
+        return list;*/
+        return null;
     }
 
 

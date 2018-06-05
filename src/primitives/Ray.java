@@ -19,7 +19,8 @@ public class Ray {
 
     }
     public Ray(Ray temp){
-        new Ray(temp._vector,temp._point);
+        this._point=new Point3D(temp.get_point());
+        this._vector=new Vector(temp.get_vector());
     }
 
     // ***************** Getters/Setters ********************** //
