@@ -5,10 +5,7 @@ import elements.DirectionalLight;
 import elements.LightSource;
 import elements.PointLight;
 import geometries.Geometry;
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 import scene.Scene;
 
 import java.util.ArrayList;
@@ -76,14 +73,21 @@ public class Render {
      * @param point
      * @return
      */
-    private Color calcColor(Geometry geometry, Point3D point){
+    private Color calcColor(Geometry geometry, Point3D point,Ray inRay,int level,double k){
+        if(level==0||Coordinate.isZero(k))return new Color(0,0,0);
         Color color=_scene.getAmbientlight().getIntensity();
         color.add(geometry.getEmission());
+        Vector rayV=inRay.get_vector();
         Vector n =geometry.getNormal(point);
         int nShininess=geometry.getMaterial().getShininess();
         double kd=geometry.getMaterial().getKd();
         double ks=geometry.getMaterial().getKs();
         for (LightSource lightsource:_scene.getLights()) {
+            //Recursive call for a reflected ray
+            Ray reflectedRay=constructReflectedRay(n,point,inRay);
+            Map<Geometry,List<Point3D>> reflectedgeometry=getSceneRayIntersections(reflectedRay);
+            Map<Geometry,Point3D> reflectedPoint=getClosestPoint(reflectedgeometry);
+            double kr=reflectedPoint.entrySet().iterator().next().getKey().getMaterial().getKr();
             if(lightsource instanceof DirectionalLight){
                 Vector normal=geometry.getNormal(point);
                 if(normal.ScalarProduct(lightsource.getD(point).multipliedbyScalar(-1))>0) {
