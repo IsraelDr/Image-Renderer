@@ -23,8 +23,8 @@ public class PlaneTest {
 
     @Test
     public void getNormal() {
-        Plane c =new Plane(new Point3D(1,-88,-43),new Vector(-31,17,-43),new Color(50,50,50),new Material(10,15,20));
-        Plane d = new Plane(new Point3D(2,15,-3),new Point3D(4,6,-8),new Point3D(1,-2,-9),new Color(50,50,50),new Material(10,15,20));
+        Plane c =new Plane(new Point3D(1,-88,-43),new Vector(-31,17,-43),new Color(50,50,50),new Material(10,15,1,1,20));
+        Plane d = new Plane(new Point3D(2,15,-3),new Point3D(4,6,-8),new Point3D(1,-2,-9),new Color(50,50,50),new Material(10,15,1,1,20));
         assertTrue(d.getNormal(new Point3D(4,6,-8)).equals(c.getNormal(new Point3D(1,-88,-43))));
     }
 
@@ -32,7 +32,7 @@ public class PlaneTest {
     public void findIntersections() {
         Camera cam =new Camera(new Point3D(0,0,0),new Vector(-1,0,0),new Vector(0,1,0));
         int length=0;
-        Plane _plane=new Plane(new Point3D(-5,0,0),new Vector(2,0,0),new Color(50,50,50),new Material(10,15,20));
+        Plane _plane=new Plane(new Point3D(-5,0,0),new Vector(2,0,0),new Color(50,50,50),new Material(10,15,1,1,20));
         for (int i=1;i<=3;i++)
         {
             for (int j = 1; j <= 3; j++) {
@@ -44,7 +44,7 @@ public class PlaneTest {
 
         Camera cam1 =new Camera(new Point3D(0,0,0),new Vector(-1,0,0),new Vector(0,1,0));
         int length1=0;
-        Plane _plane1=new Plane(new Point3D(-10,0,0),new Vector(2,300000,0),new Color(50,50,50),new Material(10,15,20));
+        Plane _plane1=new Plane(new Point3D(-10,0,0),new Vector(2,300000,0),new Color(50,50,50),new Material(10,15,1,1,20));
         for (int i=1;i<=3;i++)
         {
             for (int j = 1; j <= 3; j++) {
@@ -55,7 +55,7 @@ public class PlaneTest {
         assertTrue(length1==6);
         Camera cam2 =new Camera(new Point3D(0,0,0),new Vector(-1,0,0),new Vector(0,1,0));
         int length2=0;
-        Plane _plane2=new Plane(new Point3D(10,0,0),new Vector(2,300000,0),new Color(50,50,50),new Material(10,15,20));
+        Plane _plane2=new Plane(new Point3D(10,0,0),new Vector(2,300000,0),new Color(50,50,50),new Material(10,15,1,1,20));
         for (int i=1;i<=3;i++)
         {
             for (int j = 1; j <= 3; j++) {
