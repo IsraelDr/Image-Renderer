@@ -24,7 +24,17 @@ public class Point3D extends Point2D {
 
     }
 
-
+    /**
+     * A static "constructor"
+     * @param x Coordinate x
+     * @param y Coordinate y
+     * @param z Coordinate z
+     * @return Returns the Point(x,y,z)
+     */
+    public static Point3D construct(double x, double y, double z) {
+        Point3D pt = new Point3D(x,y,z);
+        return pt;
+    }
     // ***************** Getters/Setters ********************** //
 
     public double get_z() {

@@ -12,7 +12,7 @@ public class renderTest {
     @Test
     public void renderImage() {//
 
-        Plane p1 = new Plane(new Point3D(100, 0, 0), new Vector(-2, 0, -1), new Color(102, 153, 200), new Material(1, 1, 1, 1, 20));
+        /*Plane p1 = new Plane(new Point3D(100, 0, 0), new Vector(-2, 0, -1), new Color(102, 153, 200), new Material(1, 1, 1, 1, 20));
         Plane p2 = new Plane(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 0, 1, 1, 20));
 
         Sphere middle2 = new Sphere(new Point3D(5, 0, 5),
@@ -72,7 +72,7 @@ public class renderTest {
                 0.5, Color.BLACK, new Material(0.5, 0.75, 0, 1, 20));
         Sphere eSphere2 = new Sphere(new Point3D(-10, 1, 3.5),
                 0.25, new Color(0, 0, 0), new Material(0.5, 0.7, 1, 0.05, 10));
-        Triangle eTriangle = new Triangle(new Point3D(-1, 8, -3), new Point3D(-10, 1, 3), new Point3D(-1, -8, -3), Color.BLUE, new Material(1, 1, 0, 0, 4));
+        Triangle eTriangle = new Triangle(Point3D.construct(-1, 8, -3), Point3D.construct(-10, 1, 3), Point3D.construct(-1, -8, -3), Color.BLUE, new Material(1, 1, 0, 0, 4));
         Quadrilateral eQuadrilateral = new Quadrilateral(new Point3D(-2, -2, 3), new Point3D(-2, 4, 3), new Point3D(-2, -2, 7), new Point3D(-2, 4, 7), Color.MAGENTA, new Material(1, 1, 0, 0, 4));
         eScene.addGeometry(eTriangle);
         eScene.addGeometry(eQuadrilateral);
@@ -101,8 +101,48 @@ public class renderTest {
         ImageWriter eSceneWriter = new ImageWriter("eli's test", 1000, 1000, 1000, 1000);
         Render eRender = new Render(eScene, eSceneWriter);
         eRender.renderImage();
-        eRender.getImageWriter().writeToimage();
+        eRender.getImageWriter().writeToimage();*/
 
+        //Eile mit Weile
+        Scene eScene = new Scene("eScene");
+        Camera eCamera = new Camera(Point3D.construct(-50, 0, 3), new Vector(1, 0, 0), new Vector(0, 1, 0));
+        eScene.setCamera(eCamera);
+        eScene.setDistance(750);
+        Quadrilateral eBoard = new Quadrilateral(
+                Point3D.construct(20, -25, 25), Point3D.construct(20, 25, 25),
+                Point3D.construct(-10, -25, -20),Point3D.construct(-10, 25, -20),
+                new Color(213,43,30),
+                new Material(1, 1, 0.2, 0, 19));
+        Quadrilateral eSoldatBoardTopLeft = new Quadrilateral(
+                Point3D.construct(19, -24, 24), Point3D.construct(19, -9, 24),
+                Point3D.construct(10, -24, 10),Point3D.construct(10, -9, 10),
+                Color.DARK_GRAY,
+                new Material(1, 1, 0.5, 0, 19));
+        Quadrilateral eSoldatBoardTopRight = new Quadrilateral(
+                Point3D.construct(19, 9, 24), Point3D.construct(19, 24, 24),
+                Point3D.construct(10, 9, 10),Point3D.construct(10, 24, 10),
+                Color.DARK_GRAY,
+                new Material(1, 1, 0.5, 0, 19));
+        Quadrilateral eSoldatBoardBottomLeft = new Quadrilateral(
+                Point3D.construct(-1, -24, -6.5), Point3D.construct(-1, -7, -6.5),
+                Point3D.construct(-10, -24, -19),Point3D.construct(-10, -7, -19),
+                Color.DARK_GRAY,
+                new Material(1, 1, 0.5, 0, 19));
+        Quadrilateral eSoldatBoardBottomRight = new Quadrilateral(
+                Point3D.construct(-1, 7, -6.5), Point3D.construct(-1, 24, -6.5),
+                Point3D.construct(-10, 7, -19),Point3D.construct(-10, 24, -19),
+                Color.DARK_GRAY,
+                new Material(1, 1, 0.5, 0, 19));
+        //Sphere eSphereForSoldat = new Sphere()
+        eScene.addGeometry(eBoard);
+        eScene.addGeometry(eSoldatBoardTopLeft);
+        eScene.addGeometry(eSoldatBoardTopRight);
+        eScene.addGeometry(eSoldatBoardBottomLeft);
+        eScene.addGeometry(eSoldatBoardBottomRight);
+        ImageWriter eSceneWriter = new ImageWriter("Eile mit Weile", 1000, 1000, 1000, 1000);
+        Render eRender = new Render(eScene, eSceneWriter);
+        eRender.renderImage();
+        eRender.getImageWriter().writeToimage();
     }
 
     @Test
