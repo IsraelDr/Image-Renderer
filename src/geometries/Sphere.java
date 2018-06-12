@@ -9,7 +9,7 @@ import java.util.List;
  * class defines sphere with center and radius
  */
 public class Sphere extends RadialGeometry {
-    protected Point3D _point;
+    private Point3D _point;
 
     // ***************** Constructors ********************** //
     public Sphere(Point3D point, double rad, Color emission, Material material){
@@ -39,7 +39,7 @@ public class Sphere extends RadialGeometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> list = new ArrayList<Point3D>();
+        List<Point3D> list = new ArrayList<>();
         Vector u = this._point.vectorSubstract(ray.get_point());
         double tm = ray.get_vector().ScalarProduct(u);
         double d = Math.sqrt(Math.pow(u.size(),2)-Math.pow(tm,2));
@@ -49,16 +49,16 @@ public class Sphere extends RadialGeometry {
         double t1 = tm - th;
         double t2 = tm + th;
         if (t1>0 && t2 >0){
-            list.add(new Point3D(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t1))));
-            list.add(new Point3D(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t2))));
+            list.add(new Point3D(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t1))));
+            list.add(new Point3D(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t2))));
             return list;
         }
         if (t1>0 ) {
-            list.add(new Point3D(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t1))));
+            list.add(new Point3D(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t1))));
             return list;
         }
         if (t2 >0) {
-            list.add(new Point3D(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t2))));
+            list.add(new Point3D(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t2))));
             return  list;
         }
 

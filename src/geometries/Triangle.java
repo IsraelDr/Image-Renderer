@@ -2,12 +2,11 @@ package geometries;
 
 import primitives.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Triangle extends Plane {
-    protected Point3D _second;
-    protected Point3D _third;
+    private Point3D _second;
+    private Point3D _third;
 
 
     // ***************** Constructors ********************** //
@@ -20,7 +19,7 @@ public class Triangle extends Plane {
      * @param third  The third coordinate
      */
     public Triangle(Point3D first, Point3D second, Point3D third, Color emission, Material material) {
-        super(first, second, third,emission,material);
+        super(first, second, third, emission, material);
         _second = new Point3D(second);
         _third = new Point3D(third);
     }
@@ -55,13 +54,13 @@ public class Triangle extends Plane {
     // ***************** Operations ******************** //
 
     /**
-     * @param ray
+     * @param ray ray
      * @return arraylist of intersections
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> points = super.findIntersections(ray);
-        Vector v1 = _point.vectorSubstract(ray.get_point());
+        Vector v1 = get_point().vectorSubstract(ray.get_point());
         Vector v2 = _second.vectorSubstract(ray.get_point());
         Vector v3 = _third.vectorSubstract(ray.get_point());
         Vector N1 = v1.vectorProduct(v2).NormalVector();

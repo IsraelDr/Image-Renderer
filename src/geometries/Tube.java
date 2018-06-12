@@ -15,8 +15,8 @@ public class Tube extends RadialGeometry {
 
     /**
      * ctor
-     * @param ray
-     * @param rad
+     * @param ray Ray
+     * @param rad Radius
      */
     public Tube(Ray ray,double rad,Color emission,Material material){
         super(rad,emission,material);
@@ -25,7 +25,7 @@ public class Tube extends RadialGeometry {
 
     /**
      * copy ctor
-     * @param temp
+     * @param temp The Tube that will be copied
      */
     public Tube(Tube temp){
         super(temp);
@@ -45,8 +45,8 @@ public class Tube extends RadialGeometry {
 
     /**
      * get normal to tube at point on geometrys
-     * @param temp
-     * @return
+     * @param temp The Point
+     * @return Returns the normal
      */
     @Override
     public Vector getNormal(Point3D temp) {
@@ -59,7 +59,7 @@ public class Tube extends RadialGeometry {
     }
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> list = new ArrayList<Point3D>();
+        List<Point3D> list = new ArrayList<>();
         Vector n=ray.get_vector().add(this._ray.get_vector().multipliedbyScalar(this._ray.get_vector().ScalarProduct(ray.get_vector())).multipliedbyScalar(-1));
         double A=n.ScalarProduct(n);
         Vector m=this._ray.get_point().vectorSubstract(ray.get_point());
@@ -71,14 +71,14 @@ public class Tube extends RadialGeometry {
             return list;
         if(delta==0) {
             double t=-B/(2*A);
-            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t)));
+            list.add(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t)));
         }
         else {
             double deltasquare=Math.sqrt(delta);
             double t1=(-B+deltasquare)/(2*A);
             double t2=(-B-deltasquare)/(2*A);
-            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t1)));
-            list.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t2)));
+            list.add(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t1)));
+            list.add(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t2)));
         }
         return list;
     }

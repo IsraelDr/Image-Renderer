@@ -7,10 +7,10 @@ import primitives.Ray;
  * Class of Camera
  */
 public class Camera {
-    Point3D _p0;
-    Vector _toward;
-    Vector _right;
-    Vector _up;
+    private Point3D _p0;
+    private Vector _toward;
+    private Vector _right;
+    private Vector _up;
     /**
      * ctor
      * @param place of Camera
@@ -34,7 +34,7 @@ public class Camera {
     /**
      *
      * copy ctor
-     * @param camera
+     * @param camera The Camera that will be copied
      */
     public Camera(Camera camera){
         this._p0=new Point3D(camera._p0);
@@ -54,7 +54,7 @@ public class Camera {
 
     /**
      * GETTER
-     * @return
+     * @return Returns towards Vector
      */
     public Vector getToward() {
         return _toward;
@@ -73,10 +73,10 @@ public class Camera {
      * @return Ray from _P0 to pixel
      */
     public Ray constructRayThroughPixel(int Nx, int Ny,int i, int j, double screenDistance, double screenWidth, double screenHeight){
-        Point3D Pc=new Point3D(_p0.addVectorToPiont(_toward.multipliedbyScalar(screenDistance)));
+        Point3D Pc=new Point3D(_p0.addVectorToPoint(_toward.multipliedbyScalar(screenDistance)));
         double Rx=screenWidth/Nx;
         double Ry=screenHeight/Ny;
-        Point3D Pij=Pc.addVectorToPiont((_right.multipliedbyScalar(Rx*(i-((Nx+1)/2)))).add(_up.multipliedbyScalar(Ry*(((Ny+1)/2)-j))));
+        Point3D Pij=Pc.addVectorToPoint((_right.multipliedbyScalar(Rx*(i-((Nx+1)/2)))).add(_up.multipliedbyScalar(Ry*(((Ny+1)/2)-j))));
         return new Ray(new Vector(Pij.get_x()-_p0.get_x(),Pij.get_y()-_p0.get_y(),Pij.get_z()-_p0.get_z()),_p0);
     }
 }

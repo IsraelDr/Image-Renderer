@@ -9,8 +9,8 @@ import java.util.List;
  * Class that defines a Plane. It contains a Point3D and a Vector
  */
 public class Plane extends Geometry {
-    protected Point3D _point;
-    protected Vector _vector;
+    private Point3D _point;
+    private Vector _vector;
 
 
     // ***************** Constructors ********************** //
@@ -90,7 +90,7 @@ public class Plane extends Geometry {
         double t=(this._vector.ScalarProduct(new Vector(this._point.vectorSubstract(ray.get_point()))))/
                 this._vector.ScalarProduct(ray.get_vector());
         if(t>0)
-            points.add(ray.get_point().addVectorToPiont(ray.get_vector().multipliedbyScalar(t)));
+            points.add(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t)));
         return points;
     }
 }

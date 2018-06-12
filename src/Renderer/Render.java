@@ -1,7 +1,6 @@
 package Renderer;
 
 
-import elements.DirectionalLight;
 import elements.LightSource;
 import elements.PointLight;
 import geometries.Geometry;
@@ -21,11 +20,13 @@ public class Render {
     private ImageWriter _imageWriter;
     private final int MAX_CALC_COLOR_LEVEL = 3;
 
+    //****************Constructor****************//
     public Render(Scene scene, ImageWriter imageWriter) {
         this._scene = scene;
         this._imageWriter = new ImageWriter(imageWriter);
     }
 
+    //********************Operations*************************//
     public void renderImage() {
         int k;
         for (int i = 1; i < _imageWriter.getNx(); i++) {
@@ -84,7 +85,7 @@ public class Render {
      * @return
      */
     private Color calcColor(Geometry geometry, Point3D point, Ray inRay, int level, double k) {
-        if (level == 0 || Coordinate.isZero(k)) return new Color(0, 0, 0);
+        if (level == 0 || Coordinate.isZero(k)) return Color.BLACK;
         Color color = _scene.getAmbientlight().getIntensity();
         color.add(geometry.getEmission());
         Vector v = inRay.get_vector();
@@ -201,7 +202,7 @@ public class Render {
             result.scale(scalingFactor);
             return result;
         } else {
-            return new Color(0, 0, 0);
+            return Color.BLACK;
         }
     }
 

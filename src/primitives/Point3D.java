@@ -5,7 +5,7 @@ package primitives;
 
 public class Point3D extends Point2D {
 
-    protected Coordinate _z;
+    private Coordinate _z;
 
     // ***************** Constructors ********************** //
     public Point3D(double x, double y, double z){
@@ -46,7 +46,7 @@ public class Point3D extends Point2D {
     public boolean equals(Object obj) {
         if(this==obj)
             return true;
-        if (!(obj instanceof Point3D)||obj==null)
+        if (!(obj instanceof Point3D)/*||obj==null*/)
             return false;
         return  super.equals(obj)&& this._z.equals(((Point3D) obj)._z);
     }
@@ -72,7 +72,7 @@ public class Point3D extends Point2D {
      * @param vector The end point from the vector will be calculate
      * @return Returns the sum of the current point with the end point of the vector
      */
-    public Point3D addVectorToPiont(Vector vector){
+    public Point3D addVectorToPoint(Vector vector){
         return new Point3D(get_x()+vector._point.get_x(),get_y()+vector._point.get_y(),+get_z()+vector._point.get_z());
     }
 
