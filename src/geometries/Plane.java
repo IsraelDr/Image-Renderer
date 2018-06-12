@@ -9,8 +9,8 @@ import java.util.List;
  * Class that defines a Plane. It contains a Point3D and a Vector
  */
 public class Plane extends Geometry {
-    private Point3D _point;
-    private Vector _vector;
+    protected Point3D _point;
+    protected Vector _vector;
 
 
     // ***************** Constructors ********************** //
