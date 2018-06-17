@@ -88,11 +88,14 @@ public class Camera {
      * @param screenHeight - height of screen
      * @return Ray from _P0 to pixel
      */
-    public Ray constructRayThroughPixel(int Nx, int Ny,int i, int j, double screenDistance, double screenWidth, double screenHeight){
+    public Ray constructRayThroughPixel(int Nx, int Ny,int i, int j, double screenDistance, double screenWidth, double screenHeight) {
+        return new Ray((constructRayThroughPixelhelp(Nx,Ny,i,j,screenDistance,screenWidth,screenHeight)).get_vector(),_p0);
+    }
+    public Ray constructRayThroughPixelhelp(int Nx, int Ny,int i, int j, double screenDistance, double screenWidth, double screenHeight){
         Point3D Pc=new Point3D(_p0.addVectorToPoint(_toward.multipliedbyScalar(screenDistance)));
         double Rx=screenWidth/Nx;
         double Ry=screenHeight/Ny;
         Point3D Pij=Pc.addVectorToPoint((_right.multipliedbyScalar(Rx*(i-((Nx+1)/2)))).add(_up.multipliedbyScalar(Ry*(((Ny+1)/2)-j))));
-        return new Ray(new Vector(Pij.get_x()-_p0.get_x(),Pij.get_y()-_p0.get_y(),Pij.get_z()-_p0.get_z()),_p0);
+        return new Ray(new Vector(Pij.get_x()-_p0.get_x(),Pij.get_y()-_p0.get_y(),Pij.get_z()-_p0.get_z()),Pij);
     }
 }

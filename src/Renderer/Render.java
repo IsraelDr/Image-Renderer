@@ -19,7 +19,7 @@ public class Render {
     private Scene _scene;
     private ImageWriter _imageWriter;
     private final int MAX_CALC_COLOR_LEVEL = 3;
-
+    private boolean ImprovedRenderer=true;
     //****************Constructor****************//
     public Render(Scene scene, ImageWriter imageWriter) {
         this._scene = scene;
@@ -36,8 +36,16 @@ public class Render {
                     //this._imageWriter.writePixel(i, j, new java.awt.Color(255,0,0));
                     //continue;
                 }
-                Ray ray = _scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
-                Map<Geometry, List<Point3D>> intersectionPoints = getSceneRayIntersections(ray);
+                Map<Geometry, List<Point3D>> intersectionPoints;
+                Ray ray;
+                if(ImprovedRenderer) {
+                    ray = _scene.getCamera().constructRayThroughPixelhelp(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
+                    intersectionPoints = getSceneRayIntersectionsImproved(ray);
+                }
+                else {
+                    ray = _scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
+                    intersectionPoints = getSceneRayIntersections(ray);
+                }
                 if (intersectionPoints.isEmpty())
                     _imageWriter.writePixel(i, j, _scene.getBackgroundColor());
                 else {
@@ -263,6 +271,28 @@ public class Render {
                 intersectionPoints.put(geometry, geometryIntersectionPoints);
         }
         return intersectionPoints;
+    }
+    /**
+     * getScene Intersections
+     *
+     * @return map with geometry and list of points
+     */
+    private Map<Geometry, List<Point3D>> getSceneRayIntersectionsImproved(Ray ray) {
+        Map<Geometry, List<Point3D>> intersectionPoints = new HashMap<Geometry, List<Point3D>>();
+        List<Point3D> geometryIntersectionPoints = new ArrayList<Point3D>();
+        List<Geometry> _geometries=getrelevantgeometries(ray,new ArrayList<>(),this._scene.MaxKey());
+        for (Geometry geometry : _scene.getGeometries()) {
+            geometryIntersectionPoints = geometry.findIntersections(ray);
+            if (!geometryIntersectionPoints.isEmpty())
+                intersectionPoints.put(geometry, geometryIntersectionPoints);
+        }
+        return intersectionPoints;
+    }
+
+    private List<Geometry> getrelevantgeometries(Ray ray,List<Geometry> g,Key max) {
+        if(this._scene.getKeybyPoint(ray.get_point()).isgreater(max))
+            return null;
+        return null;
     }
 
     /**
