@@ -298,4 +298,17 @@ public class Render {
         return (entry.getValue().distance(point)<lightpoint.distance(point));
         */
     }
+
+    /**
+     *
+     * @param point
+     * @param source
+     * @param Dx
+     * @param Dy
+     * @param Dz
+     * @return
+     */
+    public static Key getKeyofPoint(Point3D point,Point3D source,double Dx,double Dy,double Dz){
+        return new Key((int)((point.get_x()-source.get_x())/Dx),(int)((point.get_y()-source.get_y())/Dy),(int)((point.get_z()-source.get_z()/Dz)));
+    }
 }

@@ -65,4 +65,14 @@ public class Sphere extends RadialGeometry {
         return list;
     }
 
+    @Override
+    public List<Point3D> getBoudaryPoints(Vector to,Vector right,Vector up) {
+        List<Point3D> list= new ArrayList<>();
+        list.add(this._point.addVectorToPoint(to.multipliedbyScalar(-this._radius)).addVectorToPoint(up.multipliedbyScalar(this._radius)).addVectorToPoint(right.multipliedbyScalar(-this._radius)));
+        list.add(this._point.addVectorToPoint(to.multipliedbyScalar(-this._radius)).addVectorToPoint(up.multipliedbyScalar(-this._radius)).addVectorToPoint(right.multipliedbyScalar(-this._radius)));
+        list.add(this._point.addVectorToPoint(to.multipliedbyScalar(-this._radius)).addVectorToPoint(up.multipliedbyScalar(this._radius)).addVectorToPoint(right.multipliedbyScalar(this._radius)));
+        list.add(this._point.addVectorToPoint(to.multipliedbyScalar(this._radius)).addVectorToPoint(up.multipliedbyScalar(this._radius)).addVectorToPoint(right.multipliedbyScalar(-this._radius)));
+        return list;
+    }
+
 }

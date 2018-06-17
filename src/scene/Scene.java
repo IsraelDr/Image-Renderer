@@ -9,6 +9,9 @@ import primitives.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import static Renderer.Render.getKeyofPoint;
 
 /**
  * Class that defines the Scene
@@ -21,6 +24,10 @@ public class Scene {
     protected double _distance;
     protected AmbientLight _ambientlight;
     protected List<LightSource> _lights;
+    protected Map<Key,List<Geometry>> _cubemap;
+    protected double _cubeDx=10;
+    protected double _cubeDy=10;
+    protected double _cubeDz=10;
 
     //****************Constructor****************//
 
@@ -133,6 +140,10 @@ public class Scene {
      */
     public void addGeometry(Geometry geometry) {
         this._geometries.addGeometry(geometry);
+        List<Point3D> boundaryPoints=geometry.getBoudaryPoints(_camera.getToward(),_camera.getRight(),_camera.getUp());
+        for (Point3D p:boundaryPoints) {
+            _cubemap.get(getKeyofPoint(p,this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)),_cubeDx,_cubeDy,_cubeDz)).add(geometry);
+        }
     }
 
     public void addLight(LightSource light) {

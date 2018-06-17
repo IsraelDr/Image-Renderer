@@ -1,6 +1,7 @@
 package geometries;
 import primitives.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cylinder extends Tube {
@@ -45,22 +46,19 @@ public class Cylinder extends Tube {
      */
     @Override
     public String toString() {
-        return this.toString()+", Height: "+this._height;
+        return super.toString()+", Height: "+this._height;
     }
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        /*k++;
-        int l;
         List<Point3D> list= super.findIntersections(ray);
-        if(k==575000)
-            l=5;
+        List<Point3D> temp=new ArrayList<>();
         for (Point3D p:list) {
-            if(Math.pow(p.distance(ray.get_point()),2)>Math.pow(get_height(),2)+Math.pow(get_radius(),2)&&p.vectorSubstract(ray.get_point()).ScalarProduct(getRay().get_vector())>0)
-                list.remove(p);
+            double m=p.vectorSubstract(ray.get_point()).ScalarProduct(this._ray.get_vector().NormalVector());
+            if(m>=0&&m<=this._height)
+                temp.add(p);
         }
-        return list;*/
-        return null;
+        return temp;
     }
 
 

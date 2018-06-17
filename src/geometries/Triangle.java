@@ -73,4 +73,9 @@ public class Triangle extends Plane {
             points.clear();
         return points;
     }
+
+    @Override
+    public List<Point3D> getBoudaryPoints(Vector to, Vector right, Vector up) {
+        return null;
+    }
 }

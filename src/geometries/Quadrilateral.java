@@ -2,6 +2,7 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Quadrilateral extends Geometry {
@@ -72,6 +73,11 @@ public class Quadrilateral extends Geometry {
         if (points2.size() > 0)
             points.addAll(points2);
         return points;
+    }
+
+    @Override
+    public List<Point3D> getBoudaryPoints(Vector to,Vector right,Vector up) {
+        return new ArrayList<>();
     }
 
     @Override

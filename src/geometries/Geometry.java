@@ -54,5 +54,6 @@ public abstract class Geometry {
      */
     public abstract Vector getNormal(Point3D temp);
     public abstract List<Point3D> findIntersections(Ray ray);
+    public abstract List<Point3D> getBoudaryPoints(Vector to,Vector right,Vector up);
 
 }

@@ -93,4 +93,9 @@ public class Plane extends Geometry {
             points.add(ray.get_point().addVectorToPoint(ray.get_vector().multipliedbyScalar(t)));
         return points;
     }
+
+    @Override
+    public List<Point3D> getBoudaryPoints(Vector to,Vector right,Vector up) {
+        return new ArrayList<>();
+    }
 }

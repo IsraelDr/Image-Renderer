@@ -59,6 +59,22 @@ public class Camera {
     public Vector getToward() {
         return _toward;
     }
+
+    /**
+     * Right
+     * @return
+     */
+    public Vector getRight() {
+        return _right;
+    }
+
+    /**
+     * get up
+     * @return
+     */
+    public Vector getUp() {
+        return _up;
+    }
     //***************Operations*************************
 
     /**

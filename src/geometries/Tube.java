@@ -82,4 +82,11 @@ public class Tube extends RadialGeometry {
         }
         return list;
     }
+
+    @Override
+    public List<Point3D> getBoudaryPoints(Vector to,Vector right,Vector up) {
+        return new ArrayList<>();
+    }
+
+
 }
