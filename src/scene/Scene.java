@@ -4,14 +4,16 @@ package scene;
 import elements.AmbientLight;
 import elements.Camera;
 import elements.LightSource;
-import geometries.*;
-import primitives.*;
+import geometries.Geometries;
+import geometries.Geometry;
+import primitives.Color;
+import primitives.Key;
+import primitives.Point3D;
+import primitives.Vector;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static Renderer.Render.getKeyofPoint;
 
 /**
  * Class that defines the Scene
@@ -142,7 +144,7 @@ public class Scene {
         this._geometries.addGeometry(geometry);
         List<Point3D> boundaryPoints=geometry.getBoudaryPoints(_camera.getToward(),_camera.getRight(),_camera.getUp());
         for (Point3D p:boundaryPoints) {
-            _cubemap.get(getKeyofPoint(p,this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)),_cubeDx,_cubeDy,_cubeDz)).add(geometry);
+            _cubemap.get(Key.getKeyofPoint(p,this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)),_cubeDx,_cubeDy,_cubeDz)).add(geometry);
         }
     }
 

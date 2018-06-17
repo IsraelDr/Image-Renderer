@@ -283,7 +283,7 @@ public class Render {
         for (Map.Entry<Geometry, List<Point3D>> entry : intersectionPoints.entrySet()) {
             count = 0;
             for (Point3D p : entry.getValue()) {
-                if (lightsource instanceof PointLight && p.distance(point) > ((PointLight)lightsource).getPosition().distance(point))
+                if (lightsource instanceof PointLight && p.distance(point) > ((PointLight) lightsource).getPosition().distance(point))
                     count++;
             }
             if (lightsource instanceof PointLight && count >= entry.getValue().size())
@@ -297,18 +297,5 @@ public class Render {
         Map.Entry<Geometry,Point3D>entry=closestPoint.entrySet().iterator().next();
         return (entry.getValue().distance(point)<lightpoint.distance(point));
         */
-    }
-
-    /**
-     *
-     * @param point
-     * @param source
-     * @param Dx
-     * @param Dy
-     * @param Dz
-     * @return
-     */
-    public static Key getKeyofPoint(Point3D point,Point3D source,double Dx,double Dy,double Dz){
-        return new Key((int)((point.get_x()-source.get_x())/Dx),(int)((point.get_y()-source.get_y())/Dy),(int)((point.get_z()-source.get_z()/Dz)));
     }
 }

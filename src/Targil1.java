@@ -1,15 +1,3 @@
-import elements.Camera;
-import geometries.Plane;
-import geometries.Sphere;
-import geometries.Triangle;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * Authors:
  * Israel Dreyfuss 4301288, sruli97@gmail.com
@@ -24,6 +12,5 @@ public class Targil1 {
         for (Point3D q:l) {
             System.out.println(q.toString());
         }*/
-
     }
 }

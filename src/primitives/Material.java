@@ -14,8 +14,10 @@ public class Material {
     //******************************CONSTRUCTORS********************************//
     /**
      * ctor
-     * @param Kd Kd
-     * @param Ks Ks
+     * @param Kd Diffuse
+     * @param Ks Specular
+     * @param Kr reflected
+     * @param Kt Transparent
      * @param Shininess Shininess
      */
     public Material(double Kd,double Ks,double Kr,double Kt,int Shininess) {
