@@ -21,7 +21,7 @@ public class renderTest {
         pScene.setCamera(pCamera);
         pScene.setDistance(1000);
         pScene.setBackgroundColor(Color.GREEN);
-        /*
+/*
         for (int i = -100; i < 100; i += 4) {
             int mod = 0;
             if (Math.abs(i % 8) == 0)
@@ -31,21 +31,23 @@ public class renderTest {
             for (int j = 200; j > 0; j -= 20) {
                 int jZ = -100 + 2*j;
                 if (Math.abs(j / 10 % 2) == mod)
-                    pScene.addGeometry(new Quadrilateral(
+                    /*pScene.addGeometry(new Quadrilateral(
                             Point3D.construct(j, i, jZ),
                             Point3D.construct(j, i + 4, jZ),
                             Point3D.construct(j + 10, i, jZ + 10),
                             Point3D.construct(j + 10, i + 4, jZ + 10),
                             Color.DARK_GRAY,
-                            new Material(1, 1, 0.5, 0, 19)));
-                else
-                    pScene.addGeometry(new Quadrilateral(
+                            new Material(1, 1, 0.5, 0, 19)));*/
+                    //pScene.addGeometry(new Sphere(Point3D.construct(j, i, jZ), 3, Color.RED, new Material(0.5, 0.5, 0, 0, 3)));
+                //else
+                    /*pScene.addGeometry(new Quadrilateral(
                             Point3D.construct(j, i, jZ),
                             Point3D.construct(j, i + 4, jZ),
                             Point3D.construct(j + 10, i, jZ + 10),
                             Point3D.construct(j + 10, i + 4, jZ + 10),
                             Color.YELLOW,
                             new Material(1, 1, 0.5, 0, 19)));
+                    pScene.addGeometry(new Sphere(Point3D.construct(j, i, jZ), 3, Color.BLUE, new Material(0.5, 0.5, 0, 0, 3)));
             }
         }*/
         SpotLight pSpot = new SpotLight(
@@ -59,8 +61,12 @@ public class renderTest {
                 1, 0.0001, 0.0001
         );
 
-        //pScene.addGeometry(new Sphere(Point3D.construct(100, 0, 0), 30, Color.RED, new Material(0.5, 0.5, 0, 0, 3)));
-        pScene.setGeometries(new Cube(
+        pScene.addGeometry(new Sphere(Point3D.construct(100, 0, 0), 30, Color.RED, new Material(0.5, 0.5, 0, 0, 3)));
+        //pScene.addGeometry(new Sphere(Point3D.construct(50, -100, -100), 30, Color.GREEN, new Material(0.5, 0.5, 0, 0, 3)));
+        //pScene.addGeometry(new Sphere(Point3D.construct(100, -100, 100), 30, Color.DARK_GRAY, new Material(0.5, 0.5, 0, 0, 3)));
+        //pScene.addGeometry(new Sphere(Point3D.construct(50, 100, 100), 30, Color.BLACK, new Material(0.5, 0.5, 0, 0, 3)));
+        //pScene.addGeometry(new Sphere(Point3D.construct(100, 100, -100), 30, Color.ORANGE, new Material(0.5, 0.5, 0, 0, 3)));
+        /*pScene.setGeometries(new Cube(
                 Point3D.construct(70, -30, 30),
                 Point3D.construct(70, 30, 30),
                 Point3D.construct(70, 30, -30),
@@ -75,12 +81,12 @@ public class renderTest {
                 Color.RED,
                 Color.BLACK,
                 Color.BLACK,
-                new Material(1, 0.5, 0, 0.88, 8)));
-        //pScene.addLight(pSpot);
-        //pScene.addLight(pPointLight);
+                new Material(1, 0.5, 0, 0.88, 8)));*/
+        pScene.addLight(pSpot);
+        pScene.addLight(pPointLight);
 
         ImageWriter pSceneWriter = new ImageWriter("Project", 1000, 1000, 1000, 1000);
-        RenderParalell pRender = new RenderParalell(pScene, pSceneWriter);
+        Render pRender = new Render(pScene, pSceneWriter);
         pRender.renderImage();
         pRender.getImageWriter().writeToimage();
 /*
@@ -391,5 +397,9 @@ public class renderTest {
 
         //myRender.printGrid(100);
         myRender2.getImageWriter().writeToimage();
+    }
+    @Test
+    public void FinalProject() {
+
     }
 }

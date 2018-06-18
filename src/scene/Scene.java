@@ -7,14 +7,10 @@ import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Color;
-import primitives.Key;
 import primitives.Point3D;
 import primitives.Vector;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class that defines the Scene
@@ -28,9 +24,9 @@ public class Scene {
     protected AmbientLight _ambientlight;
     protected List<LightSource> _lights;
     protected Map<Key, List<Geometry>> _cubemap;
-    protected double _cubeDx = 10;
-    protected double _cubeDy = 10;
-    protected double _cubeDz = 10;
+    protected double _cubeDx = 50;
+    protected double _cubeDy = 50;
+    protected double _cubeDz = 50;
 
     //****************Constructor****************//
 
@@ -47,6 +43,7 @@ public class Scene {
         _distance = 1;
         _ambientlight = new AmbientLight(new Color(100, 90, 120), 1);
         _lights = new LinkedList<>();
+        _cubemap=new HashMap<>();
     }
 
     //*************************Setter/Getter**********//
@@ -161,10 +158,11 @@ public class Scene {
         this._geometries.addGeometry(geometry);
         List<Point3D> boundaryPoints = geometry.getBoudaryPoints(_camera.getToward(), _camera.getRight(), _camera.getUp());
         List<Geometry> temp;
-        Key k1 = Key.getKeyofPoint(boundaryPoints.get(0), this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)), _cubeDx, _cubeDy, _cubeDz);
-        Key k2 = Key.getKeyofPoint(boundaryPoints.get(1), this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)), _cubeDx, _cubeDy, _cubeDz);
-        Key k3 = Key.getKeyofPoint(boundaryPoints.get(2), this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)), _cubeDx, _cubeDy, _cubeDz);
-        Key k4 = Key.getKeyofPoint(boundaryPoints.get(3), this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)), _cubeDx, _cubeDy, _cubeDz);
+        Key k1 = getKeybyPoint(boundaryPoints.get(0));
+        Key k2 = getKeybyPoint(boundaryPoints.get(1));
+        Key k3 = getKeybyPoint(boundaryPoints.get(2));
+        Key k4 = getKeybyPoint(boundaryPoints.get(3));
+        Point3D pk1 = getPoint3DbyKey(k1);
         for (int i = k1.getX(); i <= k2.getX(); i++) {
             for (int j = k1.getY(); j <= k3.getY(); j++) {
                 for (int k = k1.getZ(); k <= k4.getZ(); k++) {
@@ -194,7 +192,25 @@ public class Scene {
         }
         return max;
     }
-    public Key getKeybyPoint(Point3D p){
-        return Key.getKeyofPoint(p,this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)),this._cubeDx,this._cubeDy,this._cubeDz);
+
+    /**
+     * @param p
+     * @return
+     */
+    public Key getKeybyPoint(Point3D p) {
+        Vector temp = this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)).vectorSubstract(p);
+        int i = (int) ((temp.ScalarProduct(_camera.getToward())) / _cubeDx);
+        int j = (int) ((temp.ScalarProduct(_camera.getRight())) / _cubeDy);
+        int k = (int) ((temp.ScalarProduct(_camera.getUp())) / _cubeDz);
+        return new Key(i, j, k);
     }
+
+    public Point3D getPoint3DbyKey(Key key) {
+        Point3D source = this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance));
+        int i = key._x;
+        int j = key._y;
+        int k = key._z;
+        return source.addVectorToPoint(_camera.getToward().multipliedbyScalar(_cubeDx * i)).addVectorToPoint(_camera.getRight().multipliedbyScalar(_cubeDy * j)).addVectorToPoint(_camera.getUp().multipliedbyScalar(_cubeDz * k));
+    }
+
 }

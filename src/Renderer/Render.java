@@ -4,7 +4,10 @@ package Renderer;
 import elements.LightSource;
 import elements.PointLight;
 import geometries.Geometry;
+import geometries.Plane;
+import geometries.Quadrilateral;
 import primitives.*;
+import scene.Key;
 import scene.Scene;
 
 import java.util.ArrayList;
@@ -289,10 +292,39 @@ public class Render {
         return intersectionPoints;
     }
 
-    private List<Geometry> getrelevantgeometries(Ray ray,List<Geometry> g,Key max) {
+    private List<Geometry> getrelevantgeometries(Ray ray,List<Geometry> geometries , Key max) {
         if(this._scene.getKeybyPoint(ray.get_point()).isgreater(max))
-            return null;
-        return null;
+            return geometries;
+        Key mainKey=_scene.getKeybyPoint(ray.get_point());
+        List<Geometry> current=this._scene.getCubemap().get(mainKey);
+        for (Geometry g:current) {
+            geometries.add(g);
+        }
+        Plane top=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getUp(),null,null);
+        Plane left=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getRight(),null,null);
+        Plane right=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getRight(),null,null);
+        Plane down=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getUp(),null,null);
+        Plane forward=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getToward(),null,null);
+        List<Point3D> listpoints=new ArrayList<>();
+        if(top.findIntersections(ray).size()>0)
+            listpoints.add(top.findIntersections(ray).get(0));
+        if(left.findIntersections(ray).size()>0)
+            listpoints.add(left.findIntersections(ray).get(0));
+        if(right.findIntersections(ray).size()>0)
+            listpoints.add(right.findIntersections(ray).get(0));
+        if(down.findIntersections(ray).size()>0)
+            listpoints.add(down.findIntersections(ray).get(0));
+        if(forward.findIntersections(ray).size()>0)
+            listpoints.add(forward.findIntersections(ray).get(0));
+        double dist=Double.MAX_VALUE;
+        Point3D min=null;
+        for (Point3D p:listpoints) {
+            if(p.distance(ray.get_point())<dist){
+                dist=p.distance(ray.get_point());
+                min=new Point3D(p);
+            }
+        }
+        return getrelevantgeometries(new Ray(ray.get_vector(),min),geometries,max);
     }
 
     /**
@@ -328,4 +360,5 @@ public class Render {
         return (entry.getValue().distance(point)<lightpoint.distance(point));
         */
     }
+
 }
