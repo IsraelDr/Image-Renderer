@@ -34,7 +34,7 @@ public class Render {
         int k;
         for (int i = 1; i < _imageWriter.getNx(); i++) {
             for (int j = 1; j < _imageWriter.getNy(); j++) {
-                if (i == 500 && j >= 492) {
+                if (i == 500 && j >= 500) {
                     k = 5;
                     //this._imageWriter.writePixel(i, j, new java.awt.Color(255,0,0));
                     //continue;
@@ -42,7 +42,7 @@ public class Render {
                 Map<Geometry, List<Point3D>> intersectionPoints;
                 Ray ray;
                 if(ImprovedRenderer) {
-                    ray = _scene.getCamera().constructRayThroughPixelhelp(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
+                    ray = _scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
                     intersectionPoints = getSceneRayIntersectionsImproved(ray);
                 }
                 else {
@@ -281,10 +281,11 @@ public class Render {
      * @return map with geometry and list of points
      */
     private Map<Geometry, List<Point3D>> getSceneRayIntersectionsImproved(Ray ray) {
+        int k=0;
         Map<Geometry, List<Point3D>> intersectionPoints = new HashMap<Geometry, List<Point3D>>();
         List<Point3D> geometryIntersectionPoints = new ArrayList<Point3D>();
         List<Geometry> _geometries=getrelevantgeometries(ray,new ArrayList<>(),this._scene.MaxKey());
-        for (Geometry geometry : _scene.getGeometries()) {
+        for (Geometry geometry : _geometries) {
             geometryIntersectionPoints = geometry.findIntersections(ray);
             if (!geometryIntersectionPoints.isEmpty())
                 intersectionPoints.put(geometry, geometryIntersectionPoints);
@@ -293,18 +294,20 @@ public class Render {
     }
 
     private List<Geometry> getrelevantgeometries(Ray ray,List<Geometry> geometries , Key max) {
-        if(this._scene.getKeybyPoint(ray.get_point()).isgreater(max))
-            return geometries;
         Key mainKey=_scene.getKeybyPoint(ray.get_point());
+        if(mainKey.isgreater(max))
+            return geometries;
         List<Geometry> current=this._scene.getCubemap().get(mainKey);
-        for (Geometry g:current) {
-            geometries.add(g);
+        if(current!=null) {
+            for (Geometry g : current) {
+                geometries.add(g);
+            }
         }
-        Plane top=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getUp(),null,null);
-        Plane left=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getRight(),null,null);
-        Plane right=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getRight(),null,null);
-        Plane down=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getUp(),null,null);
-        Plane forward=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getToward(),null,null);
+        Plane top=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getUp(),Color.BLACK,new Material(0,0,0,0,0));
+        Plane left=new Plane(this._scene.getPoint3DbyKey(mainKey),_scene.getCamera().getRight(),Color.BLACK,new Material(0,0,0,0,0));
+        Plane right=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getRight(),Color.BLACK,new Material(0,0,0,0,0));
+        Plane down=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getUp(),Color.BLACK,new Material(0,0,0,0,0));
+        Plane forward=new Plane(this._scene.getPoint3DbyKey(new Key(mainKey.getX()+1,mainKey.getY()+1,mainKey.getZ()-1)),_scene.getCamera().getToward(),Color.BLACK,new Material(0,0,0,0,0));
         List<Point3D> listpoints=new ArrayList<>();
         if(top.findIntersections(ray).size()>0)
             listpoints.add(top.findIntersections(ray).get(0));
@@ -317,6 +320,8 @@ public class Render {
         if(forward.findIntersections(ray).size()>0)
             listpoints.add(forward.findIntersections(ray).get(0));
         double dist=Double.MAX_VALUE;
+        if(listpoints.size()==0)
+            return geometries;
         Point3D min=null;
         for (Point3D p:listpoints) {
             if(p.distance(ray.get_point())<dist){

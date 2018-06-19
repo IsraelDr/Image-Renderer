@@ -43,7 +43,7 @@ public class Scene {
         _distance = 1;
         _ambientlight = new AmbientLight(new Color(100, 90, 120), 1);
         _lights = new LinkedList<>();
-        _cubemap=new HashMap<>();
+        _cubemap = new HashMap<>();
     }
 
     //*************************Setter/Getter**********//
@@ -165,14 +165,15 @@ public class Scene {
         Point3D pk1 = getPoint3DbyKey(k1);
         for (int i = k1.getX(); i <= k2.getX(); i++) {
             for (int j = k1.getY(); j <= k3.getY(); j++) {
-                for (int k = k1.getZ(); k <= k4.getZ(); k++) {
+                for (int k = k1.getZ(); k >= k4.getZ(); k--) {
                     Key current = new Key(i, j, k);
-                    if (_cubemap.containsKey(current))
-                        temp = _cubemap.get(current);
-                    else
+                    if (_cubemap.containsKey(current)) {
+                        _cubemap.get(current).add(geometry);
+                    } else {
                         temp = new ArrayList<>();
-                    temp.add(geometry);
-                    _cubemap.replace(current, temp);
+                        temp.add(geometry);
+                        _cubemap.put(current, temp);
+                    }
                 }
             }
         }
@@ -198,10 +199,10 @@ public class Scene {
      * @return
      */
     public Key getKeybyPoint(Point3D p) {
-        Vector temp = this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)).vectorSubstract(p);
-        int i = (int) ((temp.ScalarProduct(_camera.getToward())) / _cubeDx);
-        int j = (int) ((temp.ScalarProduct(_camera.getRight())) / _cubeDy);
-        int k = (int) ((temp.ScalarProduct(_camera.getUp())) / _cubeDz);
+        Vector temp = p.vectorSubstract(this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)));
+        int i = (int) Math.floor((temp.ScalarProduct(_camera.getToward())) / _cubeDx);
+        int j = (int) Math.floor((temp.ScalarProduct(_camera.getRight())) / _cubeDy);
+        int k = (int) Math.floor((temp.ScalarProduct(_camera.getUp())) / _cubeDz);
         return new Key(i, j, k);
     }
 
