@@ -6,6 +6,8 @@ import elements.Camera;
 import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
+import geometries.Sphere;
+import geometries.Triangle;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
@@ -24,9 +26,11 @@ public class Scene {
     protected AmbientLight _ambientlight;
     protected List<LightSource> _lights;
     protected Map<Key, List<Geometry>> _cubemap;
-    protected double _cubeDx = 50;
-    protected double _cubeDy = 50;
-    protected double _cubeDz = 50;
+    protected Key _minKey;
+    protected Key _maxKey;
+    protected double _cubeDx = 400;
+    protected double _cubeDy = 400;
+    protected double _cubeDz = 400;
 
     //****************Constructor****************//
 
@@ -44,6 +48,8 @@ public class Scene {
         _ambientlight = new AmbientLight(new Color(100, 90, 120), 1);
         _lights = new LinkedList<>();
         _cubemap = new HashMap<>();
+        _minKey= this.getKeybyPoint(this._camera.getP0());
+        _maxKey=new Key(100,0,0);
     }
 
     //*************************Setter/Getter**********//
@@ -156,6 +162,9 @@ public class Scene {
      */
     public void addGeometry(Geometry geometry) {
         this._geometries.addGeometry(geometry);
+        if(!(geometry instanceof Sphere || geometry instanceof Triangle)) {
+            return;
+        }
         List<Point3D> boundaryPoints = geometry.getBoudaryPoints(_camera.getToward(), _camera.getRight(), _camera.getUp());
         List<Geometry> temp;
         Key k1 = getKeybyPoint(boundaryPoints.get(0));
@@ -173,6 +182,18 @@ public class Scene {
                         temp = new ArrayList<>();
                         temp.add(geometry);
                         _cubemap.put(current, temp);
+                        if(this._maxKey==null){
+                            this._maxKey=new Key(current.getX(),current.getY(),current.getZ());
+                        }
+                        else{
+                            this._maxKey=new Key(Math.max(current.getX(),this._maxKey.getX()),Math.max(current.getY(),this._maxKey.getY()),Math.max(current.getZ(),this._maxKey.getZ()));
+                        }
+                        if(this._minKey==null){
+                            this._minKey=new Key(current.getX(),current.getY(),current.getZ());
+                        }
+                        else{
+                            this._minKey=new Key(Math.min(current.getX(),this._minKey.getX()),Math.min(current.getY(),this._minKey.getY()),Math.min(current.getZ(),this._minKey.getZ()));
+                        }
                     }
                 }
             }
@@ -184,14 +205,10 @@ public class Scene {
     }
 
     public Key MaxKey() {
-        Key max = new Key(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
-        for (Key k : this._cubemap.keySet()) {
-            max.setX(Math.max(k.getX(), max.getX()));
-            max.setY(Math.max(k.getY(), max.getY()));
-            max.setZ(Math.max(k.getZ(), max.getZ()));
-
-        }
-        return max;
+        return _maxKey;
+    }
+    public Key MinKey() {
+        return this._minKey;
     }
 
     /**

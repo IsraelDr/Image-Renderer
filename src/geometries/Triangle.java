@@ -2,6 +2,7 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Triangle extends Plane {
@@ -76,6 +77,17 @@ public class Triangle extends Plane {
 
     @Override
     public List<Point3D> getBoudaryPoints(Vector to, Vector right, Vector up) {
-        return null;
+        List<Point3D> list= new ArrayList<>();
+        Vector ca=this._third.vectorSubstract(this._point);
+        Vector ba=this._second.vectorSubstract(this._point);
+        Vector temp1=ca.vectorProduct(ba.vectorProduct(ca)).multipliedbyScalar(ba.ScalarProduct(ba));
+        Vector temp2=(ba.vectorProduct(ca)).vectorProduct(ba).multipliedbyScalar(ca.ScalarProduct(ca));
+        Point3D m=this._point.addVectorToPoint((temp1.add(temp2)).multipliedbyScalar(1/(2*Math.pow(ba.vectorProduct(ca).size(),2))));
+        double rad=m.distance(this._point);
+        list.add(m.addVectorToPoint(to.multipliedbyScalar(-rad)).addVectorToPoint(up.multipliedbyScalar(rad)).addVectorToPoint(right.multipliedbyScalar(-rad)));
+        list.add(m.addVectorToPoint(to.multipliedbyScalar(rad)).addVectorToPoint(up.multipliedbyScalar(rad)).addVectorToPoint(right.multipliedbyScalar(-rad)));
+        list.add(m.addVectorToPoint(to.multipliedbyScalar(-rad)).addVectorToPoint(up.multipliedbyScalar(rad)).addVectorToPoint(right.multipliedbyScalar(rad)));
+        list.add(m.addVectorToPoint(to.multipliedbyScalar(-rad)).addVectorToPoint(up.multipliedbyScalar(-rad)).addVectorToPoint(right.multipliedbyScalar(-rad)));
+        return list;
     }
 }

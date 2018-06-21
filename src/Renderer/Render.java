@@ -3,9 +3,7 @@ package Renderer;
 
 import elements.LightSource;
 import elements.PointLight;
-import geometries.Geometry;
-import geometries.Plane;
-import geometries.Quadrilateral;
+import geometries.*;
 import primitives.*;
 import scene.Key;
 import scene.Scene;
@@ -21,8 +19,8 @@ import java.util.Map;
 public class Render {
     private Scene _scene;
     private ImageWriter _imageWriter;
-    private final int MAX_CALC_COLOR_LEVEL = 3;
-    private boolean ImprovedRenderer=true;
+    private final int MAX_CALC_COLOR_LEVEL = 7;
+    private boolean ImprovedRenderer=false;
     //****************Constructor****************//
     public Render(Scene scene, ImageWriter imageWriter) {
         this._scene = scene;
@@ -32,6 +30,7 @@ public class Render {
     //********************Operations*************************//
     public void renderImage() {
         int k;
+        Plane firstplane=new Plane(_scene.getPoint3DbyKey(this._scene.MinKey()),_scene.getCamera().getToward(),new Color(0,0,0),new Material(0,0,0,0,0));
         for (int i = 1; i < _imageWriter.getNx(); i++) {
             for (int j = 1; j < _imageWriter.getNy(); j++) {
                 if (i == 500 && j >= 500) {
@@ -43,6 +42,9 @@ public class Render {
                 Ray ray;
                 if(ImprovedRenderer) {
                     ray = _scene.getCamera().constructRayThroughPixel(_imageWriter.getNx(), _imageWriter.getNy(), i, j, _scene.getDistance(), _imageWriter.getWidth(), _imageWriter.getHeight());
+                    List<Point3D> l=firstplane.findIntersections(ray);
+                    /*if(l.size()>0)
+                        ray=new Ray(ray.get_vector(),l.get(0));*/
                     intersectionPoints = getSceneRayIntersectionsImproved(ray);
                 }
                 else {
@@ -289,6 +291,14 @@ public class Render {
             geometryIntersectionPoints = geometry.findIntersections(ray);
             if (!geometryIntersectionPoints.isEmpty())
                 intersectionPoints.put(geometry, geometryIntersectionPoints);
+        }
+        for(Geometry geo:this._scene.getGeometries())
+        {
+            if(!(geo instanceof Sphere || geo instanceof Triangle)) {
+                geometryIntersectionPoints = geo.findIntersections(ray);
+                if (!geometryIntersectionPoints.isEmpty())
+                    intersectionPoints.put(geo, geometryIntersectionPoints);
+            }
         }
         return intersectionPoints;
     }

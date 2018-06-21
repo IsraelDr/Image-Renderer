@@ -82,7 +82,7 @@ public class renderTest {
                 Color.BLACK,
                 Color.BLACK,
                 new Material(1, 0.5, 0, 0.88, 8)));*/
-        pScene.addLight(pSpot);
+       /* pScene.addLight(pSpot);
         pScene.addLight(pPointLight);
 
         ImageWriter pSceneWriter = new ImageWriter("Project", 1000, 1000, 1000, 1000);
@@ -185,7 +185,7 @@ public class renderTest {
         Sphere sun = new Sphere(new Point3D(80, 0, 60),
                 40, new Color(255, 255, 150), new Material(0.5, 0.5, 1, 1, 20));
         Triangle triangle1 = new Triangle(new Point3D(-5, 9, 2), new Point3D(-5, 0, 2), new Point3D(-5, -1, 12), new Color(100, 0, 0), new Material(1, 1, 0, 1, 20));
-        Camera camera2 = new Camera(new Point3D(-10, 0, 5),
+        Camera camera2 = new Camera(new Point3D(-10, 0, 15),
                 new Vector(1, 0, 0), new Vector(0, 1, 0));
         Tube tube = new Tube(new Ray(new Vector(0, 1, 1), new Point3D(40, 0, 0)), 10, new Color(0, 0, 255), new Material(1, 1, 1, 1, 20));
         Scene myScene2 = new Scene("mirrorTest");
@@ -400,6 +400,55 @@ public class renderTest {
     }
     @Test
     public void FinalProject() {
+        Plane p1 = new Plane(new Point3D(0, 0, -100), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0, 20));
+        Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 0, 0, 20));
+        Sphere middle2 = new Sphere(new Point3D(5, 10, 2),
+                5, new Color(0, 20, 100), new Material(1, 1, 0, 0.5, 20));
+        Sphere sun = new Sphere(new Point3D(80, 0, 60),
+                40, new Color(255, 255, 150), new Material(0.5, 0.5, 1, 1, 20));
+        Camera camera2 = new Camera(new Point3D(-1000, 0, 50),
+                new Vector(1, 0, 0), new Vector(0, 1, 0));
+        Tube tube = new Tube(new Ray(new Vector(0, 1, 1), new Point3D(40, 0, 0)), 10, new Color(0, 0, 255), new Material(1, 1, 1, 1, 20));
+        Cylinder foot=new Cylinder(new Ray( new Vector(0,0,1),new Point3D(0,0,-100)),50,150,new Color(100,0,0),new Material(1,1,0,0,20));
+        Scene myScene2 = new Scene("Biliard");
+        myScene2.setDistance(1000);
+        myScene2.setCamera(camera2);
+        myScene2.setBackgroundColor(new Color(0, 0, 0));
+        //myScene2.addGeometry(middle2);
+        myScene2.addGeometry(foot);
+        myScene2.addGeometry(p1);
+        //myScene2.addGeometry(p2);
+        //myScene2.addGeometry(tube);
+        myScene2.setAmbientlight(new Color(0, 0, 0), 1);
 
+        PointLight pointlight = new PointLight(
+                new Color(255, 255, 255),
+                new Point3D(5, 0, 5),
+                1, 0.0001, 0.0001
+        );
+
+        SpotLight Spotlight = new SpotLight(
+                new Color(255, 255, 255), new Vector(-0.8, 1, 0),
+                new Point3D(0, 0, 10),
+                1, 0.00001, 0.000001
+        );
+
+        SpotLight mySpotLight2 = new SpotLight(
+                new Color(255, 255, 255), new Vector(4, 0, -2),
+                new Point3D(5, 0, 5),
+                1, 0.01, 0.01
+        );
+        DirectionalLight dire2 = new DirectionalLight(new Color(100, 100, 100), new Vector(1, 1, -1));
+        //myScene2.addLight(dire2);
+        //myScene2.addLight(pointlight);
+        myScene2.addLight(Spotlight);
+        //myScene2.addLight(mySpotLight2);
+        ImageWriter sceneWriter2 = new ImageWriter("Biliard", 1000, 1000, 1000, 1000);
+        Render myRender = new Render(myScene2, sceneWriter2);
+
+        myRender.renderImage();
+
+        //myRender.printGrid(100);
+        myRender.getImageWriter().writeToimage();
     }
 }
