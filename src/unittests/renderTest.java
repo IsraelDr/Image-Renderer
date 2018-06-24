@@ -2,7 +2,6 @@ package unittests;
 
 import Renderer.ImageWriter;
 import Renderer.Render;
-import Renderer.RenderParalell;
 import elements.Camera;
 import elements.DirectionalLight;
 import elements.PointLight;

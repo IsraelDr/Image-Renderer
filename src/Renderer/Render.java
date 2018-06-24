@@ -34,7 +34,7 @@ public class Render {
 
     //********************Operations*************************//
     public void renderImage()  throws InterruptedException {
-        final ThreadPoolExecutor executor = new ThreadPoolExecutor(8, 12, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+        final ThreadPoolExecutor executor = new ThreadPoolExecutor(12, 12, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
         int k;
         //Plane firstplane=new Plane(_scene.getPoint3DbyKey(this._scene.MinKey()),_scene.getCamera().getToward(),new Color(0,0,0),new Material(0,0,0,0,0));
         for (int i = 1; i < _imageWriter.getNx(); i++) {
