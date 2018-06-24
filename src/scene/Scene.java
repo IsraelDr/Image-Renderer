@@ -29,8 +29,8 @@ public class Scene {
     protected Key _minKey;
     protected Key _maxKey;
     protected double _cubeDx = 500;
-    protected double _cubeDy = 20;
-    protected double _cubeDz = 20;
+    protected double _cubeDy = 400;
+    protected double _cubeDz = 400;
 
     //****************Constructor****************//
 

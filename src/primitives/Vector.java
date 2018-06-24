@@ -29,7 +29,7 @@ public class Vector {
     // ***************** Getters/Setters ********************** //
 
     public Point3D getPoint() {
-        return _point;
+        return new Point3D(_point);
     }
 
     // ***************** Administration  ******************** //

@@ -471,14 +471,19 @@ public class renderTest {
     }
     @Test
     public void Spongebob() throws InterruptedException {
-        Plane p1 = new Plane(new Point3D(0, 0, -20), new Vector(0, 0, 1), new Color(80,85,75), new Material(1, 1, 0, 0, 20));
+        Plane p1 = new Plane(new Point3D(0, 0, -20), new Vector(0, 0, 1), Color.BLACK, new Material(1, 1, 0.5, 0, 20));
         Plane p2 = new Plane(new Point3D(0, 0, 100), new Vector(0, 0, -1), new Color(76,183,237), new Material(0.3, 1, 0.5, 1, 0));
+        Plane p3 = new Plane(new Point3D(0, -20, 0), new Vector(0, 1, 0), Color.BLUE, new Material(1, 1, 0, 1, 20));
+        Plane p4 = new Plane(new Point3D(0, 100, 0), new Vector(0, -1, 0), Color.ORANGE, new Material(0.3, 1, 0, 1, 5));
+        Plane p5 = new Plane(new Point3D(0, 0, 50), new Vector(0, 0, -1), Color.BLACK, new Material(0.3, 0.2, 0, 1, 9));
+
         Sphere middle2 = new Sphere(new Point3D(5, 10, 2),
                 5, new Color(0, 20, 100), new Material(1, 1, 0, 0.5, 20));
         Sphere sun = new Sphere(new Point3D(80, 0, 60),
                 40, new Color(255, 255, 150), new Material(0.5, 0.5, 1, 1, 20));
-        Camera camera2 = new Camera(new Point3D(-200, 0, 20),
+        Camera camera2 = new Camera(new Point3D(-400, 0, 20),
                 new Vector(1, 0, 0), new Vector(0, 1, 0));
+
         Triangle teeth1=new Triangle(Point3D.construct(-0.2,2,8),Point3D.construct(1,2,13),Point3D.construct(-0.2,5,8),new Color(255,255,255),new Material(1,0,0,0,20));
         Triangle teeth2=new Triangle(Point3D.construct(1,5,13),Point3D.construct(1,2,13),Point3D.construct(-0.2,5,8),new Color(255,255,255),new Material(1,0,0,0,20));
         Triangle teeth3=new Triangle(Point3D.construct(-0.2,6,8),Point3D.construct(1,6,13),Point3D.construct(-0.2,9,8),new Color(255,255,255),new Material(1,0,0,0,20));
@@ -507,6 +512,9 @@ public class renderTest {
         myScene2.addGeometry(teeth4);
         myScene2.addGeometry(p1);
         myScene2.addGeometry(p2);
+        //myScene2.addGeometry(p3);
+        //myScene2.addGeometry(p4);
+        //myScene2.addGeometry(p5);
         myScene2.addGeometry(foot2);
         myScene2.addGeometry(foot);
         myScene2.addGeometry(arm1);
@@ -568,5 +576,24 @@ public class renderTest {
 
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
+    }
+    @Test
+    public void performenceTest() throws InterruptedException {
+        Scene pScene = new Scene("Project Scene");
+        Camera pCamera = new Camera(Point3D.construct(-225, 0, 0), new Vector(1, 0, 0), new Vector(0, 1, 0));
+        pScene.setCamera(pCamera);
+        pScene.setDistance(1000);
+        pScene.setBackgroundColor(Color.PINK);
+        for (int i = -300; i <300 ; i+=30) {
+            for (int j = -100; j <100 ; j+=20) {
+                for (int k = -100; k <100 ; k+=25) {
+                    pScene.addGeometry(new Sphere(Point3D.construct(i, j,k), 3, new Color(Math.abs(i)*2/3,Math.abs(j)*2,Math.abs(k)*2), new Material(Math.abs(k)/300, Math.abs(j)/100, 0, 0.05, 10)));
+                }
+            }
+        }
+        ImageWriter pSceneWriter = new ImageWriter("Performence Test", 1000, 1000, 1000, 1000);
+        Render pRender = new Render(pScene, pSceneWriter);
+        pRender.renderImage();
+        pRender.getImageWriter().writeToimage();
     }
 }
