@@ -60,10 +60,10 @@ public class Tube extends RadialGeometry {
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> list = new ArrayList<>();
-        Vector n=ray.get_vector().add(this._ray.get_vector().multipliedbyScalar(this._ray.get_vector().ScalarProduct(ray.get_vector())).multipliedbyScalar(-1));
+        Vector n=ray.get_vector().add(this._ray.get_vector().multipliedbyScalar(Math.abs(this._ray.get_vector().ScalarProduct(ray.get_vector()))));
         double A=n.ScalarProduct(n);
         Vector m=this._ray.get_point().vectorSubstract(ray.get_point());
-        Vector k=m.add(this._ray.get_vector().multipliedbyScalar(this._ray.get_vector().ScalarProduct(m))).multipliedbyScalar(-1);
+        Vector k=m.add(this._ray.get_vector().multipliedbyScalar(Math.abs(this._ray.get_vector().ScalarProduct(m)))).multipliedbyScalar(-1);
         double B=2*(n.ScalarProduct(k));
         double C=k.ScalarProduct(k)-Math.pow(this._radius,2);
         double delta=Math.pow(B,2)-4*A*C;

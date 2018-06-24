@@ -54,7 +54,7 @@ public class Cylinder extends Tube {
         List<Point3D> list= super.findIntersections(ray);
         List<Point3D> temp=new ArrayList<>();
         for (Point3D p:list) {
-            double m=p.vectorSubstract(ray.get_point()).ScalarProduct(this._ray.get_vector().NormalVector());
+            double m=(p.vectorSubstract(this._ray.get_point()).ScalarProduct(this._ray.get_vector().NormalVector()));
             if(m>=0&&m<=this._height)
                 temp.add(p);
         }
