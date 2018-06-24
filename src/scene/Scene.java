@@ -28,9 +28,9 @@ public class Scene {
     protected Map<Key, List<Geometry>> _cubemap;
     protected Key _minKey;
     protected Key _maxKey;
-    protected double _cubeDx = 400;
-    protected double _cubeDy = 400;
-    protected double _cubeDz = 400;
+    protected double _cubeDx = 500;
+    protected double _cubeDy = 20;
+    protected double _cubeDz = 20;
 
     //****************Constructor****************//
 
@@ -162,7 +162,7 @@ public class Scene {
      */
     public void addGeometry(Geometry geometry) {
         this._geometries.addGeometry(geometry);
-        if(!(geometry instanceof Sphere || geometry instanceof Triangle)) {
+        if(!((geometry instanceof Sphere)||(geometry instanceof Triangle))) {
             return;
         }
         List<Point3D> boundaryPoints = geometry.getBoudaryPoints(_camera.getToward(), _camera.getRight(), _camera.getUp());
@@ -219,7 +219,7 @@ public class Scene {
         Vector temp = p.vectorSubstract(this._camera.getP0().addVectorToPoint(this._camera.getToward().multipliedbyScalar(this._distance)));
         int i = (int) Math.floor((temp.ScalarProduct(_camera.getToward())) / _cubeDx);
         int j = (int) Math.floor((temp.ScalarProduct(_camera.getRight())) / _cubeDy);
-        int k = (int) Math.floor((temp.ScalarProduct(_camera.getUp())) / _cubeDz);
+        int k = ((int) Math.floor((temp.ScalarProduct(_camera.getUp())) / _cubeDz)) + 1;
         return new Key(i, j, k);
     }
 
@@ -231,4 +231,15 @@ public class Scene {
         return source.addVectorToPoint(_camera.getToward().multipliedbyScalar(_cubeDx * i)).addVectorToPoint(_camera.getRight().multipliedbyScalar(_cubeDy * j)).addVectorToPoint(_camera.getUp().multipliedbyScalar(_cubeDz * k));
     }
 
+    public double get_cubeDx() {
+        return _cubeDx;
+    }
+
+    public double get_cubeDy() {
+        return _cubeDy;
+    }
+
+    public double get_cubeDz() {
+        return _cubeDz;
+    }
 }

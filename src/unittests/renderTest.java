@@ -81,15 +81,15 @@ public class renderTest {
                 Color.RED,
                 Color.BLACK,
                 Color.BLACK,
-                new Material(1, 0.5, 0, 0.88, 8)));*/
-       /* pScene.addLight(pSpot);
-        pScene.addLight(pPointLight);
+                new Material(1, 0.5, 0, 0.88, 8)));
+       pScene.addLight(pSpot);
+        pScene.addLight(pPointLight);*/
 
-        ImageWriter pSceneWriter = new ImageWriter("Project", 1000, 1000, 1000, 1000);
+        ImageWriter pSceneWriter = new ImageWriter("Project2", 1000, 1000, 1000, 1000);
         Render pRender = new Render(pScene, pSceneWriter);
         pRender.renderImage();
-        pRender.getImageWriter().writeToimage();
-/*
+        pRender.getImageWriter().writeToimage();/*
+
         Plane p1 = new Plane(new Point3D(100, 0, 0), new Vector(-2, 0, -1), new Color(102, 153, 200), new Material(1, 1, 1, 1, 20));
         Plane p2 = new Plane(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 0, 1, 1, 20));
 
@@ -177,7 +177,7 @@ public class renderTest {
 
 
     @Test
-    public void Mirror() {
+    public void Mirror() throws InterruptedException {
         Plane p1 = new Plane(new Point3D(0, 0, 2), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0, 20));
         Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 1, 0, 0));
         Sphere middle2 = new Sphere(new Point3D(5, 20, 7),
@@ -232,7 +232,7 @@ public class renderTest {
     }
 
     @Test
-    public void renderimageloop() {//
+    public void renderimageloop() throws InterruptedException {//
         for (int i = 0; i < 15; i++) {
             Plane p1 = new Plane(new Point3D(0, 0, 2), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0, 20));
             Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 1, 0, 0));
@@ -290,9 +290,9 @@ public class renderTest {
     }
 
     @Test
-    public void TubeTest() {
+    public void TubeTest() throws InterruptedException {
         Plane p1 = new Plane(new Point3D(0, 0, 2), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0, 20));
-        Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 1, 0, 0));
+        Plane p2 = new Plane(new Point3D(0, 0, 100), new Vector(-1, 0, 0), new Color(0, 0, 100), new Material(0.3, 0, 1, 0, 0));
         Sphere middle2 = new Sphere(new Point3D(5, 20, 7),
                 5, new Color(0, 20, 100), new Material(1, 1, 0, 0, 20));
         Sphere sun = new Sphere(new Point3D(80, 0, 60),
@@ -345,7 +345,7 @@ public class renderTest {
     }
 
     @Test
-    public void TubeTestTransparent() {
+    public void TubeTestTransparent() throws InterruptedException {
         Plane p1 = new Plane(new Point3D(0, 0, 2), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0.8, 20));
         Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 0, 0, 20));
         Sphere middle2 = new Sphere(new Point3D(5, 10, 2),
@@ -399,37 +399,56 @@ public class renderTest {
         myRender2.getImageWriter().writeToimage();
     }
     @Test
-    public void FinalProject() {
-        Plane p1 = new Plane(new Point3D(0, 0, -100), new Vector(0, 0, 1), new Color(0, 100, 0), new Material(1, 1, 0, 0, 20));
-        Plane p2 = new Plane(new Point3D(25, 0, 0), new Vector(-1, 0, 0), new Color(42, 41, 70), new Material(0.3, 0, 0, 0, 20));
+    public void FinalProject() throws InterruptedException {
+        Plane p1 = new Plane(new Point3D(0, 0, -50), new Vector(0, 0, 1), new Color(100, 0, 0), new Material(1, 1, 0, 0, 20));
+        Plane p2 = new Plane(new Point3D(0, 0, 50), new Vector(0, 0, -1), new Color(0, 0, 100), new Material(0.3, 1, 0, 0, 0));
         Sphere middle2 = new Sphere(new Point3D(5, 10, 2),
                 5, new Color(0, 20, 100), new Material(1, 1, 0, 0.5, 20));
         Sphere sun = new Sphere(new Point3D(80, 0, 60),
                 40, new Color(255, 255, 150), new Material(0.5, 0.5, 1, 1, 20));
-        Camera camera2 = new Camera(new Point3D(-1000, 0, 50),
+        Camera camera2 = new Camera(new Point3D(-200, 0, 50),
                 new Vector(1, 0, 0), new Vector(0, 1, 0));
         Tube tube = new Tube(new Ray(new Vector(0, 1, 1), new Point3D(40, 0, 0)), 10, new Color(0, 0, 255), new Material(1, 1, 1, 1, 20));
         Cylinder foot=new Cylinder(new Ray( new Vector(0,0,1),new Point3D(0,0,-100)),50,150,new Color(100,0,0),new Material(1,1,0,0,20));
+        Triangle a=new Triangle(Point3D.construct(0,-50,0),Point3D.construct(150,50,0),Point3D.construct(0,50,0),new Color(0,100,0),new Material(1,1,0,0,20));
+        Triangle b=new Triangle(Point3D.construct(0,-50,0),Point3D.construct(150,50,0),Point3D.construct(150,-50,0),new Color(0,100,0),new Material(1,1,0,0,20));
         Scene myScene2 = new Scene("Biliard");
         myScene2.setDistance(1000);
         myScene2.setCamera(camera2);
         myScene2.setBackgroundColor(new Color(0, 0, 0));
-        //myScene2.addGeometry(middle2);
-        myScene2.addGeometry(foot);
+        myScene2.addGeometry(b);
+        myScene2.addGeometry(a);
         myScene2.addGeometry(p1);
-        //myScene2.addGeometry(p2);
+        myScene2.addGeometry(p2);
         //myScene2.addGeometry(tube);
         myScene2.setAmbientlight(new Color(0, 0, 0), 1);
 
+        for(int i=0;i<10;i++){
+            myScene2.addGeometry(new Sphere(new Point3D(5, -45, -50+5*i),
+                    5, new Color(0, 0, 100), new Material(1, 1, 0, 0, 20)));
+        }
+        for(int i=0;i<10;i++){
+            myScene2.addGeometry(new Sphere(new Point3D(5, 45, -50+5*i),
+                    5, new Color(0, 0, 100), new Material(1, 1, 0, 0, 20)));
+        }
+        for(int i=0;i<10;i++){
+            myScene2.addGeometry(new Sphere(new Point3D(145, -45, -50+5*i),
+                    5, new Color(0, 0, 100), new Material(1, 1, 0, 0, 20)));
+        }
+        for(int i=0;i<10;i++){
+            myScene2.addGeometry(new Sphere(new Point3D(145, 45, -50+5*i),
+                    5, new Color(0, 0, 100), new Material(1, 1, 0, 0, 20)));
+        }
+
         PointLight pointlight = new PointLight(
                 new Color(255, 255, 255),
-                new Point3D(5, 0, 5),
+                new Point3D(0, -10, 50),
                 1, 0.0001, 0.0001
         );
 
         SpotLight Spotlight = new SpotLight(
                 new Color(255, 255, 255), new Vector(-0.8, 1, 0),
-                new Point3D(0, 0, 10),
+                new Point3D(20, 0, 20),
                 1, 0.00001, 0.000001
         );
 
@@ -441,9 +460,109 @@ public class renderTest {
         DirectionalLight dire2 = new DirectionalLight(new Color(100, 100, 100), new Vector(1, 1, -1));
         //myScene2.addLight(dire2);
         //myScene2.addLight(pointlight);
-        myScene2.addLight(Spotlight);
+        myScene2.addLight(pointlight);
         //myScene2.addLight(mySpotLight2);
         ImageWriter sceneWriter2 = new ImageWriter("Biliard", 1000, 1000, 1000, 1000);
+        Render myRender = new Render(myScene2, sceneWriter2);
+
+        myRender.renderImage();
+
+        //myRender.printGrid(100);
+        myRender.getImageWriter().writeToimage();
+    }
+    @Test
+    public void Spongebob() throws InterruptedException {
+        Plane p1 = new Plane(new Point3D(0, 0, -20), new Vector(0, 0, 1), new Color(80,85,75), new Material(1, 1, 0, 0, 20));
+        Plane p2 = new Plane(new Point3D(0, 0, 100), new Vector(0, 0, -1), new Color(76,183,237), new Material(0.3, 1, 0.5, 1, 0));
+        Sphere middle2 = new Sphere(new Point3D(5, 10, 2),
+                5, new Color(0, 20, 100), new Material(1, 1, 0, 0.5, 20));
+        Sphere sun = new Sphere(new Point3D(80, 0, 60),
+                40, new Color(255, 255, 150), new Material(0.5, 0.5, 1, 1, 20));
+        Camera camera2 = new Camera(new Point3D(-200, 0, 20),
+                new Vector(1, 0, 0), new Vector(0, 1, 0));
+        Triangle teeth1=new Triangle(Point3D.construct(-0.2,2,8),Point3D.construct(1,2,13),Point3D.construct(-0.2,5,8),new Color(255,255,255),new Material(1,0,0,0,20));
+        Triangle teeth2=new Triangle(Point3D.construct(1,5,13),Point3D.construct(1,2,13),Point3D.construct(-0.2,5,8),new Color(255,255,255),new Material(1,0,0,0,20));
+        Triangle teeth3=new Triangle(Point3D.construct(-0.2,6,8),Point3D.construct(1,6,13),Point3D.construct(-0.2,9,8),new Color(255,255,255),new Material(1,0,0,0,20));
+        Triangle teeth4=new Triangle(Point3D.construct(1,9,13),Point3D.construct(1,6,13),Point3D.construct(-0.2,9,8),new Color(255,255,255),new Material(1,0,0,0,20));
+        Cylinder foot=new Cylinder(new Ray( new Vector(0,0,1),new Point3D(5,0,-20)),1,15,new Color(255,255,0),new Material(1,1,0,0,20));
+        Cylinder foot2=new Cylinder(new Ray( new Vector(0,0,1),new Point3D(5,10,-20)),1,15,new Color(255,255,0),new Material(1,1,0,0,20));
+        Cylinder arm1=new Cylinder(new Ray( new Vector(0,0.3,1),new Point3D(5,-13,5)),1,15,new Color(255,255,0),new Material(1,1,0,0,20));
+        Cylinder arm2=new Cylinder(new Ray( new Vector(0,-0.3,1),new Point3D(5,22,5)),1,15,new Color(255,255,0),new Material(1,1,0,0,20));
+        Triangle c=new Triangle(Point3D.construct(-0.2,-9.8,0),Point3D.construct(-0.2,-9.8,5),Point3D.construct(-0.2,20,5),new Color(255,255,255),new Material(1,0,0,0,20));
+        Triangle d=new Triangle(Point3D.construct(-0.2,-10,0),Point3D.construct(-0.2,20,0),Point3D.construct(-0.2,20,5),new Color(255,255,255),new Material(1,0,0,0,20));
+        Triangle a=new Triangle(Point3D.construct(-0.2,-9.8,-5),Point3D.construct(-0.2,-9.8,0),Point3D.construct(-0.2,20,0),new Color(139,69,19),new Material(1,0,0,0,20));
+        Triangle b=new Triangle(Point3D.construct(-0.2,-10,-5),Point3D.construct(-0.2,20,-5),Point3D.construct(-0.2,20,0),new Color(139,69,19),new Material(1,0,0,0,20));
+        Cylinder mooth=new Cylinder(new Ray( new Vector(-1,0,1),new Point3D(3,5,15)),7,1,new Color(0,0,0),new Material(1,1,0,0,20));
+        Scene myScene2 = new Scene("Spongebob");
+        myScene2.setDistance(1500);
+        myScene2.setCamera(camera2);
+        myScene2.setBackgroundColor(new Color(0, 0, 0));
+        myScene2.addGeometry(mooth);
+        myScene2.addGeometry(b);
+        myScene2.addGeometry(a);
+        myScene2.addGeometry(c);
+        myScene2.addGeometry(d);
+        myScene2.addGeometry(teeth1);
+        myScene2.addGeometry(teeth2);
+        myScene2.addGeometry(teeth3);
+        myScene2.addGeometry(teeth4);
+        myScene2.addGeometry(p1);
+        myScene2.addGeometry(p2);
+        myScene2.addGeometry(foot2);
+        myScene2.addGeometry(foot);
+        myScene2.addGeometry(arm1);
+        myScene2.addGeometry(arm2);
+        myScene2.addGeometry(new Sphere(new Point3D(0, 0, 30),
+                5, new Color(255,255,255), new Material(1, 0, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(0, 10, 30),
+                5, new Color(255,255,255), new Material(1, 0, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(-3.5, 2, 30),
+                2, new Color(0,191,255), new Material(1, 0, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(-3.5, 8, 30),
+                2, new Color(0,191,255), new Material(1, 0, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(-5, 2.0, 30),
+                1, new Color(0,0,0), new Material(1, 1, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(-5, 7.5, 30),
+                1, new Color(0,0,0), new Material(1, 1, 0, 0, 20)));
+        myScene2.addGeometry(new Sphere(new Point3D(-2.5, 0, -18),
+                2, new Color(0,0,0), new Material(1, 1, 0, 0, 20)));//shue1
+        myScene2.addGeometry(new Sphere(new Point3D(-2.5, 10, -18),
+                2, new Color(0,0,0), new Material(1, 1, 0, 0, 20)));//shue2
+        myScene2.addGeometry(new Sphere(new Point3D(-10, -20, 30),
+                5, new Color(0,0,100), new Material(1, 1, 0,1, 20)));//shue
+        myScene2.setAmbientlight(new Color(0, 0, 0), 1);
+        for(int k=0;k<5;k++) {
+            for (int j = 0; j < 5; j++) {
+                for (int i = 0; i < 8; i++) {
+                    myScene2.addGeometry(new Sphere(new Point3D(5+3*k, -5+5*j, 5 * i),
+                            5, new Color(255,255,0), new Material(1, 0, 0, 0, 20)));
+                }
+            }
+        }
+
+        PointLight pointlight = new PointLight(
+                new Color(255, 255, 255),
+                new Point3D(-100, -100, 10),
+                1, 0.0001, 0.0001
+        );
+
+        SpotLight Spotlightsun = new SpotLight(
+                new Color(255, 255, 255), new Vector(0.2, 0, 1),
+                new Point3D(30, -20, 20),
+                1, 0.00001, 0.000001
+        );
+
+        SpotLight mySpotLight2 = new SpotLight(
+                new Color(255, 255, 255), new Vector(1, 0, -0.2),
+                new Point3D(0, 0, 5),
+                1, 0.0001, 0.0001
+        );
+        DirectionalLight dire2 = new DirectionalLight(new Color(255,255,255), new Vector(1, 1, -1));
+        //myScene2.addLight(Spotlight);
+        myScene2.addLight(pointlight);
+        myScene2.addLight(Spotlightsun);
+        //myScene2.addLight(mySpotLight2);
+        ImageWriter sceneWriter2 = new ImageWriter("Spongebob", 1000, 1000, 1000, 1000);
         Render myRender = new Render(myScene2, sceneWriter2);
 
         myRender.renderImage();
